@@ -1,0 +1,309 @@
+{
+  "sut_information": {
+    "sut_name": "Newledge Portal",
+    "sut_url": "https://portal.test.new-ledge.com",
+    "sut_description": "Interactive cyber threat awareness platform with gamification, scoring systems, training content, and admin management capabilities",
+    "credentials": [
+      {"role": "admin", "username": "admin1@new-ledge.com", "password": "Admin1234!"},
+      {"role": "admin", "username": "admin2@new-ledge.com", "password": "Admin1234!"},
+      {"role": "admin", "username": "admin3@new-ledge.com", "password": "Admin1234!"}
+    ]
+  },
+  "exploration_data": {
+    "exploration_metadata": {
+      "sut_name": "Newledge Portal",
+      "sut_url": "https://portal.test.new-ledge.com",
+      "exploration_date": "2025-10-09",
+      "duration_minutes": 15,
+      "pages_explored": 8,
+      "user_role": "admin",
+      "completion_status": "complete"
+    },
+    
+    "pages_discovered": [
+      {
+        "url": "https://portal.test.new-ledge.com/",
+        "title": "Landing/Login Page",
+        "elements_found": ["Login button", "Sign Up", "Navigation links", "Language selector"],
+        "functionality": "Entry point with authentication and registration options",
+        "complexity": "simple",
+        "auth_required": false
+      },
+      {
+        "url": "https://portal.test.new-ledge.com/login",
+        "title": "Login Form",
+        "elements_found": ["Email field", "Password field", "Show password toggle", "Forgot password link"],
+        "functionality": "User authentication with password recovery",
+        "complexity": "simple",
+        "auth_required": false
+      },
+      {
+        "url": "https://portal.test.new-ledge.com/profile",
+        "title": "User Dashboard/My Space",
+        "elements_found": ["Welcome message", "Score display", "Game categories", "Virtual Adventures", "Security Games", "Knowledge Challenges", "Secure Development"],
+        "functionality": "Main user dashboard with gamified learning content",
+        "complexity": "medium",
+        "auth_required": true
+      },
+      {
+        "url": "https://portal.test.new-ledge.com/admin",
+        "title": "Admin Panel Home",
+        "elements_found": ["Campaigns link", "Users link", "Departments link"],
+        "functionality": "Administrative control panel entry point",
+        "complexity": "simple",
+        "auth_required": true
+      },
+      {
+        "url": "https://portal.test.new-ledge.com/admin/user",
+        "title": "User Management",
+        "elements_found": ["User list", "Edit buttons", "Search field", "Add New User", "Add Users via File"],
+        "functionality": "Complete user lifecycle management with bulk operations",
+        "complexity": "complex",
+        "auth_required": true
+      },
+      {
+        "url": "https://portal.test.new-ledge.com/leaderBoard",
+        "title": "Leaderboard",
+        "elements_found": ["Ranked user list", "Scores", "Usernames"],
+        "functionality": "Competitive scoring display with user rankings",
+        "complexity": "medium",
+        "auth_required": true
+      },
+      {
+        "url": "https://portal.test.new-ledge.com/dashboard",
+        "title": "Analytics Dashboard",
+        "elements_found": ["Progress charts", "Campaign analytics", "User statistics table", "Download feature", "Search functionality"],
+        "functionality": "Comprehensive analytics and reporting interface",
+        "complexity": "complex",
+        "auth_required": true
+      },
+      {
+        "url": "https://portal.test.new-ledge.com/about",
+        "title": "About Page",
+        "elements_found": ["Static content"],
+        "functionality": "Information page",
+        "complexity": "simple",
+        "auth_required": false
+      }
+    ],
+    
+    "product_risks": [
+      {
+        "risk": "Complete input validation failure allowing XSS and SQL injection",
+        "area": "All input fields system-wide",
+        "severity": "critical",
+        "likelihood": "high",
+        "impact": "Data breach, session hijacking, database corruption, admin account compromise",
+        "mitigation": "Comprehensive input sanitization, parameterized queries, CSP implementation"
+      },
+      {
+        "risk": "Unauthorized access to admin functions",
+        "area": "Admin Panel",
+        "severity": "critical",
+        "likelihood": "medium",
+        "impact": "Full system compromise, user data manipulation, campaign corruption",
+        "mitigation": "Role-based access control testing, privilege escalation testing"
+      },
+      {
+        "risk": "User data exposure through insecure dashboard",
+        "area": "Analytics Dashboard",
+        "severity": "high",
+        "likelihood": "medium",
+        "impact": "Privacy violation, data leakage, competitive intelligence loss",
+        "mitigation": "Access control verification, data filtering validation"
+      },
+      {
+        "risk": "Authentication bypass vulnerabilities",
+        "area": "Login System",
+        "severity": "high",
+        "likelihood": "medium", 
+        "impact": "Unauthorized system access, user impersonation",
+        "mitigation": "Authentication mechanism testing, session management validation"
+      },
+      {
+        "risk": "Bulk user import security failures",
+        "area": "File Upload (Add Users via File)",
+        "severity": "high",
+        "likelihood": "medium",
+        "impact": "Malicious file execution, system compromise, mass data corruption",
+        "mitigation": "File validation testing, upload restriction verification"
+      },
+      {
+        "risk": "Score manipulation and gaming system abuse",
+        "area": "Scoring System",
+        "severity": "medium",
+        "likelihood": "high",
+        "impact": "Unfair competition, loss of platform credibility, training effectiveness degradation",
+        "mitigation": "Score calculation validation, anti-cheating mechanism testing"
+      }
+    ],
+    
+    "security_findings": [
+      {
+        "severity": "critical",
+        "category": "Input Validation",
+        "location": "Multiple areas (usernames, search fields)",
+        "observation": "Live XSS and SQL injection payloads visible in user data: '; DROP TABLE users; --, <b style='color:red;'>Hacked Text</b>, [DELETE TABLE: ALL]",
+        "recommendation": "Immediate input sanitization implementation required across all fields"
+      },
+      {
+        "severity": "high",
+        "category": "Data Integrity",
+        "location": "User Management System",
+        "observation": "Malicious usernames and department names containing system commands (sudo rm -rf /)",
+        "recommendation": "Implement strict character restrictions and validation for all user-editable fields"
+      },
+      {
+        "severity": "medium",
+        "category": "Information Disclosure",
+        "location": "Dashboard and Leaderboard", 
+        "observation": "Sensitive user information potentially exposed to unauthorized users",
+        "recommendation": "Verify proper access controls and data filtering"
+      }
+    ],
+    
+    "functional_observations": [
+      {
+        "area": "Authentication",
+        "status": "working",
+        "complexity": "simple",
+        "notes": "Standard email/password login with forgot password option"
+      },
+      {
+        "area": "User Dashboard",
+        "status": "working",
+        "complexity": "medium", 
+        "notes": "Gamified interface with multiple content categories and progress tracking"
+      },
+      {
+        "area": "Admin Panel",
+        "status": "working",
+        "complexity": "complex",
+        "notes": "Full CRUD operations for users, campaigns, and departments"
+      },
+      {
+        "area": "Scoring System",
+        "status": "working", 
+        "complexity": "medium",
+        "notes": "Real-time score tracking with leaderboard integration"
+      },
+      {
+        "area": "Analytics/Reporting",
+        "status": "working",
+        "complexity": "complex",
+        "notes": "Comprehensive dashboard with export capabilities"
+      }
+    ],
+    
+    "user_flows": [
+      {
+        "flow_name": "User Registration and First Login",
+        "priority": "high",
+        "steps": [
+          "Navigate to portal homepage",
+          "Click Sign Up",
+          "Fill registration form", 
+          "Verify email (if required)",
+          "Complete first login",
+          "Access user dashboard"
+        ],
+        "test_scenarios": [
+          "Valid registration with all required fields",
+          "Registration with malicious payloads in all fields",
+          "Duplicate email registration attempt",
+          "Weak password testing",
+          "Email format validation",
+          "XSS in registration fields",
+          "SQL injection in registration fields"
+        ],
+        "required_test_data": [
+          "Valid email addresses (10-15)",
+          "Malicious payloads (XSS, SQLi, command injection)",
+          "Invalid email formats",
+          "Weak/strong password combinations",
+          "Special characters and Unicode input"
+        ],
+        "automation_feasibility": "high",
+        "notes": "Critical path with high security risk - prioritize automated security testing"
+      },
+      {
+        "flow_name": "Admin User Management",
+        "priority": "critical",
+        "steps": [
+          "Login as admin",
+          "Navigate to admin panel",
+          "Access user management",
+          "Create/edit/delete users",
+          "Perform bulk operations"
+        ],
+        "test_scenarios": [
+          "Create user with valid data",
+          "Create user with malicious payloads in all fields",
+          "Edit existing user data with malicious content",
+          "Delete user operations",
+          "Bulk user import with malicious CSV/Excel",
+          "Search functionality with injection payloads",
+          "Unauthorized access attempts to admin functions"
+        ],
+        "required_test_data": [
+          "Valid user data sets",
+          "Comprehensive malicious payload library",
+          "Malicious file uploads (CSV, Excel with embedded scripts)",
+          "Non-admin user credentials for privilege escalation testing"
+        ],
+        "automation_feasibility": "medium",
+        "notes": "High-risk admin functionality requiring both automated and manual security testing"
+      },
+      {
+        "flow_name": "Game Playing and Scoring",
+        "priority": "medium",
+        "steps": [
+          "Login as user",
+          "Navigate to game categories",
+          "Select and play games",
+          "Complete challenges",
+          "View updated scores"
+        ],
+        "test_scenarios": [
+          "Complete game flow with valid inputs",
+          "Score manipulation attempts",
+          "Game state tampering",
+          "Concurrent game sessions",
+          "Score calculation validation",
+          "Leaderboard update verification"
+        ],
+        "required_test_data": [
+          "Multiple user accounts for concurrent testing",
+          "Game completion data",
+          "Score manipulation payloads"
+        ],
+        "automation_feasibility": "low",
+        "notes": "Complex interactive content requiring manual testing for user experience"
+      }
+    ],
+    
+    "ui_observations": {
+      "navigation": ["My Space", "Admin Page", "Leaderboard", "Dashboard", "About", "Terms", "Safety & Policies"],
+      "key_features": ["Gamified learning", "Scoring system", "Admin management", "Analytics dashboard", "File uploads"],
+      "responsive_check_needed": true
+    },
+    
+    "performance_notes": [
+      "Login process takes 3-5 seconds with loading screens",
+      "Dashboard with large user tables may have performance issues",
+      "Multiple consecutive page loads show loading screens"
+    ],
+    
+    "recommendations_for_testing": [
+      "Priority 1: CRITICAL - Comprehensive security testing across all input fields (OWASP ZAP, manual penetration testing)",
+      "Priority 2: HIGH - Admin panel privilege escalation and access control testing",
+      "Priority 3: HIGH - File upload security testing with malicious files",
+      "Priority 4: MEDIUM - Authentication mechanism testing (session management, password policies)",
+      "Priority 5: MEDIUM - Score manipulation and business logic testing",
+      "Automation: Playwright for functional flows, OWASP ZAP for security scanning, custom scripts for input validation testing",
+      "Manual: Game user experience, complex admin workflows, social engineering scenarios",
+      "Tools needed: Playwright, OWASP ZAP, Burp Suite, Malicious file samples, Input fuzzing tools",
+      "Immediate action required: The application shows evidence of successful attacks in production - immediate security assessment needed"
+    ]
+  }
+}

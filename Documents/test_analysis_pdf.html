@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Analysis Document - Newledge Portal</title>
+    <style>
+        @media print {
+            @page {
+                margin: 2cm;
+                size: A4;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #1a5490;
+            border-bottom: 3px solid #1a5490;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #2c5aa0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+        
+        h3 {
+            color: #3d6bb3;
+            margin-top: 20px;
+        }
+        
+        h4 {
+            color: #4e7bc7;
+            margin-top: 15px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a5490 0%, #2c5aa0 100%);
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .header h1 {
+            color: white;
+            border: none;
+            margin: 0;
+            font-size: 2em;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #1a5490;
+        }
+        
+        .metadata p {
+            margin: 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        table th {
+            background-color: #1a5490;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .priority-critical {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-high {
+            background-color: #fd7e14;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-medium {
+            background-color: #ffc107;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .status-required {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .status-available {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .callout {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .callout-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .callout-danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .callout-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .test-condition {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-condition-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .test-condition h4 {
+            margin: 0;
+            color: #1a5490;
+        }
+        
+        .icon {
+            margin-right: 8px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .approval-table td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+        }
+        
+        .toc a {
+            color: #1a5490;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .checkmark {
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 Test Analysis Document</h1>
+        <h2 style="color: white; border: none;">Newledge Portal</h2>
+    </div>
+
+    <div class="metadata">
+        <p><strong>Version:</strong> 1.0</p>
+        <p><strong>Author:</strong> QA Analysis Team (AutomationAid)</p>
+        <p><strong>Date Created:</strong> October 8, 2025</p>
+        <p><strong>Last Updated:</strong> October 8, 2025</p>
+        <p><strong>Document Status:</strong> <span class="status-required">Draft for Review</span></p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="toc">
+        <h2>📋 Table of Contents</h2>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#sut-overview">2. SUT Overview</a></li>
+            <li><a href="#test-basis">3. Test Basis</a></li>
+            <li><a href="#test-conditions">4. Test Conditions and Coverage Areas</a></li>
+            <li><a href="#techniques">5. Test Techniques and Approaches</a></li>
+            <li><a href="#risks">6. Risks and Assumptions</a></li>
+            <li><a href="#dependencies">7. Dependencies</a></li>
+            <li><a href="#summary">8. Summary and Next Steps</a></li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1 id="introduction">1. Introduction</h1>
+
+    <h2>1.1 Purpose</h2>
+    <p>This Test Analysis document defines the detailed testing approach, test conditions, and coverage areas for the Newledge Portal system. It serves as the foundation for creating comprehensive test cases and guides the overall testing effort.</p>
+
+    <h2>1.2 Scope</h2>
+    <p>This analysis covers functional, non-functional, and security testing aspects of the Newledge Portal, with emphasis on:</p>
+    <ul>
+        <li>Critical user authentication and authorization workflows</li>
+        <li>High-risk game performance and loading capabilities</li>
+        <li>Cross-browser and cross-device responsiveness</li>
+        <li>Admin panel functionality and reporting</li>
+        <li>Scoring and leaderboard accuracy</li>
+    </ul>
+
+    <h2>1.3 Analysis Methodology</h2>
+    <p>The analysis was conducted through:</p>
+    <ul>
+        <li>Review of SUT Overview documentation</li>
+        <li>Examination of the comprehensive Test Plan</li>
+        <li>Hands-on exploratory testing of the live application</li>
+        <li>Risk-based prioritization aligned with identified product risks</li>
+        <li>Reference to industry best practices (LambdaTest Test Analysis framework)</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h1 id="sut-overview">2. SUT Overview</h1>
+
+    <h2>2.1 System Description</h2>
+    <p><strong>Newledge Portal</strong> is a cyber threat awareness and education platform designed to enhance security knowledge through gamification. The system provides:</p>
+    <ul>
+        <li><strong>Interactive Learning:</strong> Virtual adventures, cyber games, training videos, and knowledge challenges</li>
+        <li><strong>User Engagement:</strong> Points-based scoring system, leaderboards, and progress tracking</li>
+        <li><strong>Content Management:</strong> Admin panel for campaign creation, user management, and analytics</li>
+        <li><strong>Customization:</strong> Personalized user experiences based on roles and departments</li>
+    </ul>
+
+    <h2>2.2 Key System Components</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Description</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Authentication Module</td>
+                <td>Login, registration, password recovery, SSO integration</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>User Home Page</td>
+                <td>Personalized dashboard with games, scores, and navigation</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Game Engine</td>
+                <td>Virtual adventures, security games, challenges loading and execution</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>Scoring System</td>
+                <td>Point calculation, accumulation, and display</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Leaderboard</td>
+                <td>Real-time ranking display and updates</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Admin Panel</td>
+                <td>Campaign management, user administration, reporting</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>Dashboard</td>
+                <td>Analytics, progress tracking, data export</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h1 id="test-conditions">4. Test Conditions and Coverage Areas</h1>
+
+    <h2>4.1 Critical Test Conditions</h2>
+
+    <div class="test-condition no-break">
+        <div class="test-condition-header">
+            <h4><span class="icon">🔒</span>TC-CRIT-001: User Authentication and Session Management</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Risk Level:</strong> High</p>
+        
+        <p><strong>Test Conditions:</strong></p>
+        <ol>
+            <li>Valid login with correct credentials redirects to personalized home page</li>
+            <li>Invalid login attempts display appropriate error messages</li>
+            <li>Password field masks input characters</li>
+            <li>reCAPTCHA validation functions correctly</li>
+            <li>Session persistence across page navigation</li>
+            <li>Logout functionality clears session and redirects to login</li>
+            <li>Password recovery flow sends email and allows password reset</li>
+            <li>SSO login integration works when enabled</li>
+            <li>Concurrent login attempts with same credentials</li>
+            <li>Session timeout after inactivity period</li>
+        </ol>
+
+        <div class="callout">
+            <strong>Coverage Justification:</strong> Authentication is the gateway to all system functionality. Failures here prevent any user access and represent a complete system failure scenario.
+        </div>
+
+        <div class="callout-warning">
+            <strong>Observed Issues:</strong> Password field autocomplete warning in browser console suggests potential UX/security consideration
+        </div>
+    </div>
+
+    <div class="test-condition no-break">
+        <div class="test-condition-header">
+            <h4><span class="icon">⚙️</span>TC-CRIT-002: Admin Campaign Management</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Risk Level:</strong> High</p>
+        
+        <p><strong>Test Conditions:</strong></p>
+        <ol>
+            <li>"Add New Campaign" creates campaign with all required fields</li>
+            <li>Campaign edit functionality modifies existing campaigns correctly</li>
+            <li>Campaign deletion removes data appropriately (with confirmation)</li>
+            <li>SSO toggle affects authentication methods system-wide</li>
+            <li>Manual Signup toggle controls registration availability</li>
+            <li>Campaign name validation prevents duplicate or invalid names</li>
+            <li>User assignment to campaigns functions correctly</li>
+            <li>Department association with campaigns works properly</li>
+            <li>Save Changes persists modifications to database</li>
+            <li>Campaign data displays correctly in dashboard analytics</li>
+        </ol>
+
+        <div class="callout-success">
+            <strong>Observed Findings:</strong> Multiple campaigns visible in admin panel; Very long campaign name observed (potential validation gap); "Add VR Headset" functionality present
+        </div>
+    </div>
+
+    <div class="test-condition no-break">
+        <div class="test-condition-header">
+            <h4><span class="icon">🎮</span>TC-CRIT-003: Game Loading and Execution</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Risk Level:</strong> High</p>
+        
+        <p><strong>Test Conditions:</strong></p>
+        <ol>
+            <li>Game list loads completely on home page</li>
+            <li>Individual game cards display title, description, and status correctly</li>
+            <li>"Click to Begin" button launches game successfully</li>
+            <li>Games load in reasonable time (< 5 seconds for 80% of attempts)</li>
+            <li>Game content renders properly without visual errors</li>
+            <li>Full-screen mode functions correctly</li>
+            <li>Exit/return from game preserves progress</li>
+            <li>Game completion updates score immediately</li>
+            <li>Game state persists if user navigates away</li>
+            <li>No crashes or freezes during extended gameplay sessions</li>
+        </ol>
+
+        <p><strong>Categories to Test:</strong></p>
+        <ul>
+            <li>Virtual Adventures (e.g., "Escape Room - The Office")</li>
+            <li>Security Games (e.g., "Cyber Jackpot")</li>
+            <li>Knowledge & Skills Challenges</li>
+            <li>Secure Development modules</li>
+        </ul>
+    </div>
+
+    <div class="test-condition no-break">
+        <div class="test-condition-header">
+            <h4><span class="icon">🛡️</span>TC-CRIT-005: Data Security and Input Validation</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Risk Level:</strong> High</p>
+        
+        <p><strong>Test Conditions:</strong></p>
+        <ol>
+            <li>SQL injection attempts in login fields are blocked</li>
+            <li>XSS attempts in user profile fields are sanitized</li>
+            <li>Special characters in names/descriptions are properly escaped</li>
+            <li>File upload validation prevents malicious files</li>
+            <li>Session tokens are properly encrypted</li>
+            <li>Password storage uses secure hashing</li>
+            <li>Admin panel access requires proper authentication</li>
+            <li>API endpoints validate authorization for sensitive operations</li>
+            <li>Data export functions sanitize output</li>
+            <li>Error messages don't reveal sensitive system information</li>
+        </ol>
+
+        <div class="callout-danger">
+            <strong>⚠️ Critical Security Concerns Observed:</strong>
+            <ul>
+                <li>Suspicious usernames in leaderboard: <code>'; DROP TABLE users; --</code></li>
+                <li>HTML injection attempts: <code>&lt;b style="color:red;"&gt;Hacked Text&lt;/b&gt;</code></li>
+                <li>Command injection attempts: <code>[DELETE TABLE: ALL]</code>, <code>sudo rm -rf /</code></li>
+                <li>Invalid email formats in user database</li>
+                <li>Extremely long usernames accepted</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1 id="risks">6. Risks and Assumptions</h1>
+
+    <h2>6.1 Product Risks</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Risk ID</th>
+                <th>Risk Description</th>
+                <th>Likelihood</th>
+                <th>Impact</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PR-001</td>
+                <td>Authentication Bypass or Credential Exposure</td>
+                <td>Medium</td>
+                <td>Critical</td>
+                <td><span class="priority-critical">P1</span></td>
+            </tr>
+            <tr>
+                <td>PR-002</td>
+                <td>Game Loading Failures or Poor Performance</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td><span class="priority-high">P1</span></td>
+            </tr>
+            <tr>
+                <td>PR-003</td>
+                <td>Scoring System Inaccuracies</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td><span class="priority-high">P1</span></td>
+            </tr>
+            <tr>
+                <td>PR-004</td>
+                <td>Data Injection Vulnerabilities</td>
+                <td>High</td>
+                <td>Critical</td>
+                <td><span class="priority-critical">P1</span></td>
+            </tr>
+            <tr>
+                <td>PR-005</td>
+                <td>Responsive Design Failures</td>
+                <td>Medium</td>
+                <td>Medium</td>
+                <td><span class="priority-medium">P2</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>6.3 Assumptions</h2>
+
+    <h3>Functional Assumptions</h3>
+    <ol>
+        <li><strong>Game Scoring Algorithm:</strong> Assumes scoring is based on completion time and accuracy as documented</li>
+        <li><strong>Session Timeout:</strong> Assumes reasonable timeout period (15-30 minutes of inactivity)</li>
+        <li><strong>Data Persistence:</strong> Assumes all user data persists across sessions</li>
+        <li><strong>Campaign Assignment:</strong> Assumes users can be assigned to one or more campaigns</li>
+        <li><strong>SSO Integration:</strong> Assumes SSO provider is configured and available for testing</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h1 id="dependencies">7. Dependencies</h1>
+
+    <h2>7.1 Environmental Dependencies</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Dependency</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test Environment</td>
+                <td>https://portal.test.new-ledge.com accessible and stable</td>
+                <td>Dev Team</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+            <tr>
+                <td>Admin Credentials</td>
+                <td>Three admin accounts available</td>
+                <td>Project Manager</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+            <tr>
+                <td>Test Data</td>
+                <td>Sample campaigns, users, games available</td>
+                <td>QA Team</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+            <tr>
+                <td>Network Stability</td>
+                <td>Stable internet connection</td>
+                <td>QA Team</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>7.2 Tool Dependencies</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tool</th>
+                <th>Purpose</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Playwright</td>
+                <td>UI automation, responsiveness testing</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+            <tr>
+                <td>K6</td>
+                <td>Load and performance testing</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+            <tr>
+                <td>OWASP ZAP</td>
+                <td>Security vulnerability scanning</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+            <tr>
+                <td>Google Lighthouse</td>
+                <td>Frontend performance auditing</td>
+                <td><span class="status-required">Required</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h1 id="summary">8. Summary and Next Steps</h1>
+
+    <h2>8.1 Analysis Summary</h2>
+
+    <p>This Test Analysis has identified <strong>26 critical and high-priority test condition areas</strong> across functional, security, performance, and usability domains. The analysis is grounded in:</p>
+
+    <div class="callout-success">
+        <p><span class="checkmark">✅</span> Comprehensive documentation review</p>
+        <p><span class="checkmark">✅</span> Hands-on exploratory testing of the live application</p>
+        <p><span class="checkmark">✅</span> Risk-based prioritization aligned with identified product risks</p>
+        <p><span class="checkmark">✅</span> Industry best practices for test analysis and design</p>
+    </div>
+
+    <h3>Key Findings from Exploration:</h3>
+    <ol>
+        <li>Authentication and navigation flows function as expected</li>
+        <li>Admin panel provides comprehensive campaign and user management</li>
+        <li>Leaderboard and scoring displays are functional</li>
+        <li><strong style="color: #dc3545;">Multiple security concerns observed (input validation gaps)</strong></li>
+        <li>Game loading and display mechanisms appear stable</li>
+        <li>Responsive design requires thorough cross-device verification</li>
+    </ol>
+
+    <div class="callout-danger">
+        <h3>⚠️ Critical Risk Areas Requiring Immediate Attention:</h3>
+        <ul>
+            <li>Input validation and sanitization (XSS, SQL injection vulnerabilities observed)</li>
+            <li>Game performance under load conditions</li>
+            <li>Scoring accuracy and real-time synchronization</li>
+            <li>Session management and timeout behavior</li>
+        </ul>
+    </div>
+
+    <h2>8.2 Test Coverage Strategy</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Coverage Area</th>
+                <th>Approach</th>
+                <th>Estimated Coverage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Critical Paths</td>
+                <td>Manual + Automated</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>High Priority Features</td>
+                <td>Manual + Automated</td>
+                <td>90%</td>
+            </tr>
+            <tr>
+                <td>Security Vulnerabilities</td>
+                <td>Automated Scan + Manual</td>
+                <td>85%</td>
+            </tr>
+            <tr>
+                <td>Performance Metrics</td>
+                <td>Load Testing + Monitoring</td>
+                <td>80%</td>
+            </tr>
+            <tr>
+                <td>Responsiveness</td>
+                <td>Automated + Manual Verification</td>
+                <td>90%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>8.6 Success Criteria</h2>
+
+    <div class="callout-success">
+        <p>Testing will be considered successful when:</p>
+        <p><span class="checkmark">✅</span> <strong>Coverage:</strong> All Critical and High priority test conditions executed</p>
+        <p><span class="checkmark">✅</span> <strong>Defects:</strong> No open Critical/High severity bugs in core areas</p>
+        <p><span class="checkmark">✅</span> <strong>Performance:</strong> Login < 3s, Game loading < 5s, Leaderboard < 3s</p>
+        <p><span class="checkmark">✅</span> <strong>Security:</strong> No high-risk vulnerabilities (OWASP Top 10)</p>
+        <p><span class="checkmark">✅</span> <strong>Compatibility:</strong> Consistent behavior across Chrome, Firefox, Edge</p>
+        <p><span class="checkmark">✅</span> <strong>Responsiveness:</strong> Functional UI on mobile, tablet, desktop</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>Document Approval</h2>
+
+    <table class="approval-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Signature</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test Lead</td>
+                <td>Slav Astinov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Automation Engineer</td>
+                <td>Sava Barbarov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Project Manager</td>
+                <td>_________________</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Product Owner</td>
+                <td>_________________</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <h3>Revision History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.0</td>
+                    <td>October 8, 2025</td>
+                    <td>QA Analysis Team</td>
+                    <td>Initial release based on SUT exploration and test plan review</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="text-align: center; margin-top: 40px; color: #999;">
+            <strong>End of Test Analysis Document</strong><br>
+            © 2025 AutomationAid - Confidential
+        </p>
+    </div>
+
+    <script>
+        // Add print functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create print button
+            const printBtn = document.createElement('button');
+            printBtn.textContent = '🖨️ Print/Save as PDF';
+            printBtn.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #1a5490; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;';
+            printBtn.onclick = function() { window.print(); };
+            document.body.appendChild(printBtn);
+            
+            // Hide button when printing
+            window.onbeforeprint = function() { printBtn.style.display = 'none'; };
+            window.onafterprint = function() { printBtn.style.display = 'block'; };
+        });
+    </script>
+</body>
+</html>
