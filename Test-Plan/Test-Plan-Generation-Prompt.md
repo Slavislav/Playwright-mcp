@@ -24,24 +24,49 @@ To use this prompt, provide:
    - Event: ISTQB Testing Cup Grand Finals
    - Date: October 20th, 2025
    - Location: Copenhagen, Denmark
+5. **⚠️ CRITICAL - Competition Day Schedule:**
+   - **Competition Date:** October 20, 2025 (SINGLE DAY EVENT)
+   - **Morning Session (09:00 - 12:00):** Test planning, analysis, and design
+   - **Lunch Break (12:00 - 13:00):** DO NOT include in schedule
+   - **Afternoon Session (13:00 - 16:00):** Test implementation, execution, and reporting
+   - **Judges' Debriefing (16:00 - 17:00):** DO NOT include in schedule
+   - **IMPORTANT:** All testing activities must fit within the 6-hour window (3 hours morning + 3 hours afternoon)
+   - **External Stakeholders:** Only the Product Owner provided by ISTQB (no other external parties should be listed)
+
+## ⚠️ CRITICAL: Understanding Reference Documents vs Actual System Exploration
+
+**IMPORTANT DISTINCTION:**
+- **Reference Documents (SUT Overview, Knowledge Base):** Use ONLY for structure, format, and HTML design templates
+- **Playwright MCP Exploration:** MANDATORY for gathering actual system data, real field names, workflows, risks
+
+**You MUST do BOTH:**
+1. ✅ Use reference documents for document structure and presentation format
+2. ✅ Use Playwright MCP to explore the actual system and gather real data
+
+**What this means:**
+- DON'T just copy information from reference documents
+- DO explore the live system and document what you actually see
+- DO use reference documents as templates for how to organize your findings
 
 ## Process Overview
 The Test Plan generation follows this systematic approach:
 
 ### Phase 1: Input Analysis
-- Analyze SUT Overview document for comprehensive system understanding
+- Analyze SUT Overview document for comprehensive system understanding (REFERENCE ONLY)
 - Reference PROJECT-SYSTEM-MESSAGE.md for competition scoring criteria
-- Review Test Plan Knowledge Base for document structure requirements
+- Review Test Plan Knowledge Base for document structure requirements (TEMPLATE ONLY)
 - Identify critical areas requiring focused Playwright MCP exploration
 
-### Phase 2: Targeted Data Gathering
-- Use Playwright MCP to gather specific Test Plan data from SUT
+### Phase 2: Targeted Data Gathering (MANDATORY - ACTUAL SYSTEM)
+- ⚠️ Use Playwright MCP to gather specific Test Plan data from LIVE SUT
 - Focus on risk identification, scope definition, and resource requirements
 - Capture realistic timeline and scheduling information
 - Document systematic approach and tool usage evidence
+- Record actual UI elements, workflows, and system behavior
 
 ### Phase 3: Test Plan Document Generation
-- Create comprehensive Test Plan following knowledge base structure
+- Create comprehensive Test Plan following knowledge base structure (from Phase 1)
+- Use actual data gathered from Playwright MCP exploration (from Phase 2)
 - Optimize content for ISTQB competition scoring (20 points)
 - Generate professional HTML output using template design
 - Ensure all scoring criteria are thoroughly addressed
@@ -60,17 +85,31 @@ The Test Plan generation follows this systematic approach:
 4. Identify specific areas requiring additional Playwright MCP exploration
 ```
 
-### Step 2: Targeted Playwright MCP Exploration
+### Step 2: Targeted Playwright MCP Exploration ⚠️ MANDATORY
 ```
-1. Navigate to SUT using provided URL and credentials
-2. Focus on gathering Test Plan specific data:
-   - Risk identification: Critical business functions, failure points
-   - Scope definition: In-scope vs out-of-scope functionality
-   - Resource requirements: Tools, environments, team needs
-   - Timeline validation: Realistic scheduling based on system complexity
-   - Systematic approach evidence: Tool usage, methodologies
-3. Capture screenshots and data for Test Plan documentation
-4. Document any limitations or constraints discovered
+⚠️ CRITICAL: This step is MANDATORY and MUST be executed even if reference documents exist.
+   Previous documents provide STRUCTURE/DESIGN REFERENCE ONLY - you MUST gather actual system data.
+
+1. **Open Playwright MCP** and navigate to SUT using provided URL and credentials
+2. **Systematically explore the system** to gather Test Plan specific data:
+   - Risk identification: Observe critical business functions, identify failure points
+   - Scope definition: Document actual in-scope vs out-of-scope functionality you discover
+   - Module inventory: List all available modules, menus, features you can see
+   - Workflow observation: Navigate through key workflows to understand complexity
+   - Data validation: Check what data exists (employee records, configurations, etc.)
+   - UI interaction: Note actual button labels, field names, error messages
+   - Timeline validation: Assess realistic scheduling based on observed system complexity
+3. **Capture evidence** from your exploration:
+   - Take screenshots of key modules and features
+   - Document actual field names, button labels, menu items
+   - Record error messages, validation rules you encounter
+   - Note any technical constraints or limitations
+4. **Document your findings**:
+   - What you observed vs what you expected
+   - Any limitations or constraints discovered
+   - Specific risks identified through exploration
+
+⚠️ DO NOT skip this step. Reference documents provide templates, not actual system data.
 ```
 
 ### Step 3: Test Plan Document Generation
@@ -98,15 +137,18 @@ The Test Plan generation follows this systematic approach:
 
 **Clear Scope and Realistic Time Management:**
 - Define precise in-scope and out-of-scope functionality
-- Create realistic timeline based on actual system complexity
-- Allocate appropriate resources for each testing phase
-- Include buffer time for unexpected issues
+- Create realistic timeline based on **SINGLE DAY** competition schedule (6 hours total)
+- **Morning Session (3 hours):** Test planning, analysis, and design activities
+- **Afternoon Session (3 hours):** Test implementation, execution, and reporting
+- Allocate appropriate resources within the 6-hour competition window
+- Include realistic time management that fits the competition constraints
 
 **Use of Tools and Systematic Approach:**
-- Document Playwright MCP usage for system exploration
+- Document comprehensive toolstack usage for all testing activities
 - Reference systematic methodology (ISTQB principles)
-- Include tool selection rationale and usage strategy
-- Demonstrate professional testing approach
+- Include tool selection rationale and usage strategy for each testing type
+- Demonstrate professional testing approach with appropriate tool integration
+- **Refer to Competition Toolstack (see below)** for specific tool applications
 
 **Avoid Penalty Points:**
 - Cover multiple test types (functional, integration, system, etc.)
@@ -140,6 +182,17 @@ The Test Plan generation follows this systematic approach:
 - **Design Consistency:** Professional, competition-ready appearance
 - **Content Structure:** Adapt template sections for Test Plan content
 - **Visual Elements:** Tables, charts, and structured data presentation
+- **⚠️ CRITICAL - HTML File Generation Strategy:**
+  - **NEVER attempt to generate the entire HTML file in one operation**
+  - **Step 1:** Create a blank HTML file first using PowerShell: `Set-Content -Path "filename.html" -Value "" -Encoding UTF8`
+  - **Step 2:** Generate HTML content in small batches (sections) using `Add-Content` for each section
+  - **Step 3:** Add sections incrementally: Header → Metadata → TOC → Each Major Section → Footer → Closing tags
+  - **Reason:** Large HTML files exceed token limits and cause generation failures
+- **⚠️ CRITICAL - Character Encoding:**
+  - **NEVER use emoji characters or special Unicode symbols** (e.g., 🖨️, 📋, ✅, ❌, ⚠️, 🎯, 🤖, 🏆, 🚨, ⏰)
+  - **Use standard ASCII characters only** for all visual indicators
+  - **Use HTML entities for special characters** when needed (e.g., &check; for checkmarks)
+  - **Reason:** Emoji and Unicode characters display as garbled text (e.g., ðŸ–¨ï) in the HTML output
 
 ## Quality Assurance Checklist
 
@@ -198,19 +251,101 @@ The Test Plan document serves as foundation for:
 - **Test Design Generation** - Establishes methodology and approach
 - **Test Execution** - Guides actual testing activities
 
+## Competition Toolstack
+
+### Testing Tools (Use in Test Plan Documentation)
+When documenting the testing approach, reference the following tools based on the testing type:
+
+#### **1. Security & Penetration Testing**
+- **Tool:** OWASP ZAP
+- **Usage:** Exploratory security testing using spiders, active/passive scanning, and request manipulation
+- **Deliverable:** Security test report generated from OWASP ZAP (published to project folder)
+- **Application:** Security testing section, risk mitigation for authentication/authorization vulnerabilities
+
+#### **2. Accessibility Testing**
+- **Tool:** Google Lighthouse
+- **Usage:** Automated accessibility audits, WCAG compliance validation, performance insights
+- **Deliverable:** Lighthouse accessibility report with scores and recommendations
+- **Application:** Accessibility testing section, usability validation, compliance verification
+
+#### **3. Load & Performance Testing**
+- **Tool:** K6 + Performance Analyzer Addon
+- **Usage:** Load testing scripts, performance benchmarking, stress testing scenarios
+- **Deliverable:** K6 performance test report with metrics and analysis (published to project folder)
+- **Application:** Performance testing section, scalability validation, bottleneck identification
+
+#### **4. Test Automation**
+- **Tool:** Playwright
+- **Usage:** Automated functional test scripts for high-priority test cases
+- **Deliverable:** Playwright test scripts published to GitHub repository
+- **Application:** Test automation section, regression testing, cross-browser validation
+- **Priority:** High-priority (P1/P2) test cases to be automated
+
+#### **5. Workflow & Documentation**
+- **Tools:** Cursor, Claude, n8n
+- **Usage:** 
+  - **Cursor + Claude:** AI-assisted test documentation generation, test case design, intelligent analysis
+  - **n8n:** Workflow automation for test execution pipelines, report generation, CI/CD integration
+- **Application:** Test management, documentation automation, workflow orchestration
+
+#### **6. System Under Test Exploration**
+- **Tool:** Playwright MCP (Model Context Protocol)
+- **Usage:** Systematic SUT exploration, UI interaction, data gathering, screenshot capture
+- **Application:** SUT analysis, test data preparation, exploratory testing automation
+
+### Tool Integration Strategy
+- **Multiple Test Types:** Use appropriate tools for each testing level (functional, security, performance, accessibility)
+- **Systematic Approach:** Document tool usage rationale and expected outcomes
+- **Report Generation:** All tools generate professional reports for evidence and analysis
+- **Automation Priority:** Focus automation on high-risk, high-priority test scenarios
+
 ## Notes
 - Always prioritize competition scoring criteria (20 points)
 - Maintain professional ISTQB standards throughout
 - Ensure all recommendations are practical and executable
 - Focus on comprehensive risk coverage and realistic planning
-- Use Playwright MCP strategically for targeted data gathering
+- Reference the Competition Toolstack for appropriate tool selection per testing type
+- Document tool usage to demonstrate systematic approach (scoring criterion)
 
 ---
 
-**Prompt Version**: 1.0  
+**Prompt Version**: 2.1  
 **Created**: January 2025  
+**Last Updated**: January 2026  
 **Purpose**: ISTQB Testing Cup Test Plan Generation  
 **Dependencies**: SUT Overview, PROJECT-SYSTEM-MESSAGE.md, test-plan-knowledge-base.md, Playwright MCP
+
+## Version History
+
+### Version 2.1 (January 2026)
+- **CRITICAL CLARIFICATION:** Added explicit distinction between reference documents and actual system exploration
+- **CRITICAL FIX:** Made Playwright MCP exploration MANDATORY with clear warning labels
+- Added "Understanding Reference Documents vs Actual System Exploration" section
+- Enhanced Step 2 with detailed Playwright MCP exploration checklist
+- Clarified that reference documents are for STRUCTURE/TEMPLATE only, not actual data
+- Added explicit instructions to document actual UI elements, field names, error messages
+- Emphasized that skipping Playwright MCP exploration is NOT acceptable
+
+### Version 2.0 (October 2025)
+- **CRITICAL FIX:** Added HTML file generation strategy (batch generation to avoid token limits)
+- **CRITICAL FIX:** Added character encoding guidelines (no emoji/Unicode symbols)
+- **CRITICAL FIX:** Updated competition schedule to single-day format (6 hours total)
+- **NEW:** Added comprehensive Competition Toolstack section
+  - OWASP ZAP for security/penetration testing
+  - Google Lighthouse for accessibility testing
+  - K6 + Performance Analyzer for load/performance testing
+  - Playwright for test automation (P1/P2 priority)
+  - Cursor, Claude, n8n for workflow automation
+  - Playwright MCP for SUT exploration
+- Added tool integration strategy and deliverable specifications
+- Added clear instructions for morning/afternoon session breakdown
+- Clarified external stakeholders (ISTQB Product Owner only)
+- Improved time management guidelines for realistic competition constraints
+
+### Version 1.0 (January 2025)
+- Initial Test Plan Generation Prompt
+- Core structure and scoring optimization
+- ISTQB best practices integration
 
 
 

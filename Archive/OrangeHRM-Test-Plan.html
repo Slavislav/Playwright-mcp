@@ -1,0 +1,2660 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Plan - OrangeHRM OS 5.7 | ISTQB Testing Cup Grand Finals</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; background: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        
+        /* Header Styles */
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; margin: -20px -20px 30px -20px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .subtitle { font-size: 1.2em; opacity: 0.95; margin-bottom: 25px; }
+        
+        /* Metadata Grid */
+        .metadata { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+        .metadata-item { background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; border-left: 4px solid #ffd700; }
+        .metadata-item strong { display: block; font-size: 0.85em; opacity: 0.9; margin-bottom: 5px; }
+        .metadata-item span { font-size: 1.1em; font-weight: 600; }
+        
+        /* Navigation TOC */
+        .toc { background: #f8f9fa; padding: 25px; border-radius: 10px; margin: 30px 0; border-left: 5px solid #667eea; }
+        .toc h2 { color: #667eea; margin-bottom: 20px; font-size: 1.8em; }
+        .toc ol { margin-left: 25px; }
+        .toc li { margin: 12px 0; }
+        .toc a { color: #333; text-decoration: none; font-size: 1.05em; transition: all 0.3s; padding: 5px 10px; border-radius: 5px; display: inline-block; }
+        .toc a:hover { background: #667eea; color: white; transform: translateX(5px); }
+        
+        /* Section Styles */
+        .section { margin: 40px 0; padding: 30px; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; font-size: 2em; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid #667eea; }
+        .section h3 { color: #764ba2; font-size: 1.5em; margin: 25px 0 15px 0; }
+        .section h4 { color: #333; font-size: 1.2em; margin: 20px 0 12px 0; }
+        .section p { margin: 12px 0; text-align: justify; line-height: 1.8; }
+        .section ul, .section ol { margin: 15px 0 15px 30px; }
+        .section li { margin: 10px 0; line-height: 1.7; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; }
+        td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; }
+        tr:hover { background: #f8f9fa; }
+        
+        /* Info Boxes */
+        .info-box { padding: 20px; margin: 20px 0; border-radius: 10px; border-left: 5px solid; }
+        .info-box.objective { background: #e3f2fd; border-color: #2196f3; }
+        .info-box.risk { background: #ffebee; border-color: #f44336; }
+        .info-box.success { background: #e8f5e9; border-color: #4caf50; }
+        .info-box.warning { background: #fff3e0; border-color: #ff9800; }
+        .info-box h4 { margin-bottom: 10px; color: inherit; }
+        
+        /* Timeline */
+        .timeline { margin: 30px 0; }
+        .timeline-item { display: flex; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 5px solid #667eea; }
+        .timeline-item strong { min-width: 180px; color: #667eea; font-size: 1.1em; }
+        
+        /* Footer */
+        .footer { margin-top: 50px; padding: 30px; background: #f8f9fa; text-align: center; color: #666; border-top: 3px solid #667eea; border-radius: 10px; }
+        
+        /* Print Styles */
+        @media print {
+            .container { box-shadow: none; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header Section -->
+    <div class="header">
+        <h1>TEST PLAN</h1>
+        <div class="subtitle">OrangeHRM OS 5.7 - Human Resource Management System</div>
+        
+        <div class="metadata">
+            <div class="metadata-item">
+                <strong>Team Name</strong>
+                <span>Automation Aid</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Competition</strong>
+                <span>ISTQB Testing Cup Grand Finals</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Date</strong>
+                <span>October 20th, 2025</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Location</strong>
+                <span>Copenhagen, Denmark</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Team Lead</strong>
+                <span>Slav Astinov</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Test Lead</strong>
+                <span>Sava Barbarov</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Document Version</strong>
+                <span>1.0</span>
+            </div>
+            <div class="metadata-item">
+                <strong>System Under Test</strong>
+                <span>OrangeHRM OS 5.7</span>
+            </div>
+        </div>
+    </div>
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="#section1">1. Objective</a></li>
+            <li><a href="#section2">2. Scope</a></li>
+            <li><a href="#section3">3. Test Methodology</a></li>
+            <li><a href="#section4">4. Approach</a></li>
+            <li><a href="#section5">5. Assumptions</a></li>
+            <li><a href="#section6">6. Risk Management</a></li>
+            <li><a href="#section7">7. Backup and Mitigation Plan</a></li>
+            <li><a href="#section8">8. Roles and Responsibilities</a></li>
+            <li><a href="#section9">9. Schedule</a></li>
+            <li><a href="#section10">10. Defect Tracking</a></li>
+            <li><a href="#section11">11. Test Environment</a></li>
+            <li><a href="#section12">12. Entry and Exit Criteria</a></li>
+            <li><a href="#section13">13. Test Automation</a></li>
+            <li><a href="#section14">14. Effort Estimation</a></li>
+            <li><a href="#section15">15. Deliverables</a></li>
+            <li><a href="#section16">16. Templates and Standards</a></li>
+        </ol>
+    </div>
+    <!-- Section 1: Objective -->
+    <div class="section" id="section1">
+        <h2>1. Objective</h2>
+        
+        <div class="info-box objective">
+            <h4>Primary Testing Objective</h4>
+            <p>Ensure the OrangeHRM OS 5.7 Human Resource Management System meets all functional, security, performance, and accessibility requirements while delivering a reliable, user-friendly experience for HR operations and employee self-service activities.</p>
+        </div>
+        
+        <h3>1.1 Specific Objectives</h3>
+        <ul>
+            <li><strong>Functional Validation:</strong> Verify all 12 core modules (Admin, PIM, Leave, Time, Recruitment, My Info, Performance, Dashboard, Directory, Maintenance, Claim, and Buzz) function according to business requirements.</li>
+            
+            <li><strong>Security Assurance:</strong> Validate authentication, authorization, and data protection mechanisms to ensure compliance with data privacy regulations (GDPR) and protection of sensitive employee information.</li>
+            
+            <li><strong>Performance Verification:</strong> Ensure system performance remains optimal with the existing database of 209+ employees and under concurrent user load scenarios.</li>
+            
+            <li><strong>Accessibility Compliance:</strong> Validate WCAG 2.1 Level AA compliance to ensure the system is accessible to users with disabilities.</li>
+            
+            <li><strong>Usability Testing:</strong> Confirm intuitive navigation and user experience across all user roles (Admin and ESS - Employee Self Service).</li>
+            
+            <li><strong>Cross-Browser Compatibility:</strong> Verify consistent functionality across Chrome, Firefox, Safari, and Edge browsers.</li>
+            
+            <li><strong>Risk-Based Testing:</strong> Prioritize testing efforts on high-risk areas including user authentication, employee data management, leave approval workflows, and time tracking accuracy.</li>
+            
+            <li><strong>Defect Identification:</strong> Identify and document all defects to ensure the system is production-ready and bug-free.</li>
+        </ul>
+        
+        <h3>1.2 Success Criteria</h3>
+        <ul>
+            <li>All critical (P1) and high-priority (P2) test cases executed with 100% pass rate</li>
+            <li>Zero critical or high-severity defects remain open at test completion</li>
+            <li>Security testing identifies no critical vulnerabilities</li>
+            <li>Performance benchmarks met for response time and concurrent user load</li>
+            <li>Accessibility score of 90+ achieved on Google Lighthouse</li>
+            <li>All regulatory compliance requirements validated</li>
+        </ul>
+    </div>
+    <!-- Section 2: Scope -->
+    <div class="section" id="section2">
+        <h2>2. Scope</h2>
+        
+        <h3>2.1 In-Scope</h3>
+        <p>The following modules, features, and testing activities are included within the scope of this test plan:</p>
+        
+        <h4>2.1.1 Functional Modules</h4>
+        <table>
+            <tr>
+                <th>Module</th>
+                <th>Key Features</th>
+                <th>Priority</th>
+            </tr>
+            <tr>
+                <td><strong>Admin</strong></td>
+                <td>User management, role configuration, organization setup, job definitions, qualifications, nationalities, corporate branding</td>
+                <td>P1 - Critical</td>
+            </tr>
+            <tr>
+                <td><strong>PIM (Personnel Information Management)</strong></td>
+                <td>Employee records (209+ employees), personal details, employment status, job assignments, organizational structure</td>
+                <td>P1 - Critical</td>
+            </tr>
+            <tr>
+                <td><strong>Leave</strong></td>
+                <td>Leave requests, approvals, leave balance tracking, leave entitlements, leave types configuration</td>
+                <td>P1 - Critical</td>
+            </tr>
+            <tr>
+                <td><strong>Time</strong></td>
+                <td>Timesheet management, time tracking, attendance records, project time allocation</td>
+                <td>P1 - Critical</td>
+            </tr>
+            <tr>
+                <td><strong>Recruitment</strong></td>
+                <td>Candidate management, job postings, interview scheduling, candidate workflow</td>
+                <td>P2 - High</td>
+            </tr>
+            <tr>
+                <td><strong>My Info</strong></td>
+                <td>Employee self-service, personal information updates, document uploads</td>
+                <td>P2 - High</td>
+            </tr>
+            <tr>
+                <td><strong>Performance</strong></td>
+                <td>Performance reviews, self-reviews, KPI tracking, goal management</td>
+                <td>P2 - High</td>
+            </tr>
+            <tr>
+                <td><strong>Dashboard</strong></td>
+                <td>Time at work widget, my actions, quick launch, employee distribution, buzz feed</td>
+                <td>P2 - High</td>
+            </tr>
+            <tr>
+                <td><strong>Directory</strong></td>
+                <td>Employee directory search, organizational chart</td>
+                <td>P3 - Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Maintenance</strong></td>
+                <td>Data purge, access logs, candidate purge</td>
+                <td>P3 - Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Claim</strong></td>
+                <td>Expense claims, claim approvals, reimbursement tracking</td>
+                <td>P3 - Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Buzz</strong></td>
+                <td>Social feed, employee posts, likes, shares, communication</td>
+                <td>P3 - Medium</td>
+            </tr>
+        </table>
+        
+        <h4>2.1.2 Cross-Functional Testing</h4>
+        <ul>
+            <li><strong>Security Testing:</strong> Authentication, authorization, session management, SQL injection, XSS, CSRF, data encryption</li>
+            <li><strong>Performance Testing:</strong> Load testing, stress testing, response time benchmarks, concurrent user scenarios</li>
+            <li><strong>Accessibility Testing:</strong> WCAG 2.1 Level AA compliance, screen reader compatibility, keyboard navigation</li>
+            <li><strong>Usability Testing:</strong> User interface consistency, navigation intuitiveness, error messaging clarity</li>
+            <li><strong>Compatibility Testing:</strong> Cross-browser (Chrome, Firefox, Safari, Edge), cross-platform (Windows, macOS, Linux), responsive design (desktop, tablet, mobile)</li>
+            <li><strong>Integration Testing:</strong> Module integration, data flow validation, workflow integration</li>
+            <li><strong>Regression Testing:</strong> Existing functionality validation after changes</li>
+        </ul>
+        
+        <h3>2.2 Out-of-Scope</h3>
+        <p>The following items are explicitly excluded from this test plan:</p>
+        <ul>
+            <li><strong>Third-Party Integrations:</strong> External payroll systems, LDAP/Active Directory integration, third-party authentication providers</li>
+            <li><strong>Email Server Configuration:</strong> SMTP setup, email delivery mechanisms (only UI validation for email triggers)</li>
+            <li><strong>Database Administration:</strong> Database backup procedures, database optimization, direct database operations</li>
+            <li><strong>Server Infrastructure:</strong> Server configuration, network setup, firewall rules, load balancer configuration</li>
+            <li><strong>System Upgrade Testing:</strong> Migration from previous versions (testing demo version as-is)</li>
+            <li><strong>Mobile Application Testing:</strong> Native mobile apps (if separate from responsive web interface)</li>
+            <li><strong>Custom Report Development:</strong> Creation of new custom reports (only testing existing report functionality)</li>
+            <li><strong>Data Migration:</strong> Import of legacy data from other HR systems</li>
+            <li><strong>Localization Testing:</strong> Multi-language support (English only for competition scope)</li>
+        </ul>
+        
+        <h3>2.3 Scope Boundaries</h3>
+        <div class="info-box warning">
+            <h4>Important Scope Clarifications</h4>
+            <ul>
+                <li>Testing will be conducted on the demo instance: https://opensource-demo.orangehrmlive.com/</li>
+                <li>Testing limited to features available in OrangeHRM OS 5.7 open-source version</li>
+                <li>Data used for testing will be existing demo data plus test data created during testing</li>
+                <li>Testing constrained to 6-hour competition window (3 hours morning + 3 hours afternoon)</li>
+                <li>Focus on high-risk, high-priority features given time constraints</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Section 3: Test Methodology -->
+    <div class="section" id="section3">
+        <h2>3. Test Methodology</h2>
+        
+        <p>The testing approach follows ISTQB best practices and incorporates multiple testing levels and types to ensure comprehensive coverage of the OrangeHRM system.</p>
+        
+        <h3>3.1 Testing Levels</h3>
+        
+        <h4>3.1.1 Functional Testing</h4>
+        <ul>
+            <li><strong>Component Testing:</strong> Individual module feature validation</li>
+            <li><strong>Integration Testing:</strong> Module interaction and data flow verification</li>
+            <li><strong>System Testing:</strong> End-to-end business process validation</li>
+            <li><strong>User Acceptance Testing:</strong> Business requirement fulfillment validation</li>
+        </ul>
+        
+        <h4>3.1.2 Non-Functional Testing</h4>
+        <ul>
+            <li><strong>Security Testing (OWASP ZAP):</strong> Vulnerability assessment, penetration testing, authentication/authorization validation</li>
+            <li><strong>Performance Testing (K6):</strong> Load testing, stress testing, scalability validation</li>
+            <li><strong>Accessibility Testing (Google Lighthouse):</strong> WCAG compliance validation</li>
+            <li><strong>Usability Testing:</strong> User experience evaluation, navigation assessment</li>
+            <li><strong>Compatibility Testing:</strong> Cross-browser and cross-platform validation</li>
+        </ul>
+        
+        <h3>3.2 Testing Types Sequence</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>1. Smoke Testing</strong>
+                <span>Critical functionality validation, login, navigation, basic operations</span>
+            </div>
+            <div class="timeline-item">
+                <strong>2. Functional Testing</strong>
+                <span>Comprehensive module testing, business logic validation</span>
+            </div>
+            <div class="timeline-item">
+                <strong>3. Integration Testing</strong>
+                <span>Module interaction, workflow integration, data flow validation</span>
+            </div>
+            <div class="timeline-item">
+                <strong>4. Security Testing</strong>
+                <span>OWASP ZAP scanning, vulnerability assessment, security validation</span>
+            </div>
+            <div class="timeline-item">
+                <strong>5. Performance Testing</strong>
+                <span>K6 load testing, response time benchmarks, concurrent user scenarios</span>
+            </div>
+            <div class="timeline-item">
+                <strong>6. Accessibility Testing</strong>
+                <span>Google Lighthouse audit, WCAG compliance validation</span>
+            </div>
+            <div class="timeline-item">
+                <strong>7. Usability Testing</strong>
+                <span>User experience evaluation, navigation intuitiveness assessment</span>
+            </div>
+            <div class="timeline-item">
+                <strong>8. Compatibility Testing</strong>
+                <span>Cross-browser validation (Chrome, Firefox, Safari, Edge)</span>
+            </div>
+            <div class="timeline-item">
+                <strong>9. Regression Testing</strong>
+                <span>Automated Playwright tests for high-priority scenarios (P1/P2)</span>
+            </div>
+        </ul>
+        
+        <h3>3.3 Testing Tools and Technologies</h3>
+        <table>
+            <tr>
+                <th>Tool</th>
+                <th>Purpose</th>
+                <th>Testing Type</th>
+                <th>Deliverable</th>
+            </tr>
+            <tr>
+                <td><strong>OWASP ZAP</strong></td>
+                <td>Security and penetration testing</td>
+                <td>Security Testing</td>
+                <td>OWASP ZAP security test report (published to project folder)</td>
+            </tr>
+            <tr>
+                <td><strong>Google Lighthouse</strong></td>
+                <td>Accessibility audits and compliance validation</td>
+                <td>Accessibility Testing</td>
+                <td>Lighthouse accessibility report with scores</td>
+            </tr>
+            <tr>
+                <td><strong>K6 + Performance Analyzer</strong></td>
+                <td>Load and performance testing</td>
+                <td>Performance Testing</td>
+                <td>K6 performance test report (published to project folder)</td>
+            </tr>
+            <tr>
+                <td><strong>Playwright</strong></td>
+                <td>Test automation for high-priority scenarios</td>
+                <td>Functional & Regression Testing</td>
+                <td>Playwright test scripts (published to GitHub repository)</td>
+            </tr>
+            <tr>
+                <td><strong>Playwright MCP</strong></td>
+                <td>System exploration and test data preparation</td>
+                <td>Exploratory Testing</td>
+                <td>System analysis documentation</td>
+            </tr>
+            <tr>
+                <td><strong>Cursor + Claude</strong></td>
+                <td>AI-assisted test documentation and case design</td>
+                <td>Test Management</td>
+                <td>Test documentation, test cases, analysis reports</td>
+            </tr>
+            <tr>
+                <td><strong>n8n</strong></td>
+                <td>Workflow automation and CI/CD integration</td>
+                <td>Test Orchestration</td>
+                <td>Automated test execution pipelines</td>
+            </tr>
+        </table>
+        
+        <h3>3.4 Test Design Techniques</h3>
+        <ul>
+            <li><strong>Equivalence Partitioning:</strong> Input data classification for efficient test coverage</li>
+            <li><strong>Boundary Value Analysis:</strong> Edge case testing for numerical and date inputs</li>
+            <li><strong>Decision Table Testing:</strong> Complex business rule validation</li>
+            <li><strong>State Transition Testing:</strong> Workflow and status change validation</li>
+            <li><strong>Use Case Testing:</strong> End-to-end user journey validation</li>
+            <li><strong>Error Guessing:</strong> Experience-based defect identification</li>
+            <li><strong>Exploratory Testing:</strong> Ad-hoc testing for uncovering unexpected issues</li>
+            <li><strong>Risk-Based Testing:</strong> Prioritization based on business impact and likelihood</li>
+        </ul>
+    </div>
+    <!-- Section 4: Approach -->
+    <div class="section" id="section4">
+        <h2>4. Approach</h2>
+        
+        <p>The testing approach is strategically designed to maximize coverage within the competition time constraints while focusing on high-risk areas and critical business functionality.</p>
+        
+        <h3>4.1 Risk-Based Testing Strategy</h3>
+        <p>Testing efforts will be prioritized based on risk assessment considering:</p>
+        <ul>
+            <li><strong>Business Impact:</strong> Critical HR operations (employee data, leave management, time tracking)</li>
+            <li><strong>Usage Frequency:</strong> Most frequently used features and workflows</li>
+            <li><strong>Complexity:</strong> Complex business logic and integration points</li>
+            <li><strong>Security Sensitivity:</strong> Authentication, authorization, and sensitive data handling</li>
+            <li><strong>Regulatory Requirements:</strong> GDPR compliance and data protection</li>
+        </ul>
+        
+        <h3>4.2 High-Level Testing Scenarios</h3>
+        
+        <h4>4.2.1 Critical User Journeys (Priority 1)</h4>
+        <table>
+            <tr>
+                <th>Scenario</th>
+                <th>Description</th>
+                <th>Test Type</th>
+            </tr>
+            <tr>
+                <td><strong>User Authentication</strong></td>
+                <td>Login with valid/invalid credentials, password reset, session management, logout</td>
+                <td>Functional, Security</td>
+            </tr>
+            <tr>
+                <td><strong>Employee Management</strong></td>
+                <td>Add new employee, update employee details, assign job/department, deactivate employee</td>
+                <td>Functional, Integration</td>
+            </tr>
+            <tr>
+                <td><strong>Leave Request Workflow</strong></td>
+                <td>Employee submits leave request, supervisor approval/rejection, leave balance update</td>
+                <td>Functional, Integration, Workflow</td>
+            </tr>
+            <tr>
+                <td><strong>Time Tracking</strong></td>
+                <td>Clock in/out, timesheet entry, timesheet approval, time reporting</td>
+                <td>Functional, Integration</td>
+            </tr>
+            <tr>
+                <td><strong>User Role Management</strong></td>
+                <td>Admin creates users, assigns roles (Admin/ESS), manages permissions</td>
+                <td>Functional, Security</td>
+            </tr>
+        </table>
+        
+        <h4>4.2.2 Important User Journeys (Priority 2)</h4>
+        <ul>
+            <li>Recruitment candidate management and interview scheduling</li>
+            <li>Performance review submission and approval workflow</li>
+            <li>Employee self-service information updates</li>
+            <li>Dashboard widget functionality and data accuracy</li>
+            <li>Organization structure management</li>
+            <li>Job and qualification configuration</li>
+        </ul>
+        
+        <h4>4.2.3 Supporting Features (Priority 3)</h4>
+        <ul>
+            <li>Employee directory search and filtering</li>
+            <li>Buzz social feed interactions</li>
+            <li>Expense claim submission and approval</li>
+            <li>System maintenance operations</li>
+            <li>Report generation and export</li>
+        </ul>
+        
+        <h3>4.3 Testing Flow and Dependencies</h3>
+        <div class="info-box success">
+            <h4>Testing Execution Flow</h4>
+            <ol>
+                <li><strong>Phase 1 - Smoke Testing (Morning - First 30 minutes):</strong> Validate critical paths and basic functionality to ensure system readiness</li>
+                <li><strong>Phase 2 - Functional Testing (Morning - 90 minutes):</strong> Execute P1 test cases for Admin, PIM, Leave, and Time modules</li>
+                <li><strong>Phase 3 - Security Testing (Morning - 60 minutes):</strong> Run OWASP ZAP scans and manual security validation</li>
+                <li><strong>Phase 4 - Integration Testing (Afternoon - 60 minutes):</strong> Validate module interactions and workflow integration</li>
+                <li><strong>Phase 5 - Performance & Accessibility Testing (Afternoon - 60 minutes):</strong> Execute K6 load tests and Lighthouse accessibility audits</li>
+                <li><strong>Phase 6 - Test Automation (Afternoon - 45 minutes):</strong> Develop and execute Playwright automation for P1/P2 scenarios</li>
+                <li><strong>Phase 7 - Reporting (Afternoon - 15 minutes):</strong> Consolidate results, generate reports, and finalize documentation</li>
+            </ol>
+        </div>
+        
+        <h3>4.4 Automation Strategy</h3>
+        <p><strong>Automation Focus:</strong> High-priority (P1/P2) test cases will be automated using Playwright for:</p>
+        <ul>
+            <li>Regression testing efficiency</li>
+            <li>Repeatability and consistency</li>
+            <li>Cross-browser validation</li>
+            <li>Continuous integration support</li>
+        </ul>
+        
+        <p><strong>Automation Candidates:</strong></p>
+        <ul>
+            <li>User login and authentication flows</li>
+            <li>Employee CRUD operations</li>
+            <li>Leave request submission and approval</li>
+            <li>Time tracking punch in/out operations</li>
+            <li>Critical navigation and search functions</li>
+        </ul>
+        
+        <h3>4.5 Exploratory Testing Approach</h3>
+        <p>Dedicated exploratory testing sessions will be conducted using charter-based exploratory testing methodology:</p>
+        <ul>
+            <li><strong>Time-boxed sessions:</strong> 20-minute focused exploration sprints</li>
+            <li><strong>Charter-based:</strong> Specific objectives for each exploratory session</li>
+            <li><strong>Documentation:</strong> Session notes, findings, and defects recorded systematically</li>
+            <li><strong>Coverage:</strong> Areas not fully covered by scripted tests</li>
+        </ul>
+    </div>
+    <!-- Section 5: Assumptions -->
+    <div class="section" id="section5">
+        <h2>5. Assumptions</h2>
+        
+        <p>The following assumptions have been made for this test plan:</p>
+        
+        <h3>5.1 System and Environment Assumptions</h3>
+        <ul>
+            <li>The OrangeHRM demo instance (https://opensource-demo.orangehrmlive.com/) will remain available and stable throughout the competition day</li>
+            <li>System version remains OrangeHRM OS 5.7 without unexpected updates during testing</li>
+            <li>Demo data (209+ employees, existing users) will be available for testing purposes</li>
+            <li>Internet connectivity will be stable and reliable during the competition</li>
+            <li>System allows creation of test data without impacting demo functionality</li>
+        </ul>
+        
+        <h3>5.2 Resource Assumptions</h3>
+        <ul>
+            <li>Testing team (Slav Astinov, Sava Barbarov) will have uninterrupted access during competition hours</li>
+            <li>All required testing tools (OWASP ZAP, K6, Google Lighthouse, Playwright, Cursor, Claude, n8n) will be pre-configured and available</li>
+            <li>Team members have necessary credentials and permissions for all testing activities</li>
+            <li>Competition organizers will provide ISTQB Product Owner for clarifications if needed</li>
+        </ul>
+        
+        <h3>5.3 Schedule Assumptions</h3>
+        <ul>
+            <li>Competition follows single-day schedule: 6 hours total testing time (09:00-12:00 morning, 13:00-16:00 afternoon)</li>
+            <li>Lunch break (12:00-13:00) is excluded from testing activities</li>
+            <li>Judges' debriefing (16:00-17:00) does not require team participation in active testing</li>
+            <li>All test execution, automation, and reporting must be completed within the 6-hour window</li>
+        </ul>
+        
+        <h3>5.4 Testing Assumptions</h3>
+        <ul>
+            <li>System requirements and business rules can be inferred from system behavior and available documentation</li>
+            <li>High-priority test cases (P1/P2) can be identified through risk analysis and system exploration</li>
+            <li>Automated test scripts can be developed and executed within allocated time</li>
+            <li>Defects can be documented and reported without formal defect tracking system access</li>
+            <li>Test results can be consolidated and reports generated within competition timeframe</li>
+        </ul>
+        
+        <h3>5.5 Stakeholder Assumptions</h3>
+        <ul>
+            <li>ISTQB Product Owner will be available for requirement clarifications during competition hours</li>
+            <li>Competition judges will evaluate deliverables based on ISTQB scoring criteria (20 points for Test Plan Quality)</li>
+            <li>All documentation will be submitted in required HTML format by competition deadline</li>
+        </ul>
+    </div>
+    
+    <!-- Section 6: Risk Management -->
+    <div class="section" id="section6">
+        <h2>6. Risk Management</h2>
+        
+        <p>A comprehensive risk assessment has been conducted to identify potential risks that could impact testing effectiveness and quality.</p>
+        
+        <h3>6.1 Product Risks</h3>
+        
+        <div class="info-box risk">
+            <h4>HIGH SEVERITY - Critical Product Risks</h4>
+            <table>
+                <tr>
+                    <th>Risk ID</th>
+                    <th>Risk Description</th>
+                    <th>Impact</th>
+                    <th>Likelihood</th>
+                    <th>Risk Level</th>
+                </tr>
+                <tr>
+                    <td>PR-01</td>
+                    <td><strong>Authentication Bypass:</strong> Unauthorized access to system due to weak authentication mechanisms</td>
+                    <td>Critical</td>
+                    <td>Medium</td>
+                    <td>HIGH</td>
+                </tr>
+                <tr>
+                    <td>PR-02</td>
+                    <td><strong>Data Integrity Loss:</strong> Employee data corruption or accidental deletion without proper validation</td>
+                    <td>Critical</td>
+                    <td>Medium</td>
+                    <td>HIGH</td>
+                </tr>
+                <tr>
+                    <td>PR-03</td>
+                    <td><strong>Authorization Violations:</strong> ESS users accessing admin-only functions or other employees' data</td>
+                    <td>Critical</td>
+                    <td>High</td>
+                    <td>HIGH</td>
+                </tr>
+                <tr>
+                    <td>PR-04</td>
+                    <td><strong>Leave Balance Calculation Errors:</strong> Incorrect leave balance updates affecting payroll and compliance</td>
+                    <td>High</td>
+                    <td>Medium</td>
+                    <td>HIGH</td>
+                </tr>
+                <tr>
+                    <td>PR-05</td>
+                    <td><strong>Time Tracking Inaccuracies:</strong> Incorrect time calculations impacting payroll and billing</td>
+                    <td>High</td>
+                    <td>Medium</td>
+                    <td>HIGH</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h4>MEDIUM SEVERITY - Important Product Risks</h4>
+        <table>
+            <tr>
+                <th>Risk ID</th>
+                <th>Risk Description</th>
+                <th>Impact</th>
+                <th>Likelihood</th>
+                <th>Risk Level</th>
+            </tr>
+            <tr>
+                <td>PR-06</td>
+                <td><strong>SQL Injection Vulnerabilities:</strong> Malicious SQL queries could compromise database</td>
+                <td>High</td>
+                <td>Low</td>
+                <td>MEDIUM</td>
+            </tr>
+            <tr>
+                <td>PR-07</td>
+                <td><strong>Cross-Site Scripting (XSS):</strong> Malicious scripts injected through user inputs</td>
+                <td>High</td>
+                <td>Low</td>
+                <td>MEDIUM</td>
+            </tr>
+            <tr>
+                <td>PR-08</td>
+                <td><strong>Performance Degradation:</strong> System slowdown under concurrent user load</td>
+                <td>Medium</td>
+                <td>Medium</td>
+                <td>MEDIUM</td>
+            </tr>
+            <tr>
+                <td>PR-09</td>
+                <td><strong>GDPR Compliance Violations:</strong> Inadequate data privacy controls for employee personal data</td>
+                <td>High</td>
+                <td>Low</td>
+                <td>MEDIUM</td>
+            </tr>
+            <tr>
+                <td>PR-10</td>
+                <td><strong>Workflow State Corruption:</strong> Leave/performance review workflows stuck in invalid states</td>
+                <td>Medium</td>
+                <td>Medium</td>
+                <td>MEDIUM</td>
+            </tr>
+        </table>
+        
+        <h4>LOW SEVERITY - Supporting Feature Risks</h4>
+        <ul>
+            <li><strong>PR-11:</strong> Browser compatibility issues affecting user experience (Impact: Low, Likelihood: Medium)</li>
+            <li><strong>PR-12:</strong> Accessibility compliance gaps affecting disabled users (Impact: Medium, Likelihood: Low)</li>
+            <li><strong>PR-13:</strong> Usability issues causing user confusion and errors (Impact: Low, Likelihood: High)</li>
+            <li><strong>PR-14:</strong> Report generation errors or inaccurate data (Impact: Low, Likelihood: Medium)</li>
+            <li><strong>PR-15:</strong> Social feed (Buzz) functionality failures (Impact: Low, Likelihood: Low)</li>
+        </ul>
+        
+        <h3>6.2 Project Risks</h3>
+        
+        <table>
+            <tr>
+                <th>Risk ID</th>
+                <th>Risk Description</th>
+                <th>Impact</th>
+                <th>Likelihood</th>
+                <th>Mitigation Strategy</th>
+            </tr>
+            <tr>
+                <td>PJ-01</td>
+                <td><strong>Time Constraint:</strong> Insufficient time to complete all planned testing within 6-hour competition window</td>
+                <td>High</td>
+                <td>High</td>
+                <td>Risk-based prioritization; focus on P1/P2 test cases first; parallel execution where possible</td>
+            </tr>
+            <tr>
+                <td>PJ-02</td>
+                <td><strong>System Unavailability:</strong> Demo instance becomes unavailable during competition</td>
+                <td>Critical</td>
+                <td>Low</td>
+                <td>Early smoke testing to validate availability; immediate escalation to organizers if issues occur</td>
+            </tr>
+            <tr>
+                <td>PJ-03</td>
+                <td><strong>Tool Failures:</strong> Testing tools malfunction or become unavailable</td>
+                <td>Medium</td>
+                <td>Low</td>
+                <td>Pre-competition tool validation; backup manual testing approach; tool redundancy where possible</td>
+            </tr>
+            <tr>
+                <td>PJ-04</td>
+                <td><strong>Unclear Requirements:</strong> Ambiguous business rules requiring clarification</td>
+                <td>Medium</td>
+                <td>Medium</td>
+                <td>Early engagement with ISTQB Product Owner; document assumptions; exploratory testing to uncover requirements</td>
+            </tr>
+            <tr>
+                <td>PJ-05</td>
+                <td><strong>Scope Creep:</strong> Attempting to test beyond realistic scope for time available</td>
+                <td>High</td>
+                <td>Medium</td>
+                <td>Strict scope management; continuous monitoring of progress against schedule; prioritization discipline</td>
+            </tr>
+        </table>
+        
+        <h3>6.3 Risk Mitigation Strategies</h3>
+        
+        <h4>6.3.1 High-Risk Area Focus</h4>
+        <ul>
+            <li>Allocate 60% of testing effort to authentication, authorization, and employee data management (PR-01, PR-02, PR-03)</li>
+            <li>Mandatory security testing using OWASP ZAP for vulnerability identification (PR-06, PR-07)</li>
+            <li>Comprehensive leave balance and time tracking validation (PR-04, PR-05)</li>
+        </ul>
+        
+        <h4>6.3.2 Early Risk Detection</h4>
+        <ul>
+            <li>Smoke testing executed first to identify critical issues early</li>
+            <li>Security scanning initiated in parallel with functional testing</li>
+            <li>Continuous monitoring of test progress and defect trends</li>
+        </ul>
+        
+        <h4>6.3.3 Time Management Controls</h4>
+        <ul>
+            <li>Time-boxed testing sessions with strict adherence to schedule</li>
+            <li>Continuous prioritization and scope adjustment based on progress</li>
+            <li>Parallel execution of independent testing activities</li>
+            <li>Pre-defined cutoff points for moving to next phase</li>
+        </ul>
+    </div>
+    <!-- Section 7: Backup and Mitigation Plan -->
+    <div class="section" id="section7">
+        <h2>7. Backup and Mitigation Plan</h2>
+        
+        <p>Contingency plans have been established to address potential issues and ensure testing continuity:</p>
+        
+        <h3>7.1 System Availability Issues</h3>
+        <table>
+            <tr>
+                <th>Issue</th>
+                <th>Contingency Action</th>
+                <th>Responsible</th>
+            </tr>
+            <tr>
+                <td>Demo instance unavailable</td>
+                <td>1. Immediate notification to competition organizers<br>2. Document issue with screenshots/evidence<br>3. Continue with test documentation and analysis<br>4. Resume testing when system restored</td>
+                <td>Team Lead</td>
+            </tr>
+            <tr>
+                <td>Network connectivity issues</td>
+                <td>1. Switch to backup internet connection<br>2. Use mobile hotspot if necessary<br>3. Continue offline activities (documentation, script development)<br>4. Sync results when connectivity restored</td>
+                <td>Test Lead</td>
+            </tr>
+            <tr>
+                <td>System performance degradation</td>
+                <td>1. Document performance issues as defects<br>2. Adjust test execution timing to accommodate delays<br>3. Prioritize critical tests to complete within time constraints<br>4. Use performance issues as input for performance testing</td>
+                <td>Both team members</td>
+            </tr>
+        </table>
+        
+        <h3>7.2 Tool and Resource Issues</h3>
+        <table>
+            <tr>
+                <th>Issue</th>
+                <th>Contingency Action</th>
+                <th>Responsible</th>
+            </tr>
+            <tr>
+                <td>OWASP ZAP failure</td>
+                <td>1. Manual security testing using browser developer tools<br>2. Focus on authentication, authorization, input validation<br>3. Document manual security test results<br>4. Note tool issue in final report</td>
+                <td>Test Lead</td>
+            </tr>
+            <tr>
+                <td>K6 performance testing tool issues</td>
+                <td>1. Browser-based performance monitoring<br>2. Manual concurrent user simulation<br>3. Response time measurement using browser tools<br>4. Document alternative testing approach</td>
+                <td>Test Lead</td>
+            </tr>
+            <tr>
+                <td>Playwright automation failures</td>
+                <td>1. Prioritize manual test execution<br>2. Focus automation on highest-priority scenarios only<br>3. Document automation challenges<br>4. Provide automation scripts even if partially complete</td>
+                <td>Team Lead</td>
+            </tr>
+            <tr>
+                <td>Lighthouse accessibility issues</td>
+                <td>1. Manual accessibility testing with keyboard navigation<br>2. Screen reader simulation<br>3. Color contrast validation using browser extensions<br>4. Document manual accessibility findings</td>
+                <td>Both team members</td>
+            </tr>
+        </table>
+        
+        <h3>7.3 Schedule and Scope Issues</h3>
+        <table>
+            <tr>
+                <th>Issue</th>
+                <th>Contingency Action</th>
+                <th>Decision Maker</th>
+            </tr>
+            <tr>
+                <td>Behind schedule on functional testing</td>
+                <td>1. Re-prioritize remaining test cases<br>2. Focus only on P1 tests<br>3. Reduce test case execution detail<br>4. Adjust subsequent phase timings</td>
+                <td>Team Lead</td>
+            </tr>
+            <tr>
+                <td>Scope too ambitious for time available</td>
+                <td>1. Dynamic scope reduction based on progress<br>2. Defer P3 (low priority) tests<br>3. Focus on critical user journeys only<br>4. Document deferred scope with justification</td>
+                <td>Team Lead</td>
+            </tr>
+            <tr>
+                <td>High defect count impacting schedule</td>
+                <td>1. Continue testing despite defects<br>2. Document all defects systematically<br>3. Note blockers and their impact<br>4. Adjust scope to work around blocking defects</td>
+                <td>Test Lead</td>
+            </tr>
+            <tr>
+                <td>Reporting time insufficient</td>
+                <td>1. Use pre-defined report templates<br>2. Continuous documentation throughout testing<br>3. Parallel report generation during final phase<br>4. Focus on key findings and critical defects</td>
+                <td>Both team members</td>
+            </tr>
+        </table>
+        
+        <h3>7.4 Communication and Escalation</h3>
+        <ul>
+            <li><strong>Issue Escalation Path:</strong> Test Lead â†’ Team Lead â†’ ISTQB Product Owner â†’ Competition Organizers</li>
+            <li><strong>Decision Authority:</strong> Team Lead has final authority on scope and priority decisions</li>
+            <li><strong>Time Checkpoints:</strong> Progress review every 60 minutes with scope/priority adjustment as needed</li>
+            <li><strong>Critical Issue Response:</strong> Immediate team discussion for any blocker or critical issue</li>
+        </ul>
+        
+        <h3>7.5 Quality Safeguards</h3>
+        <ul>
+            <li>Minimum 80% P1 test case completion required before moving to P2 tests</li>
+            <li>All critical defects must be documented regardless of time constraints</li>
+            <li>Test evidence (screenshots, logs) captured for all high-severity defects</li>
+            <li>Continuous backup of test documentation and results</li>
+            <li>Final quality review checkpoint 30 minutes before submission deadline</li>
+        </ul>
+    </div>
+    
+    <!-- Section 8: Roles and Responsibilities -->
+    <div class="section" id="section8">
+        <h2>8. Roles and Responsibilities</h2>
+        
+        <h3>8.1 Team Structure</h3>
+        
+        <div class="info-box success">
+            <h4>Automation Aid Team</h4>
+            <p><strong>Team Lead:</strong> Slav Astinov<br>
+            <strong>Test Lead:</strong> Sava Barbarov</p>
+        </div>
+        
+        <h3>8.2 Detailed Role Responsibilities</h3>
+        
+        <h4>8.2.1 Team Lead - Slav Astinov</h4>
+        <table>
+            <tr>
+                <th>Responsibility Area</th>
+                <th>Specific Tasks</th>
+            </tr>
+            <tr>
+                <td><strong>Test Planning</strong></td>
+                <td>
+                    - Review and approve Test Plan document<br>
+                    - Define testing scope and priorities<br>
+                    - Allocate resources and time across testing phases<br>
+                    - Establish risk mitigation strategies
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Test Execution</strong></td>
+                <td>
+                    - Execute functional tests for Admin and PIM modules<br>
+                    - Perform integration testing across modules<br>
+                    - Conduct exploratory testing sessions<br>
+                    - Validate workflow integration points
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Test Automation</strong></td>
+                <td>
+                    - Develop Playwright automation scripts<br>
+                    - Automate P1/P2 priority test cases<br>
+                    - Execute automated regression tests<br>
+                    - Publish automation scripts to GitHub repository
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Project Management</strong></td>
+                <td>
+                    - Monitor progress against schedule<br>
+                    - Make scope and priority adjustment decisions<br>
+                    - Coordinate with ISTQB Product Owner<br>
+                    - Ensure deliverable quality and timely submission
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Documentation</strong></td>
+                <td>
+                    - Create Test Plan document<br>
+                    - Consolidate test results and findings<br>
+                    - Generate final test report<br>
+                    - Document test artifacts and evidence
+                </td>
+            </tr>
+        </table>
+        
+        <h4>8.2.2 Test Lead - Sava Barbarov</h4>
+        <table>
+            <tr>
+                <th>Responsibility Area</th>
+                <th>Specific Tasks</th>
+            </tr>
+            <tr>
+                <td><strong>Test Analysis</strong></td>
+                <td>
+                    - Perform system analysis and exploration<br>
+                    - Identify test conditions and scenarios<br>
+                    - Create Test Analysis document<br>
+                    - Define test data requirements
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Test Design</strong></td>
+                <td>
+                    - Design comprehensive test cases<br>
+                    - Create Test Design document<br>
+                    - Define test case priorities (P1/P2/P3)<br>
+                    - Design exploratory testing charters
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Test Execution</strong></td>
+                <td>
+                    - Execute functional tests for Leave, Time, and Recruitment modules<br>
+                    - Perform security testing using OWASP ZAP<br>
+                    - Conduct accessibility testing using Google Lighthouse<br>
+                    - Execute performance testing using K6
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Specialized Testing</strong></td>
+                <td>
+                    - Security vulnerability assessment<br>
+                    - Performance and load testing<br>
+                    - Accessibility compliance validation<br>
+                    - Cross-browser compatibility testing
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Defect Management</strong></td>
+                <td>
+                    - Log and track all identified defects<br>
+                    - Assign severity and priority to defects<br>
+                    - Create defect reports with evidence<br>
+                    - Maintain defect repository
+                </td>
+            </tr>
+        </table>
+        
+        <h3>8.3 Shared Responsibilities</h3>
+        <ul>
+            <li><strong>System Exploration:</strong> Both team members use Playwright MCP for systematic SUT analysis</li>
+            <li><strong>Test Data Preparation:</strong> Collaborative creation and management of test data</li>
+            <li><strong>Defect Verification:</strong> Cross-verification of critical defects</li>
+            <li><strong>Knowledge Sharing:</strong> Continuous communication of findings and issues</li>
+            <li><strong>Quality Review:</strong> Mutual review of test documentation and deliverables</li>
+            <li><strong>Time Management:</strong> Both members monitor progress and raise schedule concerns</li>
+        </ul>
+        
+        <h3>8.4 External Stakeholders</h3>
+        <table>
+            <tr>
+                <th>Stakeholder</th>
+                <th>Role</th>
+                <th>Interaction</th>
+            </tr>
+            <tr>
+                <td><strong>ISTQB Product Owner</strong></td>
+                <td>Business requirements clarification</td>
+                <td>Available for questions during competition hours; provide requirement clarifications as needed</td>
+            </tr>
+            <tr>
+                <td><strong>Competition Organizers</strong></td>
+                <td>Event coordination and support</td>
+                <td>Escalation point for technical issues, system access problems, or rule clarifications</td>
+            </tr>
+            <tr>
+                <td><strong>Competition Judges</strong></td>
+                <td>Deliverable evaluation</td>
+                <td>Review and score test documentation based on ISTQB criteria (20 points for Test Plan Quality)</td>
+            </tr>
+        </table>
+        
+        <h3>8.5 RACI Matrix</h3>
+        <table>
+            <tr>
+                <th>Activity</th>
+                <th>Team Lead<br>(Slav Astinov)</th>
+                <th>Test Lead<br>(Sava Barbarov)</th>
+                <th>ISTQB Product Owner</th>
+            </tr>
+            <tr>
+                <td>Write Test Plan</td>
+                <td>R, A</td>
+                <td>C</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Write Test Analysis</td>
+                <td>C</td>
+                <td>R, A</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Write Test Design</td>
+                <td>C</td>
+                <td>R, A</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Execute Functional Tests</td>
+                <td>R</td>
+                <td>R</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Execute Security Tests</td>
+                <td>I</td>
+                <td>R, A</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Execute Performance Tests</td>
+                <td>I</td>
+                <td>R, A</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Develop Automation Scripts</td>
+                <td>R, A</td>
+                <td>C</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Log Defects</td>
+                <td>R</td>
+                <td>R, A</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Generate Test Reports</td>
+                <td>R, A</td>
+                <td>C</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Approve Deliverables</td>
+                <td>A</td>
+                <td>R</td>
+                <td>I</td>
+            </tr>
+        </table>
+        <p><em>R = Responsible, A = Accountable, C = Consulted, I = Informed</em></p>
+    </div>
+    <!-- Section 9: Schedule -->
+    <div class="section" id="section9">
+        <h2>9. Schedule</h2>
+        
+        <p>The test schedule is designed for the single-day competition format with 6 hours of testing time (3 hours morning session + 3 hours afternoon session).</p>
+        
+        <div class="info-box warning">
+            <h4>Competition Day Schedule - October 20, 2025</h4>
+            <p><strong>Morning Session:</strong> 09:00 - 12:00 (3 hours)<br>
+            <strong>Lunch Break:</strong> 12:00 - 13:00 (excluded from testing)<br>
+            <strong>Afternoon Session:</strong> 13:00 - 16:00 (3 hours)<br>
+            <strong>Judges' Debriefing:</strong> 16:00 - 17:00 (no team participation required)</p>
+        </div>
+        
+        <h3>9.1 Detailed Time Allocation</h3>
+        
+        <h4>MORNING SESSION (09:00 - 12:00)</h4>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Phase</th>
+                <th>Activities</th>
+                <th>Owner</th>
+                <th>Deliverables</th>
+            </tr>
+            <tr>
+                <td><strong>09:00 - 09:30</strong><br>(30 min)</td>
+                <td><strong>Phase 1: Setup & Smoke Testing</strong></td>
+                <td>
+                    - System access verification<br>
+                    - Tool readiness validation<br>
+                    - Smoke test execution (login, navigation, critical paths)<br>
+                    - Test environment confirmation
+                </td>
+                <td>Both</td>
+                <td>Smoke test results, environment readiness report</td>
+            </tr>
+            <tr>
+                <td><strong>09:30 - 11:00</strong><br>(90 min)</td>
+                <td><strong>Phase 2: Functional Testing (P1 Focus)</strong></td>
+                <td>
+                    - <strong>Team Lead:</strong> Admin module, PIM module, User Management<br>
+                    - <strong>Test Lead:</strong> Leave module, Time module, Recruitment module<br>
+                    - Critical user journey validation<br>
+                    - Test case execution and defect logging<br>
+                    - Test data preparation
+                </td>
+                <td>Both (parallel)</td>
+                <td>Functional test results, defect reports, test execution logs</td>
+            </tr>
+            <tr>
+                <td><strong>11:00 - 12:00</strong><br>(60 min)</td>
+                <td><strong>Phase 3: Security Testing</strong></td>
+                <td>
+                    - OWASP ZAP automated scanning<br>
+                    - Manual security testing (authentication, authorization)<br>
+                    - Input validation testing<br>
+                    - Session management verification<br>
+                    - Security vulnerability documentation
+                </td>
+                <td>Test Lead (primary)<br>Team Lead (support)</td>
+                <td>OWASP ZAP security report, security test results, vulnerability list</td>
+            </tr>
+        </table>
+        
+        <h4>LUNCH BREAK (12:00 - 13:00)</h4>
+        <p><em>No testing activities scheduled. Team regroup and strategy adjustment for afternoon session.</em></p>
+        
+        <h4>AFTERNOON SESSION (13:00 - 16:00)</h4>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Phase</th>
+                <th>Activities</th>
+                <th>Owner</th>
+                <th>Deliverables</th>
+            </tr>
+            <tr>
+                <td><strong>13:00 - 14:00</strong><br>(60 min)</td>
+                <td><strong>Phase 4: Integration Testing</strong></td>
+                <td>
+                    - Module integration validation<br>
+                    - Workflow integration (Leave approval, Recruitment, Performance)<br>
+                    - Data flow verification<br>
+                    - Cross-module interaction testing<br>
+                    - End-to-end scenario validation
+                </td>
+                <td>Both</td>
+                <td>Integration test results, workflow validation reports</td>
+            </tr>
+            <tr>
+                <td><strong>14:00 - 15:00</strong><br>(60 min)</td>
+                <td><strong>Phase 5: Performance & Accessibility Testing</strong></td>
+                <td>
+                    - K6 load testing execution (30 min)<br>
+                    - Performance benchmarking<br>
+                    - Response time measurement<br>
+                    - Google Lighthouse accessibility audit (30 min)<br>
+                    - WCAG compliance validation<br>
+                    - Usability assessment
+                </td>
+                <td>Test Lead (primary)<br>Team Lead (support)</td>
+                <td>K6 performance report, Lighthouse accessibility report, usability findings</td>
+            </tr>
+            <tr>
+                <td><strong>15:00 - 15:45</strong><br>(45 min)</td>
+                <td><strong>Phase 6: Test Automation</strong></td>
+                <td>
+                    - Playwright automation script development<br>
+                    - P1/P2 test case automation<br>
+                    - Automated test execution<br>
+                    - Cross-browser validation (Chrome, Firefox)<br>
+                    - Script optimization and debugging
+                </td>
+                <td>Team Lead (primary)<br>Test Lead (support)</td>
+                <td>Playwright automation scripts (published to GitHub), automated test results</td>
+            </tr>
+            <tr>
+                <td><strong>15:45 - 16:00</strong><br>(15 min)</td>
+                <td><strong>Phase 7: Reporting & Finalization</strong></td>
+                <td>
+                    - Consolidate all test results<br>
+                    - Generate final test report<br>
+                    - Compile defect summary<br>
+                    - Package all deliverables<br>
+                    - Final quality review<br>
+                    - Submit documentation
+                </td>
+                <td>Both</td>
+                <td>Final test report, consolidated defect list, all test artifacts, deliverable submission</td>
+            </tr>
+        </table>
+        
+        <h3>9.2 Milestone Tracking</h3>
+        <table>
+            <tr>
+                <th>Milestone</th>
+                <th>Target Time</th>
+                <th>Success Criteria</th>
+            </tr>
+            <tr>
+                <td><strong>M1: Test Environment Ready</strong></td>
+                <td>09:15</td>
+                <td>All tools functional, system accessible, smoke tests passed</td>
+            </tr>
+            <tr>
+                <td><strong>M2: Functional Testing 50% Complete</strong></td>
+                <td>10:15</td>
+                <td>All P1 Admin and PIM tests executed, Leave and Time tests 50% complete</td>
+            </tr>
+            <tr>
+                <td><strong>M3: Functional Testing 100% Complete</strong></td>
+                <td>11:00</td>
+                <td>All P1 functional tests executed, defects logged, P2 tests identified for afternoon</td>
+            </tr>
+            <tr>
+                <td><strong>M4: Security Testing Complete</strong></td>
+                <td>12:00</td>
+                <td>OWASP ZAP scan complete, manual security tests executed, vulnerabilities documented</td>
+            </tr>
+            <tr>
+                <td><strong>M5: Integration Testing Complete</strong></td>
+                <td>14:00</td>
+                <td>All critical workflows validated, integration issues documented</td>
+            </tr>
+            <tr>
+                <td><strong>M6: Performance & Accessibility Complete</strong></td>
+                <td>15:00</td>
+                <td>K6 and Lighthouse reports generated, performance/accessibility findings documented</td>
+            </tr>
+            <tr>
+                <td><strong>M7: Automation Scripts Complete</strong></td>
+                <td>15:45</td>
+                <td>P1/P2 scenarios automated, scripts published to GitHub, automation results documented</td>
+            </tr>
+            <tr>
+                <td><strong>M8: Final Submission Ready</strong></td>
+                <td>16:00</td>
+                <td>All deliverables complete, quality reviewed, and submitted</td>
+            </tr>
+        </table>
+        
+        <h3>9.3 Dependencies and Critical Path</h3>
+        <ul>
+            <li><strong>Smoke Testing â†’ Functional Testing:</strong> System readiness must be confirmed before comprehensive testing begins</li>
+            <li><strong>Functional Testing â†’ Integration Testing:</strong> Individual module validation provides foundation for integration testing</li>
+            <li><strong>Test Execution â†’ Automation:</strong> Manual test execution informs automation script development</li>
+            <li><strong>All Testing â†’ Reporting:</strong> Test results from all phases feed into final reporting</li>
+        </ul>
+        
+        <h3>9.4 Schedule Risk Management</h3>
+        <div class="info-box warning">
+            <h4>Schedule Contingencies</h4>
+            <ul>
+                <li><strong>Buffer Time:</strong> 15-minute buffers built into each major phase transition</li>
+                <li><strong>Priority Adjustment:</strong> If behind schedule, defer P2/P3 tests and focus on P1 completion</li>
+                <li><strong>Scope Reduction:</strong> Pre-defined scope reduction plan if significant delays occur:
+                    <ul>
+                        <li>First reduction: Skip P3 tests (Directory, Maintenance, Claim, Buzz)</li>
+                        <li>Second reduction: Limit automation to login and employee management only</li>
+                        <li>Third reduction: Reduce cross-browser testing to Chrome and Firefox only</li>
+                    </ul>
+                </li>
+                <li><strong>Progress Checkpoints:</strong> Every 60 minutes, assess progress and adjust remaining schedule if needed</li>
+            </ul>
+        </div>
+        
+        <h3>9.5 Parallel Execution Opportunities</h3>
+        <ul>
+            <li><strong>Morning Functional Testing:</strong> Team Lead and Test Lead test different modules simultaneously</li>
+            <li><strong>Security Testing:</strong> OWASP ZAP automated scan runs in background while manual security tests executed</li>
+            <li><strong>Performance Testing:</strong> K6 load tests run while Lighthouse accessibility audits performed on different scenarios</li>
+            <li><strong>Continuous Documentation:</strong> Test results documented continuously throughout testing, not just in reporting phase</li>
+        </ul>
+    </div>
+    <!-- Section 10: Defect Tracking -->
+    <div class="section" id="section10">
+        <h2>10. Defect Tracking</h2>
+        
+        <h3>10.1 Defect Management Process</h3>
+        <p>All defects identified during testing will be systematically logged, categorized, and tracked using a structured approach.</p>
+        
+        <h4>10.1.1 Defect Identification</h4>
+        <ul>
+            <li>Defects captured during all testing phases (functional, security, performance, accessibility, integration)</li>
+            <li>Screenshots, video recordings, and logs collected as evidence</li>
+            <li>Reproduction steps documented in detail</li>
+            <li>Test environment and configuration details recorded</li>
+        </ul>
+        
+        <h4>10.1.2 Defect Classification</h4>
+        <table>
+            <tr>
+                <th>Severity</th>
+                <th>Definition</th>
+                <th>Examples</th>
+                <th>Response Time</th>
+            </tr>
+            <tr>
+                <td><strong>S1 - Critical</strong></td>
+                <td>System crash, data loss, complete functionality failure, security vulnerability</td>
+                <td>Cannot login, employee data deleted, SQL injection possible, system unavailable</td>
+                <td>Immediate documentation and escalation</td>
+            </tr>
+            <tr>
+                <td><strong>S2 - High</strong></td>
+                <td>Major functionality impaired, significant business impact, workaround exists but difficult</td>
+                <td>Leave balance calculation incorrect, timesheet approval fails, reports generate wrong data</td>
+                <td>Document within 15 minutes</td>
+            </tr>
+            <tr>
+                <td><strong>S3 - Medium</strong></td>
+                <td>Moderate functionality issue, reasonable workaround available, usability problem</td>
+                <td>UI element misaligned, error message unclear, search filter not working properly</td>
+                <td>Document within testing phase</td>
+            </tr>
+            <tr>
+                <td><strong>S4 - Low</strong></td>
+                <td>Minor issue, cosmetic defect, minimal business impact</td>
+                <td>Typo in label, button color inconsistent, tooltip text grammatically incorrect</td>
+                <td>Document if time available</td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <th>Priority</th>
+                <th>Definition</th>
+                <th>Action Required</th>
+            </tr>
+            <tr>
+                <td><strong>P1 - Urgent</strong></td>
+                <td>Must be fixed before production; blocks critical functionality</td>
+                <td>Detailed documentation, escalation to stakeholders</td>
+            </tr>
+            <tr>
+                <td><strong>P2 - High</strong></td>
+                <td>Should be fixed soon; impacts important functionality</td>
+                <td>Full documentation with reproduction steps</td>
+            </tr>
+            <tr>
+                <td><strong>P3 - Medium</strong></td>
+                <td>Should be fixed; impacts non-critical functionality</td>
+                <td>Standard documentation</td>
+            </tr>
+            <tr>
+                <td><strong>P4 - Low</strong></td>
+                <td>Can be fixed later; minimal impact</td>
+                <td>Brief documentation</td>
+            </tr>
+        </table>
+        
+        <h3>10.2 Defect Lifecycle</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>1. Identification</strong>
+                <span>Defect discovered during test execution</span>
+            </div>
+            <div class="timeline-item">
+                <strong>2. Documentation</strong>
+                <span>Defect logged with complete details, evidence, and reproduction steps</span>
+            </div>
+            <div class="timeline-item">
+                <strong>3. Classification</strong>
+                <span>Severity and priority assigned based on impact and business criticality</span>
+            </div>
+            <div class="timeline-item">
+                <strong>4. Verification</strong>
+                <span>Defect reproduced and verified by second team member (for S1/S2 defects)</span>
+            </div>
+            <div class="timeline-item">
+                <strong>5. Reporting</strong>
+                <span>Defect included in defect report and final test documentation</span>
+            </div>
+        </div>
+        
+        <h3>10.3 Defect Report Template</h3>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Defect ID</strong></td>
+                <td>Unique identifier (e.g., DEF-001, DEF-002)</td>
+            </tr>
+            <tr>
+                <td><strong>Summary</strong></td>
+                <td>Brief one-line description of the defect</td>
+            </tr>
+            <tr>
+                <td><strong>Module/Feature</strong></td>
+                <td>Affected module or feature (Admin, PIM, Leave, Time, etc.)</td>
+            </tr>
+            <tr>
+                <td><strong>Severity</strong></td>
+                <td>S1 (Critical), S2 (High), S3 (Medium), S4 (Low)</td>
+            </tr>
+            <tr>
+                <td><strong>Priority</strong></td>
+                <td>P1 (Urgent), P2 (High), P3 (Medium), P4 (Low)</td>
+            </tr>
+            <tr>
+                <td><strong>Steps to Reproduce</strong></td>
+                <td>Detailed step-by-step instructions to reproduce the defect</td>
+            </tr>
+            <tr>
+                <td><strong>Expected Result</strong></td>
+                <td>What should happen according to requirements or expected behavior</td>
+            </tr>
+            <tr>
+                <td><strong>Actual Result</strong></td>
+                <td>What actually happened (the defect)</td>
+            </tr>
+            <tr>
+                <td><strong>Test Environment</strong></td>
+                <td>Browser, OS, test data used, URL, timestamp</td>
+            </tr>
+            <tr>
+                <td><strong>Evidence</strong></td>
+                <td>Screenshots, video recordings, log files, error messages</td>
+            </tr>
+            <tr>
+                <td><strong>Identified By</strong></td>
+                <td>Tester name (Slav Astinov or Sava Barbarov)</td>
+            </tr>
+            <tr>
+                <td><strong>Date/Time</strong></td>
+                <td>When defect was identified</td>
+            </tr>
+        </table>
+        
+        <h3>10.4 Defect Metrics</h3>
+        <p>The following metrics will be tracked and reported:</p>
+        <ul>
+            <li><strong>Total Defects Found:</strong> Overall count of all defects identified</li>
+            <li><strong>Defects by Severity:</strong> Distribution across S1, S2, S3, S4</li>
+            <li><strong>Defects by Priority:</strong> Distribution across P1, P2, P3, P4</li>
+            <li><strong>Defects by Module:</strong> Which modules have most defects</li>
+            <li><strong>Defects by Type:</strong> Functional, security, performance, accessibility, usability</li>
+            <li><strong>Defect Density:</strong> Defects per test case executed</li>
+        </ul>
+        
+        <h3>10.5 Critical Defect Escalation</h3>
+        <div class="info-box risk">
+            <h4>Immediate Escalation Required For:</h4>
+            <ul>
+                <li>Any S1 (Critical) defect that blocks testing or impacts data integrity</li>
+                <li>Security vulnerabilities (SQL injection, XSS, authentication bypass)</li>
+                <li>Data loss or corruption scenarios</li>
+                <li>System unavailability or crashes</li>
+            </ul>
+            <p><strong>Escalation Path:</strong> Test Lead â†’ Team Lead â†’ ISTQB Product Owner (if clarification needed)</p>
+        </div>
+    </div>
+    
+    <!-- Section 11: Test Environment -->
+    <div class="section" id="section11">
+        <h2>11. Test Environment</h2>
+        
+        <h3>11.1 System Under Test</h3>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td><strong>Application Name</strong></td>
+                <td>OrangeHRM - Human Resource Management System</td>
+            </tr>
+            <tr>
+                <td><strong>Version</strong></td>
+                <td>OrangeHRM OS 5.7 (Open Source)</td>
+            </tr>
+            <tr>
+                <td><strong>Environment Type</strong></td>
+                <td>Demo/Test Environment</td>
+            </tr>
+            <tr>
+                <td><strong>URL</strong></td>
+                <td>https://opensource-demo.orangehrmlive.com/</td>
+            </tr>
+            <tr>
+                <td><strong>Access Credentials</strong></td>
+                <td>Username: Admin<br>Password: admin123</td>
+            </tr>
+            <tr>
+                <td><strong>Available User Roles</strong></td>
+                <td>Admin, ESS (Employee Self Service)</td>
+            </tr>
+            <tr>
+                <td><strong>Test Data</strong></td>
+                <td>Existing demo data: 209+ employees, 16 system users, organizational structure</td>
+            </tr>
+        </table>
+        
+        <h3>11.2 Test Client Configuration</h3>
+        
+        <h4>11.2.1 Hardware Requirements</h4>
+        <ul>
+            <li><strong>Processor:</strong> Intel i5 or equivalent (minimum)</li>
+            <li><strong>RAM:</strong> 8GB (minimum), 16GB (recommended)</li>
+            <li><strong>Storage:</strong> 50GB available space for tools, logs, and screenshots</li>
+            <li><strong>Display:</strong> 1920x1080 resolution (for consistent UI testing)</li>
+            <li><strong>Network:</strong> Stable broadband internet connection (10+ Mbps)</li>
+        </ul>
+        
+        <h4>11.2.2 Software Requirements</h4>
+        <table>
+            <tr>
+                <th>Software</th>
+                <th>Version</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><strong>Operating System</strong></td>
+                <td>Windows 10/11 or macOS 12+ or Linux Ubuntu 20.04+</td>
+                <td>Test client platform</td>
+            </tr>
+            <tr>
+                <td><strong>Google Chrome</strong></td>
+                <td>Latest stable version</td>
+                <td>Primary test browser, Lighthouse testing</td>
+            </tr>
+            <tr>
+                <td><strong>Mozilla Firefox</strong></td>
+                <td>Latest stable version</td>
+                <td>Cross-browser compatibility testing</td>
+            </tr>
+            <tr>
+                <td><strong>Microsoft Edge</strong></td>
+                <td>Latest stable version</td>
+                <td>Cross-browser compatibility testing</td>
+            </tr>
+            <tr>
+                <td><strong>Safari</strong></td>
+                <td>Latest stable version (macOS)</td>
+                <td>Cross-browser compatibility testing (if macOS available)</td>
+            </tr>
+        </table>
+        
+        <h3>11.3 Testing Tools Configuration</h3>
+        <table>
+            <tr>
+                <th>Tool</th>
+                <th>Version</th>
+                <th>Configuration Requirements</th>
+            </tr>
+            <tr>
+                <td><strong>OWASP ZAP</strong></td>
+                <td>Latest stable</td>
+                <td>Pre-configured with target URL, authentication settings, scan policies</td>
+            </tr>
+            <tr>
+                <td><strong>K6</strong></td>
+                <td>v0.45.0+</td>
+                <td>Performance Analyzer addon installed, load test scripts prepared</td>
+            </tr>
+            <tr>
+                <td><strong>Google Lighthouse</strong></td>
+                <td>Chrome DevTools integrated</td>
+                <td>Chrome browser with DevTools, audit configuration ready</td>
+            </tr>
+            <tr>
+                <td><strong>Playwright</strong></td>
+                <td>v1.40.0+</td>
+                <td>Node.js 18+, browser binaries installed, test framework configured</td>
+            </tr>
+            <tr>
+                <td><strong>Playwright MCP</strong></td>
+                <td>Latest</td>
+                <td>MCP server configured, browser automation ready</td>
+            </tr>
+            <tr>
+                <td><strong>Cursor + Claude</strong></td>
+                <td>Latest</td>
+                <td>AI assistant configured, project context loaded</td>
+            </tr>
+            <tr>
+                <td><strong>n8n</strong></td>
+                <td>Latest</td>
+                <td>Workflow automation platform, test execution pipelines configured</td>
+            </tr>
+        </table>
+        
+        <h3>11.4 Test Data Strategy</h3>
+        <ul>
+            <li><strong>Existing Demo Data:</strong> Use available 209+ employees, 16 users, organizational structure for read-only tests</li>
+            <li><strong>New Test Data:</strong> Create new test employees, users, leave requests for CRUD operation testing</li>
+            <li><strong>Test Data Isolation:</strong> Use distinct naming conventions (e.g., "TEST_" prefix) to identify test data</li>
+            <li><strong>Test Data Cleanup:</strong> Document all test data created for potential cleanup (if possible in demo environment)</li>
+            <li><strong>Test Data Sets:</strong>
+                <ul>
+                    <li>Positive test data: Valid inputs within business rules</li>
+                    <li>Negative test data: Invalid inputs, boundary values, edge cases</li>
+                    <li>Security test data: SQL injection strings, XSS payloads, special characters</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>11.5 Environment Validation</h3>
+        <p>Before testing begins, the following environment checks will be performed:</p>
+        <ul>
+            <li>System accessibility verification (URL loads successfully)</li>
+            <li>Login functionality confirmation (credentials work)</li>
+            <li>All major modules accessible (navigation menu functional)</li>
+            <li>Demo data availability confirmation (employees, users visible)</li>
+            <li>All testing tools operational (OWASP ZAP, K6, Lighthouse, Playwright functional)</li>
+            <li>Network connectivity stable (ping test, speed test)</li>
+            <li>Screen recording and screenshot capture working</li>
+        </ul>
+    </div>
+    
+    <!-- Section 12: Entry and Exit Criteria -->
+    <div class="section" id="section12">
+        <h2>12. Entry and Exit Criteria</h2>
+        
+        <h3>12.1 Entry Criteria</h3>
+        <p>The following conditions must be met before testing activities can begin:</p>
+        
+        <h4>12.1.1 Test Environment Readiness</h4>
+        <ul>
+            <li>OrangeHRM demo system is accessible at https://opensource-demo.orangehrmlive.com/</li>
+            <li>Test credentials (Admin/admin123) are validated and functional</li>
+            <li>All testing tools installed and configured (OWASP ZAP, K6, Lighthouse, Playwright)</li>
+            <li>Test client hardware and software meet specified requirements</li>
+            <li>Network connectivity is stable and reliable</li>
+        </ul>
+        
+        <h4>12.1.2 Test Preparedness</h4>
+        <ul>
+            <li>Test Plan document reviewed and approved by Team Lead</li>
+            <li>Test team members understand their roles and responsibilities</li>
+            <li>Testing schedule and milestones communicated to all stakeholders</li>
+            <li>Test documentation templates prepared (test case, defect report, test report)</li>
+            <li>Test data strategy defined and initial test data prepared</li>
+        </ul>
+        
+        <h4>12.1.3 Resource Availability</h4>
+        <ul>
+            <li>Both team members (Team Lead and Test Lead) available for full competition day</li>
+            <li>ISTQB Product Owner available for clarifications if needed</li>
+            <li>All necessary testing tools and resources accessible</li>
+            <li>GitHub repository available for automation script publication</li>
+            <li>Project folder accessible for report publication</li>
+        </ul>
+        
+        <h4>12.1.4 Stakeholder Approval</h4>
+        <ul>
+            <li>Test Plan approved by Team Lead</li>
+            <li>Testing scope and approach agreed upon</li>
+            <li>Risk assessment reviewed and mitigation strategies confirmed</li>
+            <li>Schedule validated as realistic for competition timeframe</li>
+        </ul>
+        
+        <h3>12.2 Exit Criteria</h3>
+        <p>Testing will be considered complete when the following criteria are met:</p>
+        
+        <h4>12.2.1 Test Execution Completeness</h4>
+        <ul>
+            <li><strong>Priority 1 Tests:</strong> 100% of P1 test cases executed</li>
+            <li><strong>Priority 2 Tests:</strong> Minimum 80% of P2 test cases executed (100% target)</li>
+            <li><strong>Priority 3 Tests:</strong> Best effort execution based on time availability</li>
+            <li><strong>Critical User Journeys:</strong> All critical workflows tested end-to-end</li>
+            <li><strong>High-Risk Areas:</strong> All high-risk areas (authentication, employee data, leave, time) thoroughly tested</li>
+        </ul>
+        
+        <h4>12.2.2 Test Coverage Achievement</h4>
+        <ul>
+            <li><strong>Functional Testing:</strong> All P1 modules (Admin, PIM, Leave, Time) tested comprehensively</li>
+            <li><strong>Security Testing:</strong> OWASP ZAP scan completed, critical security tests executed</li>
+            <li><strong>Performance Testing:</strong> K6 load tests executed, performance benchmarks measured</li>
+            <li><strong>Accessibility Testing:</strong> Lighthouse audit completed, WCAG compliance assessed</li>
+            <li><strong>Integration Testing:</strong> Critical module interactions and workflows validated</li>
+            <li><strong>Automation:</strong> P1/P2 scenarios automated with Playwright, scripts published to GitHub</li>
+        </ul>
+        
+        <h4>12.2.3 Defect Management</h4>
+        <ul>
+            <li>All identified defects logged with complete documentation</li>
+            <li>Critical (S1) and High (S2) severity defects verified and documented with evidence</li>
+            <li>Defects categorized by severity, priority, module, and type</li>
+            <li>Defect metrics calculated and reported</li>
+            <li>Blocking defects escalated and documented with workarounds (if available)</li>
+        </ul>
+        
+        <h4>12.2.4 Deliverables Completion</h4>
+        <ul>
+            <li><strong>Test Plan:</strong> HTML document completed and reviewed</li>
+            <li><strong>Test Analysis:</strong> HTML document completed with test conditions</li>
+            <li><strong>Test Design:</strong> HTML document completed with test cases</li>
+            <li><strong>Test Execution Results:</strong> All test results documented and consolidated</li>
+            <li><strong>Defect Reports:</strong> Comprehensive defect list with evidence</li>
+            <li><strong>Security Report:</strong> OWASP ZAP report published to project folder</li>
+            <li><strong>Performance Report:</strong> K6 report published to project folder</li>
+            <li><strong>Accessibility Report:</strong> Lighthouse report with findings</li>
+            <li><strong>Automation Scripts:</strong> Playwright scripts published to GitHub repository</li>
+            <li><strong>Final Test Report:</strong> Executive summary with recommendations</li>
+        </ul>
+        
+        <h4>12.2.5 Quality Gates</h4>
+        <div class="info-box success">
+            <h4>Success Criteria for Test Completion</h4>
+            <ul>
+                <li>No unresolved Critical (S1) defects that block system usability</li>
+                <li>All High (S2) severity defects documented with detailed reproduction steps</li>
+                <li>Test coverage target achieved: 100% P1, 80%+ P2</li>
+                <li>All testing types executed: functional, security, performance, accessibility, integration</li>
+                <li>All deliverables completed and quality-reviewed</li>
+                <li>Competition submission deadline met (16:00, October 20, 2025)</li>
+            </ul>
+        </div>
+        
+        <h4>12.2.6 Acceptable Exit Without Full Completion</h4>
+        <p>Testing may be concluded if time constraints prevent full completion, provided:</p>
+        <ul>
+            <li>All P1 (Critical priority) tests have been executed</li>
+            <li>High-risk areas (authentication, employee data management, leave, time) have been thoroughly tested</li>
+            <li>All identified critical defects are documented</li>
+            <li>Scope reduction decisions are documented with rationale</li>
+            <li>Test coverage gaps are identified and documented for future testing</li>
+            <li>Competition submission deadline requirements are met</li>
+        </ul>
+        
+        <h3>12.3 Suspension and Resumption Criteria</h3>
+        
+        <h4>12.3.1 Test Suspension Triggers</h4>
+        <p>Testing will be suspended if:</p>
+        <ul>
+            <li>OrangeHRM demo system becomes unavailable for more than 15 minutes</li>
+            <li>Critical system defect prevents further testing of dependent functionality</li>
+            <li>Major environmental issue (network failure, tool failure) cannot be resolved quickly</li>
+            <li>Data corruption in test environment requires investigation</li>
+        </ul>
+        
+        <h4>12.3.2 Test Resumption Requirements</h4>
+        <p>Testing will resume when:</p>
+        <ul>
+            <li>System availability restored and validated through smoke tests</li>
+            <li>Blocking defect has workaround documented or testing can proceed in alternative area</li>
+            <li>Environmental issues resolved and test environment re-validated</li>
+            <li>Team Lead approves testing resumption</li>
+        </ul>
+    </div>
+    <!-- Section 13: Test Automation -->
+    <div class="section" id="section13">
+        <h2>13. Test Automation</h2>
+        
+        <p>Test automation is a critical component of the testing strategy, focusing on high-priority scenarios to ensure repeatability, efficiency, and continuous integration support.</p>
+        
+        <h3>13.1 Automation Strategy</h3>
+        
+        <h4>13.1.1 Automation Objectives</h4>
+        <ul>
+            <li><strong>Regression Testing:</strong> Enable rapid regression testing for future releases</li>
+            <li><strong>Repeatability:</strong> Ensure consistent test execution across multiple runs</li>
+            <li><strong>Efficiency:</strong> Reduce manual effort for repetitive high-priority tests</li>
+            <li><strong>Coverage:</strong> Automated execution of critical user journeys</li>
+            <li><strong>CI/CD Integration:</strong> Support continuous integration and deployment pipelines</li>
+            <li><strong>Cross-Browser Validation:</strong> Automated testing across multiple browsers</li>
+        </ul>
+        
+        <h4>13.1.2 Automation Scope</h4>
+        <div class="info-box objective">
+            <h4>In-Scope for Automation</h4>
+            <ul>
+                <li><strong>P1 (Critical Priority) Test Cases:</strong> All priority 1 scenarios automated</li>
+                <li><strong>P2 (High Priority) Test Cases:</strong> Selected P2 scenarios based on time availability</li>
+                <li><strong>Stable Functionality:</strong> Mature features with low change frequency</li>
+                <li><strong>Repetitive Tests:</strong> Tests that need to be executed frequently (e.g., smoke tests, login)</li>
+                <li><strong>Data-Driven Tests:</strong> Tests requiring multiple data variations</li>
+                <li><strong>Cross-Browser Tests:</strong> Critical scenarios validated across Chrome and Firefox</li>
+            </ul>
+        </div>
+        
+        <div class="info-box warning">
+            <h4>Out-of-Scope for Automation</h4>
+            <ul>
+                <li><strong>P3 (Low Priority) Test Cases:</strong> Low-priority scenarios deferred due to time constraints</li>
+                <li><strong>Exploratory Testing:</strong> Ad-hoc testing requiring human judgment</li>
+                <li><strong>Usability Testing:</strong> Subjective user experience evaluation</li>
+                <li><strong>Visual Design Validation:</strong> Aesthetic assessments requiring human evaluation</li>
+                <li><strong>One-Time Tests:</strong> Tests unlikely to be repeated in future</li>
+            </ul>
+        </div>
+        
+        <h3>13.2 Automation Tool: Playwright</h3>
+        <table>
+            <tr>
+                <th>Aspect</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td><strong>Tool</strong></td>
+                <td>Playwright (v1.40.0+)</td>
+            </tr>
+            <tr>
+                <td><strong>Language</strong></td>
+                <td>JavaScript/TypeScript</td>
+            </tr>
+            <tr>
+                <td><strong>Browsers Supported</strong></td>
+                <td>Chromium, Firefox, WebKit (Chrome and Firefox prioritized for competition)</td>
+            </tr>
+            <tr>
+                <td><strong>Capabilities</strong></td>
+                <td>
+                    - Cross-browser testing<br>
+                    - Headless and headed execution<br>
+                    - Screenshot and video capture<br>
+                    - Network interception<br>
+                    - Mobile emulation<br>
+                    - Parallel test execution
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Repository</strong></td>
+                <td>GitHub repository (automation scripts published here)</td>
+            </tr>
+        </table>
+        
+        <h3>13.3 Automated Test Cases (Priority-Based)</h3>
+        
+        <h4>13.3.1 P1 Automation Candidates</h4>
+        <table>
+            <tr>
+                <th>Test Scenario</th>
+                <th>Module</th>
+                <th>Automation Complexity</th>
+            </tr>
+            <tr>
+                <td><strong>User Login - Valid Credentials</strong></td>
+                <td>Authentication</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td><strong>User Login - Invalid Credentials</strong></td>
+                <td>Authentication</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td><strong>User Logout</strong></td>
+                <td>Authentication</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td><strong>Add New Employee</strong></td>
+                <td>PIM</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Search Employee by Name</strong></td>
+                <td>PIM</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Update Employee Details</strong></td>
+                <td>PIM</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Delete Employee</strong></td>
+                <td>PIM</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Submit Leave Request</strong></td>
+                <td>Leave</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Approve Leave Request</strong></td>
+                <td>Leave</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td><strong>Clock In/Out</strong></td>
+                <td>Time</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Create User Account</strong></td>
+                <td>Admin</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><strong>Navigation to All Major Modules</strong></td>
+                <td>All</td>
+                <td>Low</td>
+            </tr>
+        </table>
+        
+        <h4>13.3.2 P2 Automation Candidates (Time Permitting)</h4>
+        <ul>
+            <li>Add candidate to recruitment pipeline</li>
+            <li>Schedule interview for candidate</li>
+            <li>Submit performance review</li>
+            <li>Update employee personal information (self-service)</li>
+            <li>Search employee directory</li>
+            <li>Generate employee report</li>
+        </ul>
+        
+        <h3>13.4 Automation Framework Structure</h3>
+        <div class="info-box objective">
+            <h4>Framework Components</h4>
+            <ul>
+                <li><strong>Page Object Model (POM):</strong> Separate page objects for each major module (LoginPage, DashboardPage, PIMPage, etc.)</li>
+                <li><strong>Test Data Management:</strong> External test data files (JSON/CSV) for data-driven testing</li>
+                <li><strong>Utility Functions:</strong> Reusable functions for common operations (login, navigation, waits)</li>
+                <li><strong>Configuration:</strong> Environment configuration (URLs, credentials, browser settings)</li>
+                <li><strong>Reporting:</strong> HTML test report generation with screenshots for failures</li>
+                <li><strong>CI/CD Integration:</strong> GitHub Actions workflow for automated execution</li>
+            </ul>
+        </div>
+        
+        <h3>13.5 Automation Execution Plan</h3>
+        <table>
+            <tr>
+                <th>Phase</th>
+                <th>Time</th>
+                <th>Activities</th>
+                <th>Deliverables</th>
+            </tr>
+            <tr>
+                <td><strong>Script Development</strong></td>
+                <td>15:00 - 15:30<br>(30 min)</td>
+                <td>
+                    - Create page objects<br>
+                    - Develop test scripts for P1 scenarios<br>
+                    - Implement test data management<br>
+                    - Configure cross-browser execution
+                </td>
+                <td>Playwright test scripts, page objects, test data files</td>
+            </tr>
+            <tr>
+                <td><strong>Script Execution</strong></td>
+                <td>15:30 - 15:40<br>(10 min)</td>
+                <td>
+                    - Execute automated tests (Chrome)<br>
+                    - Execute cross-browser tests (Firefox)<br>
+                    - Capture test results and screenshots<br>
+                    - Identify automation failures
+                </td>
+                <td>Automated test results, execution logs, screenshots</td>
+            </tr>
+            <tr>
+                <td><strong>Script Refinement</strong></td>
+                <td>15:40 - 15:45<br>(5 min)</td>
+                <td>
+                    - Debug and fix failing scripts<br>
+                    - Optimize script performance<br>
+                    - Generate HTML test report<br>
+                    - Publish scripts to GitHub
+                </td>
+                <td>Refined scripts, test report, GitHub repository with automation code</td>
+            </tr>
+        </table>
+        
+        <h3>13.6 Automation Success Criteria</h3>
+        <ul>
+            <li><strong>Script Coverage:</strong> Minimum 10 P1 test scenarios automated</li>
+            <li><strong>Execution Success Rate:</strong> Minimum 80% pass rate for automated tests</li>
+            <li><strong>Cross-Browser Validation:</strong> Scripts executed successfully on Chrome and Firefox</li>
+            <li><strong>Code Quality:</strong> Scripts follow Page Object Model pattern with reusable components</li>
+            <li><strong>Documentation:</strong> README file with setup instructions and execution commands</li>
+            <li><strong>GitHub Publication:</strong> All automation scripts published to GitHub repository</li>
+        </ul>
+        
+        <h3>13.7 Automation Maintenance Considerations</h3>
+        <ul>
+            <li><strong>Modularity:</strong> Page objects separate from test logic for easy maintenance</li>
+            <li><strong>Explicit Waits:</strong> Robust waiting strategies to handle dynamic content</li>
+            <li><strong>Error Handling:</strong> Try-catch blocks for graceful failure handling</li>
+            <li><strong>Screenshot on Failure:</strong> Automatic screenshot capture when tests fail</li>
+            <li><strong>Clear Naming:</strong> Descriptive test and function names for readability</li>
+            <li><strong>Comments:</strong> Code documentation for complex logic</li>
+        </ul>
+    </div>
+    <!-- Section 14: Effort Estimation -->
+    <div class="section" id="section14">
+        <h2>14. Effort Estimation</h2>
+        
+        <p>Effort estimation for the testing activities is based on the competition's 6-hour timeframe, with strategic allocation across testing phases and team members.</p>
+        
+        <h3>14.1 Total Available Effort</h3>
+        <table>
+            <tr>
+                <th>Resource</th>
+                <th>Morning Session</th>
+                <th>Afternoon Session</th>
+                <th>Total Hours</th>
+            </tr>
+            <tr>
+                <td><strong>Team Lead (Slav Astinov)</strong></td>
+                <td>3 hours</td>
+                <td>3 hours</td>
+                <td>6 hours</td>
+            </tr>
+            <tr>
+                <td><strong>Test Lead (Sava Barbarov)</strong></td>
+                <td>3 hours</td>
+                <td>3 hours</td>
+                <td>6 hours</td>
+            </tr>
+            <tr>
+                <td><strong>Total Team Effort</strong></td>
+                <td>6 hours</td>
+                <td>6 hours</td>
+                <td><strong>12 person-hours</strong></td>
+            </tr>
+        </table>
+        
+        <h3>14.2 Effort Distribution by Phase</h3>
+        <table>
+            <tr>
+                <th>Phase</th>
+                <th>Duration</th>
+                <th>Team Lead Effort</th>
+                <th>Test Lead Effort</th>
+                <th>Total Effort</th>
+                <th>% of Total</th>
+            </tr>
+            <tr>
+                <td><strong>1. Setup & Smoke Testing</strong></td>
+                <td>09:00 - 09:30</td>
+                <td>0.5 hours</td>
+                <td>0.5 hours</td>
+                <td>1 hour</td>
+                <td>8%</td>
+            </tr>
+            <tr>
+                <td><strong>2. Functional Testing</strong></td>
+                <td>09:30 - 11:00</td>
+                <td>1.5 hours</td>
+                <td>1.5 hours</td>
+                <td>3 hours</td>
+                <td>25%</td>
+            </tr>
+            <tr>
+                <td><strong>3. Security Testing</strong></td>
+                <td>11:00 - 12:00</td>
+                <td>0.5 hours</td>
+                <td>1 hour</td>
+                <td>1.5 hours</td>
+                <td>13%</td>
+            </tr>
+            <tr>
+                <td><strong>4. Integration Testing</strong></td>
+                <td>13:00 - 14:00</td>
+                <td>1 hour</td>
+                <td>1 hour</td>
+                <td>2 hours</td>
+                <td>17%</td>
+            </tr>
+            <tr>
+                <td><strong>5. Performance & Accessibility</strong></td>
+                <td>14:00 - 15:00</td>
+                <td>0.5 hours</td>
+                <td>1 hour</td>
+                <td>1.5 hours</td>
+                <td>13%</td>
+            </tr>
+            <tr>
+                <td><strong>6. Test Automation</strong></td>
+                <td>15:00 - 15:45</td>
+                <td>0.75 hours</td>
+                <td>0.25 hours</td>
+                <td>1 hour</td>
+                <td>8%</td>
+            </tr>
+            <tr>
+                <td><strong>7. Reporting & Finalization</strong></td>
+                <td>15:45 - 16:00</td>
+                <td>0.25 hours</td>
+                <td>0.25 hours</td>
+                <td>0.5 hours</td>
+                <td>4%</td>
+            </tr>
+            <tr>
+                <td><strong>8. Documentation (Continuous)</strong></td>
+                <td>Throughout</td>
+                <td>1 hour</td>
+                <td>0.5 hours</td>
+                <td>1.5 hours</td>
+                <td>13%</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>TOTAL</strong></td>
+                <td><strong>6 hours</strong></td>
+                <td><strong>6 hours</strong></td>
+                <td><strong>12 hours</strong></td>
+                <td><strong>100%</strong></td>
+            </tr>
+        </table>
+        
+        <h3>14.3 Effort Distribution by Activity Type</h3>
+        <table>
+            <tr>
+                <th>Activity Type</th>
+                <th>Estimated Effort</th>
+                <th>% of Total</th>
+            </tr>
+            <tr>
+                <td><strong>Test Execution (All Types)</strong></td>
+                <td>8.5 hours</td>
+                <td>71%</td>
+            </tr>
+            <tr>
+                <td><strong>Test Automation Development</strong></td>
+                <td>1 hour</td>
+                <td>8%</td>
+            </tr>
+            <tr>
+                <td><strong>Documentation</strong></td>
+                <td>1.5 hours</td>
+                <td>13%</td>
+            </tr>
+            <tr>
+                <td><strong>Reporting & Finalization</strong></td>
+                <td>0.5 hours</td>
+                <td>4%</td>
+            </tr>
+            <tr>
+                <td><strong>Setup & Validation</strong></td>
+                <td>0.5 hours</td>
+                <td>4%</td>
+            </tr>
+            <tr>
+                <td><strong>TOTAL</strong></td>
+                <td><strong>12 hours</strong></td>
+                <td><strong>100%</strong></td>
+            </tr>
+        </table>
+        
+        <h3>14.4 Test Case Execution Estimates</h3>
+        <table>
+            <tr>
+                <th>Module</th>
+                <th>Estimated Test Cases</th>
+                <th>Avg. Time per TC</th>
+                <th>Total Effort</th>
+            </tr>
+            <tr>
+                <td><strong>Admin Module</strong></td>
+                <td>15 test cases</td>
+                <td>5 minutes</td>
+                <td>1.25 hours</td>
+            </tr>
+            <tr>
+                <td><strong>PIM Module</strong></td>
+                <td>20 test cases</td>
+                <td>5 minutes</td>
+                <td>1.67 hours</td>
+            </tr>
+            <tr>
+                <td><strong>Leave Module</strong></td>
+                <td>18 test cases</td>
+                <td>6 minutes</td>
+                <td>1.8 hours</td>
+            </tr>
+            <tr>
+                <td><strong>Time Module</strong></td>
+                <td>12 test cases</td>
+                <td>5 minutes</td>
+                <td>1 hour</td>
+            </tr>
+            <tr>
+                <td><strong>Recruitment Module</strong></td>
+                <td>10 test cases</td>
+                <td>6 minutes</td>
+                <td>1 hour</td>
+            </tr>
+            <tr>
+                <td><strong>Other Modules (P2/P3)</strong></td>
+                <td>15 test cases</td>
+                <td>4 minutes</td>
+                <td>1 hour</td>
+            </tr>
+            <tr>
+                <td><strong>Integration & Workflows</strong></td>
+                <td>10 test cases</td>
+                <td>8 minutes</td>
+                <td>1.33 hours</td>
+            </tr>
+            <tr>
+                <td><strong>TOTAL</strong></td>
+                <td><strong>100 test cases</strong></td>
+                <td><strong>5.5 min avg</strong></td>
+                <td><strong>9 hours</strong></td>
+            </tr>
+        </table>
+        <p><em>Note: Test execution effort (9 hours) distributed across both team members working in parallel = 4.5 hours per person, fitting within functional and integration testing phases.</em></p>
+        
+        <h3>14.5 Contingency and Buffer</h3>
+        <ul>
+            <li><strong>Built-in Buffers:</strong> 15-minute transition buffers between major phases</li>
+            <li><strong>Scope Flexibility:</strong> P3 tests and some P2 tests can be deferred if schedule pressures occur</li>
+            <li><strong>Parallel Execution:</strong> Two team members working simultaneously doubles throughput</li>
+            <li><strong>Tool Automation:</strong> OWASP ZAP, K6, and Lighthouse automated scans reduce manual effort</li>
+            <li><strong>Continuous Documentation:</strong> Documentation throughout testing prevents reporting bottleneck</li>
+        </ul>
+        
+        <h3>14.6 Risk Factors Affecting Effort</h3>
+        <table>
+            <tr>
+                <th>Risk Factor</th>
+                <th>Impact on Effort</th>
+                <th>Mitigation</th>
+            </tr>
+            <tr>
+                <td><strong>High Defect Count</strong></td>
+                <td>+20-30% effort for defect logging and verification</td>
+                <td>Streamlined defect template, parallel defect logging</td>
+            </tr>
+            <tr>
+                <td><strong>Tool Failures</strong></td>
+                <td>+15-25% effort for manual alternatives</td>
+                <td>Pre-validated tool setup, backup manual approaches</td>
+            </tr>
+            <tr>
+                <td><strong>System Unavailability</strong></td>
+                <td>Lost testing time during downtime</td>
+                <td>Immediate escalation, continue documentation during downtime</td>
+            </tr>
+            <tr>
+                <td><strong>Complex Test Scenarios</strong></td>
+                <td>+10-15% effort for workflows requiring multiple steps</td>
+                <td>Focus on high-priority scenarios, defer complex P3 tests if needed</td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Section 15: Deliverables -->
+    <div class="section" id="section15">
+        <h2>15. Deliverables</h2>
+        
+        <p>The following deliverables will be produced as part of the testing activities for the ISTQB Testing Cup Grand Finals.</p>
+        
+        <h3>15.1 Before Testing Phase</h3>
+        <table>
+            <tr>
+                <th>Deliverable</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Due Date/Time</th>
+            </tr>
+            <tr>
+                <td><strong>Test Plan Document</strong></td>
+                <td>Comprehensive test plan (this document) in HTML format covering objectives, scope, approach, schedule, risks, and resources</td>
+                <td>Team Lead</td>
+                <td>09:00 (Pre-competition preparation)</td>
+            </tr>
+            <tr>
+                <td><strong>Test Analysis Document</strong></td>
+                <td>Analysis of test conditions, test scenarios, and risk-based prioritization in HTML format</td>
+                <td>Test Lead</td>
+                <td>09:00 (Pre-competition preparation)</td>
+            </tr>
+            <tr>
+                <td><strong>Test Design Document</strong></td>
+                <td>Detailed test cases, test data specifications, and exploratory testing charters in HTML format</td>
+                <td>Test Lead</td>
+                <td>09:00 (Pre-competition preparation)</td>
+            </tr>
+        </table>
+        
+        <h3>15.2 During Testing Phase</h3>
+        <table>
+            <tr>
+                <th>Deliverable</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Target Completion</th>
+            </tr>
+            <tr>
+                <td><strong>Test Execution Logs</strong></td>
+                <td>Detailed logs of all test cases executed with pass/fail status, actual results, and timestamps</td>
+                <td>Both</td>
+                <td>Continuous throughout testing</td>
+            </tr>
+            <tr>
+                <td><strong>Defect Reports</strong></td>
+                <td>Comprehensive defect documentation with reproduction steps, severity, priority, evidence (screenshots/videos)</td>
+                <td>Both</td>
+                <td>Logged immediately upon discovery</td>
+            </tr>
+            <tr>
+                <td><strong>Test Data Sets</strong></td>
+                <td>Test data created and used during testing (employee records, user accounts, leave requests, etc.)</td>
+                <td>Both</td>
+                <td>Continuous throughout testing</td>
+            </tr>
+            <tr>
+                <td><strong>Test Evidence</strong></td>
+                <td>Screenshots, screen recordings, log files supporting test execution and defect identification</td>
+                <td>Both</td>
+                <td>Captured during test execution</td>
+            </tr>
+        </table>
+        
+        <h3>15.3 After Testing Phase</h3>
+        <table>
+            <tr>
+                <th>Deliverable</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Due Date/Time</th>
+            </tr>
+            <tr>
+                <td><strong>Security Test Report</strong></td>
+                <td>OWASP ZAP automated scan report with vulnerability findings, risk ratings, and recommendations</td>
+                <td>Test Lead</td>
+                <td>12:00 (published to project folder)</td>
+            </tr>
+            <tr>
+                <td><strong>Performance Test Report</strong></td>
+                <td>K6 load testing report with performance metrics, response times, throughput, and bottleneck analysis</td>
+                <td>Test Lead</td>
+                <td>15:00 (published to project folder)</td>
+            </tr>
+            <tr>
+                <td><strong>Accessibility Test Report</strong></td>
+                <td>Google Lighthouse accessibility audit report with WCAG compliance scores and recommendations</td>
+                <td>Test Lead</td>
+                <td>15:00</td>
+            </tr>
+            <tr>
+                <td><strong>Playwright Automation Scripts</strong></td>
+                <td>Complete test automation framework with page objects, test scripts, test data, and configuration files</td>
+                <td>Team Lead</td>
+                <td>15:45 (published to GitHub repository)</td>
+            </tr>
+            <tr>
+                <td><strong>Automation Test Results</strong></td>
+                <td>HTML test report from Playwright execution showing automated test results, pass/fail status, execution time</td>
+                <td>Team Lead</td>
+                <td>15:45</td>
+            </tr>
+            <tr>
+                <td><strong>Consolidated Defect List</strong></td>
+                <td>Master defect list with all identified defects categorized by severity, priority, module, type, with metrics</td>
+                <td>Test Lead</td>
+                <td>15:45</td>
+            </tr>
+            <tr>
+                <td><strong>Final Test Report</strong></td>
+                <td>Executive summary with test coverage, key findings, defect summary, risk assessment, recommendations, and sign-off</td>
+                <td>Team Lead</td>
+                <td>16:00</td>
+            </tr>
+            <tr>
+                <td><strong>Test Metrics Dashboard</strong></td>
+                <td>Quantitative metrics including test execution statistics, defect metrics, coverage analysis, and trend data</td>
+                <td>Both</td>
+                <td>16:00</td>
+            </tr>
+        </table>
+        
+        <h3>15.4 Deliverable Quality Standards</h3>
+        <ul>
+            <li><strong>Completeness:</strong> All required sections and information included</li>
+            <li><strong>Accuracy:</strong> Information is factually correct and verified</li>
+            <li><strong>Clarity:</strong> Written in clear, professional language without ambiguity</li>
+            <li><strong>Consistency:</strong> Consistent terminology, formatting, and style across all documents</li>
+            <li><strong>Traceability:</strong> Clear links between test plan, test cases, test results, and defects</li>
+            <li><strong>Evidence-Based:</strong> All findings supported by evidence (screenshots, logs, data)</li>
+            <li><strong>Professional Presentation:</strong> Competition-grade HTML formatting with proper structure</li>
+        </ul>
+        
+        <h3>15.5 Deliverable Review and Approval</h3>
+        <table>
+            <tr>
+                <th>Deliverable</th>
+                <th>Reviewer</th>
+                <th>Approver</th>
+            </tr>
+            <tr>
+                <td>Test Plan, Test Analysis, Test Design</td>
+                <td>Test Lead (peer review)</td>
+                <td>Team Lead</td>
+            </tr>
+            <tr>
+                <td>Test Execution Results</td>
+                <td>Team Lead (sampling)</td>
+                <td>Test Lead</td>
+            </tr>
+            <tr>
+                <td>Defect Reports (S1/S2 severity)</td>
+                <td>Second team member</td>
+                <td>Test Lead</td>
+            </tr>
+            <tr>
+                <td>Security, Performance, Accessibility Reports</td>
+                <td>Team Lead</td>
+                <td>Test Lead</td>
+            </tr>
+            <tr>
+                <td>Automation Scripts</td>
+                <td>Test Lead (code review)</td>
+                <td>Team Lead</td>
+            </tr>
+            <tr>
+                <td>Final Test Report</td>
+                <td>Test Lead</td>
+                <td>Team Lead</td>
+            </tr>
+        </table>
+        
+        <h3>15.6 Deliverable Submission</h3>
+        <div class="info-box success">
+            <h4>Submission Requirements</h4>
+            <ul>
+                <li><strong>Format:</strong> All primary deliverables in HTML format (Test Plan, Test Analysis, Test Design, Final Test Report)</li>
+                <li><strong>Publication:</strong>
+                    <ul>
+                        <li>OWASP ZAP and K6 reports: Published to project folder</li>
+                        <li>Playwright automation scripts: Published to GitHub repository</li>
+                    </ul>
+                </li>
+                <li><strong>Deadline:</strong> All deliverables completed and submitted by 16:00, October 20, 2025</li>
+                <li><strong>Quality Check:</strong> Final review checkpoint at 15:50 before submission</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Section 16: Templates and Standards -->
+    <div class="section" id="section16">
+        <h2>16. Templates and Standards</h2>
+        
+        <p>Standardized templates and documentation standards ensure consistency, quality, and professionalism across all testing deliverables.</p>
+        
+        <h3>16.1 Document Templates</h3>
+        
+        <h4>16.1.1 Test Case Template</h4>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Test Case ID</strong></td>
+                <td>Unique identifier (e.g., TC-PIM-001, TC-LEAVE-012)</td>
+            </tr>
+            <tr>
+                <td><strong>Test Case Title</strong></td>
+                <td>Brief descriptive title of what is being tested</td>
+            </tr>
+            <tr>
+                <td><strong>Module</strong></td>
+                <td>Module or feature being tested (Admin, PIM, Leave, Time, etc.)</td>
+            </tr>
+            <tr>
+                <td><strong>Priority</strong></td>
+                <td>P1 (Critical), P2 (High), P3 (Medium), P4 (Low)</td>
+            </tr>
+            <tr>
+                <td><strong>Test Type</strong></td>
+                <td>Functional, Security, Performance, Accessibility, Integration, etc.</td>
+            </tr>
+            <tr>
+                <td><strong>Preconditions</strong></td>
+                <td>System state and prerequisites before test execution</td>
+            </tr>
+            <tr>
+                <td><strong>Test Data</strong></td>
+                <td>Specific test data required for execution</td>
+            </tr>
+            <tr>
+                <td><strong>Test Steps</strong></td>
+                <td>Detailed step-by-step execution instructions</td>
+            </tr>
+            <tr>
+                <td><strong>Expected Result</strong></td>
+                <td>Expected outcome for each step and overall test</td>
+            </tr>
+            <tr>
+                <td><strong>Postconditions</strong></td>
+                <td>System state after test execution (cleanup if needed)</td>
+            </tr>
+        </table>
+        
+        <h4>16.1.2 Defect Report Template</h4>
+        <p><em>(Detailed in Section 10.3 - Defect Report Template)</em></p>
+        
+        <h4>16.1.3 Test Execution Log Template</h4>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Test Case ID</strong></td>
+                <td>Reference to test case executed</td>
+            </tr>
+            <tr>
+                <td><strong>Execution Date/Time</strong></td>
+                <td>When test was executed</td>
+            </tr>
+            <tr>
+                <td><strong>Tester</strong></td>
+                <td>Who executed the test (Slav Astinov or Sava Barbarov)</td>
+            </tr>
+            <tr>
+                <td><strong>Test Environment</strong></td>
+                <td>Browser, OS, test data used</td>
+            </tr>
+            <tr>
+                <td><strong>Execution Result</strong></td>
+                <td>Pass, Fail, Blocked, Skipped</td>
+            </tr>
+            <tr>
+                <td><strong>Actual Result</strong></td>
+                <td>What actually happened during execution</td>
+            </tr>
+            <tr>
+                <td><strong>Defects Found</strong></td>
+                <td>Link to defect IDs if test failed</td>
+            </tr>
+            <tr>
+                <td><strong>Comments</strong></td>
+                <td>Additional notes or observations</td>
+            </tr>
+        </table>
+        
+        <h3>16.2 Naming Conventions</h3>
+        <ul>
+            <li><strong>Test Cases:</strong> TC-[MODULE]-[NUMBER] (e.g., TC-PIM-001, TC-LEAVE-012)</li>
+            <li><strong>Defects:</strong> DEF-[NUMBER] (e.g., DEF-001, DEF-045)</li>
+            <li><strong>Test Data:</strong> TEST_[ENTITY]_[DESCRIPTOR] (e.g., TEST_EMP_John_Doe, TEST_USER_Admin01)</li>
+            <li><strong>Documents:</strong> [TYPE]_OrangeHRM_[DATE] (e.g., TestPlan_OrangeHRM_20251020)</li>
+            <li><strong>Screenshots:</strong> [MODULE]_[FEATURE]_[TIMESTAMP] (e.g., PIM_AddEmployee_20251020_093045)</li>
+        </ul>
+        
+        <h3>16.3 Documentation Standards</h3>
+        
+        <h4>16.3.1 HTML Document Standards</h4>
+        <ul>
+            <li><strong>Header:</strong> Include competition context (Team Name, Competition, Date, Location, Team Members)</li>
+            <li><strong>Table of Contents:</strong> Hyperlinked navigation for easy access to sections</li>
+            <li><strong>Section Numbering:</strong> Consistent hierarchical numbering (1, 1.1, 1.1.1)</li>
+            <li><strong>Visual Consistency:</strong> Consistent color scheme, fonts, and styling</li>
+            <li><strong>Tables:</strong> Used for structured data presentation with headers</li>
+            <li><strong>Headings:</strong> Clear hierarchical structure (H1, H2, H3, H4)</li>
+            <li><strong>Lists:</strong> Bullet points or numbered lists for easy readability</li>
+            <li><strong>Emphasis:</strong> Bold for key terms, italics for notes, color-coded info boxes</li>
+        </ul>
+        
+        <h4>16.3.2 Content Standards</h4>
+        <ul>
+            <li><strong>Language:</strong> Professional English, clear and concise</li>
+            <li><strong>Tense:</strong> Present tense for current state, future tense for planned activities</li>
+            <li><strong>Voice:</strong> Active voice preferred over passive voice</li>
+            <li><strong>Abbreviations:</strong> Spell out on first use, then abbreviation (e.g., Personnel Information Management (PIM))</li>
+            <li><strong>Consistency:</strong> Consistent terminology throughout all documents</li>
+            <li><strong>Clarity:</strong> Avoid ambiguous language, be specific and precise</li>
+        </ul>
+        
+        <h3>16.4 Quality Review Checklist</h3>
+        <div class="info-box objective">
+            <h4>Document Quality Criteria</h4>
+            <ul>
+                <li>All required sections present and complete</li>
+                <li>Information is accurate and verified</li>
+                <li>Clear, professional language without typos or grammatical errors</li>
+                <li>Consistent formatting and styling</li>
+                <li>All tables and figures properly formatted with headers</li>
+                <li>Hyperlinks functional (for HTML documents)</li>
+                <li>Competition context information correct and complete</li>
+                <li>Cross-references between documents accurate</li>
+                <li>Evidence (screenshots, logs) properly labeled and referenced</li>
+                <li>Document metadata complete (version, date, authors)</li>
+            </ul>
+        </div>
+        
+        <h3>16.5 Version Control</h3>
+        <ul>
+            <li><strong>Version Numbering:</strong> Major.Minor format (e.g., 1.0, 1.1, 2.0)</li>
+            <li><strong>Version History:</strong> Document changes in version history section</li>
+            <li><strong>Author Tracking:</strong> Record who created/modified the document</li>
+            <li><strong>Timestamp:</strong> Date and time of last modification</li>
+            <li><strong>Approval:</strong> Record who approved the document and when</li>
+        </ul>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <h3>Document Approval</h3>
+        <table style="margin: 20px auto; max-width: 600px;">
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Signature</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <td><strong>Prepared By</strong></td>
+                <td>Slav Astinov (Team Lead)</td>
+                <td>_________________</td>
+                <td>October 20, 2025</td>
+            </tr>
+            <tr>
+                <td><strong>Reviewed By</strong></td>
+                <td>Sava Barbarov (Test Lead)</td>
+                <td>_________________</td>
+                <td>October 20, 2025</td>
+            </tr>
+            <tr>
+                <td><strong>Approved By</strong></td>
+                <td>Slav Astinov (Team Lead)</td>
+                <td>_________________</td>
+                <td>October 20, 2025</td>
+            </tr>
+        </table>
+        
+        <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
+            <strong>Team Automation Aid</strong><br>
+            ISTQB Testing Cup Grand Finals<br>
+            Copenhagen, Denmark<br>
+            October 20th, 2025
+        </p>
+        
+        <p style="margin-top: 20px; font-size: 0.85em; color: #999;">
+            <em>This document is confidential and intended for ISTQB Testing Cup evaluation purposes only.</em><br>
+            Copyright 2025 Automation Aid Team. All rights reserved.
+        </p>
+        
+        <p style="margin-top: 30px; font-weight: bold; color: #667eea; font-size: 1.1em;">
+            "Delivering exceptional testing documentation that demonstrates mastery of ISTQB principles,<br>
+            innovative automation approaches, and professional excellence worthy of the ISTQB Testing Cup Grand Finals."
+        </p>
+    </div>
+
+</div>
+</body>
+</html>

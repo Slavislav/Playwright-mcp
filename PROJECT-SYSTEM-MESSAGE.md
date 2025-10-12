@@ -159,17 +159,74 @@ Test Lead: Sava Barbarov
 
 ## 🛠️ **TOOLS & RESOURCES**
 
-### **Primary Tools**
-- **Playwright MCP:** Browser automation and SUT exploration
-- **Knowledge Bases:** 
-  - `Test-Plan/test-plan-knowledge-base.md`
-  - `Test-Analysis/test-analysis-knowledge-base.md`
-  - `Test-Design/test-design-knowledge-base.md`
-- **Template:** `Documents/template.html`
+### **Competition Toolstack**
+The following tools are available for comprehensive testing activities:
+
+#### **1. Security & Penetration Testing**
+- **Tool:** OWASP ZAP
+- **Purpose:** Exploratory security testing, vulnerability assessment
+- **Usage:** Spiders, active/passive scanning, request manipulation, security vulnerability detection
+- **Deliverable:** OWASP ZAP security test report (published to project folder)
+- **Application:** Authentication/authorization testing, injection attack detection, security risk mitigation
+
+#### **2. Accessibility Testing**
+- **Tool:** Google Lighthouse
+- **Purpose:** Automated accessibility audits and compliance validation
+- **Usage:** WCAG compliance testing, accessibility score generation, best practice recommendations
+- **Deliverable:** Lighthouse accessibility report with compliance scores
+- **Application:** Accessibility validation, usability testing, compliance verification
+
+#### **3. Load & Performance Testing**
+- **Tool:** K6 + Performance Analyzer Addon
+- **Purpose:** Load testing, performance benchmarking, scalability validation
+- **Usage:** Load testing scripts, stress testing scenarios, performance metric collection
+- **Deliverable:** K6 performance test report with metrics and analysis (published to project folder)
+- **Application:** Performance testing, scalability validation, bottleneck identification
+
+#### **4. Test Automation**
+- **Tool:** Playwright
+- **Purpose:** Automated functional test execution for high-priority scenarios
+- **Usage:** Automated test scripts for critical user journeys, regression testing, cross-browser validation
+- **Deliverable:** Playwright test scripts published to GitHub repository
+- **Priority:** High-priority (P1/P2) test cases MUST be automated
+- **Application:** Functional testing, regression testing, cross-browser compatibility
+
+#### **5. Workflow & Documentation Automation**
+- **Tools:** Cursor, Claude, n8n
+- **Purpose:** AI-assisted testing and workflow automation
+- **Usage:**
+  - **Cursor + Claude:** Test documentation generation, test case design, intelligent analysis, test data generation
+  - **n8n:** Test execution workflow automation, report generation pipelines, CI/CD integration
+- **Application:** Document generation, workflow orchestration, test management automation
+
+#### **6. System Under Test Exploration**
+- **Tool:** Playwright MCP (Model Context Protocol)
+- **Purpose:** Systematic SUT exploration and analysis
+- **Usage:** Browser automation, UI interaction, data gathering, screenshot capture, workflow analysis
+- **Application:** SUT analysis, test data preparation, exploratory testing automation
+
+### **Knowledge Bases**
+- `Test-Plan/test-plan-knowledge-base.md`
+- `Test-Analysis/test-analysis-knowledge-base.md`
+- `Test-Design/test-design-knowledge-base.md`
+
+### **Templates & Standards**
+- **HTML Template:** `Documents/template.html`
+- **Document Standards:** This system message
 
 ### **Process Guides**
 - **SUT Analysis:** `SUT-Overview-Generator/SUT-Overview-Generation-Prompt.md`
-- **Document Standards:** This system message
+- **Test Plan Generation:** `Test-Plan/Test-Plan-Generation-Prompt.md`
+- **Test Analysis Generation:** `Test-Analysis/Test-Analysis-Generation-Prompt.md`
+- **Test Design Generation:** `Test-Design/Test-Design-Generation-Prompt.md`
+
+### **Tool Integration Strategy**
+- **Multiple Test Types:** Use appropriate tools for each testing level (functional, security, performance, accessibility)
+- **Systematic Approach:** Document tool selection rationale and usage strategy
+- **Report Generation:** All tools generate professional reports for evidence and scoring
+- **Automation Priority:** Focus automation on high-risk, high-priority test scenarios (P1/P2)
+- **GitHub Integration:** Playwright automation scripts published to GitHub repository
+- **Project Deliverables:** OWASP ZAP and K6 reports published to project folder
 
 ---
 
