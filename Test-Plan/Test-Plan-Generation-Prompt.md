@@ -279,7 +279,7 @@ When documenting the testing approach, reference the following tools based on th
 - **Usage:** Automated functional test scripts for high-priority test cases
 - **Deliverable:** Playwright test scripts published to GitHub repository
 - **Application:** Test automation section, regression testing, cross-browser validation
-- **Priority:** High-priority (P1/P2) test cases to be automated
+- **Priority:** High-priority (P1) test cases to be automated
 
 #### **5. Workflow & Documentation**
 - **Tools:** Cursor, Claude, n8n
@@ -334,7 +334,7 @@ When documenting the testing approach, reference the following tools based on th
   - OWASP ZAP for security/penetration testing
   - Google Lighthouse for accessibility testing
   - K6 + Performance Analyzer for load/performance testing
-  - Playwright for test automation (P1/P2 priority)
+  - Playwright for test automation (P1 priority)
   - Cursor, Claude, n8n for workflow automation
   - Playwright MCP for SUT exploration
 - Added tool integration strategy and deliverable specifications
