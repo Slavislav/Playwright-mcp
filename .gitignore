@@ -1,0 +1,43 @@
+# Archive folder - Generated competition documents
+Archive/
+
+# Playwright MCP cache
+.playwright-mcp/
+
+# Node modules
+node_modules/
+
+# Package manager files
+pnpm-lock.yaml
+.pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+

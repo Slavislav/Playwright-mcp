@@ -26,7 +26,7 @@ The SUT Overview generation follows this systematic approach:
 
 ### Phase 1: Initial System Analysis
 - Navigate to the target URL
-- Capture initial page state and structure
+- Analyze page state and structure using Playwright snapshots
 - Document login page elements and authentication flow
 - Perform login with provided credentials
 - Analyze post-login dashboard and navigation structure
@@ -35,8 +35,8 @@ The SUT Overview generation follows this systematic approach:
 - Systematically explore all accessible modules/sections
 - Document navigation structure and menu hierarchy
 - Identify user roles and permission levels
-- Capture key functionality in each module
-- Analyze data structures and user interface components
+- Analyze key functionality in each module using page snapshots
+- Document data structures and user interface components
 
 ### Phase 3: Comprehensive Documentation
 - Generate detailed SUT Overview document
@@ -49,10 +49,10 @@ The SUT Overview generation follows this systematic approach:
 ### Step 1: System Navigation & Authentication
 ```
 1. Use Playwright MCP to navigate to the provided URL
-2. Take initial page snapshot to capture login interface
+2. Use Playwright page snapshots to analyze login interface structure
 3. Document authentication elements (username/password fields, buttons)
 4. Perform login using provided credentials
-5. Capture post-login state and verify successful authentication
+5. Analyze post-login state and verify successful authentication
 6. Document user role and permissions visible in the interface
 ```
 
@@ -61,7 +61,7 @@ The SUT Overview generation follows this systematic approach:
 1. Systematically click through all accessible navigation elements
 2. For each module/section visited:
    - Document the URL and page title
-   - Capture page snapshot
+   - Analyze page structure using Playwright snapshots
    - Identify key functionality and features
    - Note data structures (tables, forms, lists)
    - Document user interface elements
@@ -174,17 +174,20 @@ Expected Output:
 
 ## Notes
 - Always use Playwright MCP for browser automation and page analysis
-- Take multiple snapshots throughout the exploration process
+- Use Playwright page snapshots (NOT screenshots) for efficient page structure analysis
+- Screenshots are NOT needed - they slow down execution and consume context unnecessarily
 - Document any errors or limitations encountered during analysis
 - Focus on functionality that would be relevant for testing purposes
 - Consider both positive and negative testing scenarios in the analysis
 
 ---
 
-**Prompt Version**: 1.0  
+**Prompt Version**: 1.1  
 **Created**: January 2025  
+**Last Updated**: October 2025  
 **Purpose**: Automated SUT Overview generation for web applications  
-**Dependencies**: Playwright MCP, Test Planning Knowledge Bases
+**Dependencies**: Playwright MCP, Test Planning Knowledge Bases  
+**Change Log**: v1.1 - Removed screenshot requirements, optimized for Playwright page snapshots only
 
 
 
