@@ -56,10 +56,95 @@ Playwright-mcp/
 ├── 📁 Documents/                    # Templates & reference materials
 │   ├── template.html               # HTML document template
 │   └── exploration.json            # Sample exploration data
+├── 📁 k6/                           # Performance load testing toolkit
+│   ├── basic-load-test.js          # Simple endpoint testing template
+│   ├── spike-test.js               # Traffic surge simulation
+│   ├── stress-test.js              # Breaking point finder
+│   ├── api-rest-test.js            # Multi-endpoint API testing
+│   ├── scenario-based-test.js      # Realistic user behavior scenarios
+│   ├── soak-test.js                # Long-term stability testing
+│   ├── utils.js                    # Helper functions & data generation
+│   ├── config.js                   # Configuration template
+│   ├── AI_AGENT_PROMPT.md          # K6 knowledge base for AI agents
+│   └── README.md                   # Quick reference guide
+├── 📁 playwright-base-project/     # AI-powered test automation framework
+│   ├── page-objects/               # Page Object Models (POM)
+│   ├── tests/                      # Test specifications
+│   ├── test-data/                  # Test data files
+│   ├── helpers/                    # Utility functions
+│   ├── playwright.config.ts        # Playwright configuration
+│   ├── README.md                   # Complete framework documentation
+│   ├── QUICK-START.md              # Instant automation template
+│   ├── AUTOMATION-TRIGGER-PROMPT.md # AI automation guide
+│   └── AUTOMATION-REFERENCE-CARD.md # Quick reference patterns
 └── 📁 Archive/                      # Generated competition documents
     ├── CURA-Healthcare-*.html      # Practice documentation
     └── A1-Club-*.md               # Practice documentation
 ```
+
+---
+
+## 🎭 Playwright Test Automation Framework
+
+### Purpose
+**AI-Powered Test Generation** for rapid SUT validation and test case execution during competition.
+
+### Competition Integration
+- **SUT Exploration:** Use Playwright-MCP to interactively explore the unknown SUT
+- **Automated Test Creation:** AI generates page objects, test data, and test specs from live application
+- **Real Selector Capture:** Captures actual DOM elements from browser, not assumptions
+- **Test Case Execution:** Validates test design with executable automation
+
+### Key Features
+| Feature | Benefit |
+|---------|---------|
+| **AI-Powered Generation** | Provide URL + credentials → Get complete test automation |
+| **Page Object Model** | Maintainable, reusable test components |
+| **Real Browser Exploration** | Playwright-MCP captures actual selectors from live app |
+| **TypeScript + Best Practices** | Production-ready, type-safe code |
+| **Multi-Browser Support** | Chromium, Firefox, WebKit |
+| **Rich Reporting** | HTML reports with traces, screenshots, videos |
+
+### Competition Workflow
+```bash
+# Quick automation for unknown SUT:
+1. Receive SUT URL and credentials
+2. Use QUICK-START.md template → Paste URL + credentials + test case
+3. AI explores SUT with Playwright-MCP browser
+4. Auto-generates: Page Objects + Test Data + Test Specs
+5. Execute tests to validate Test Design
+6. Include test reports as supporting artifacts
+# Total time: ~15-30 minutes per test scenario
+```
+
+### Documentation
+- **[playwright-base-project/README.md](./playwright-base-project/README.md)** - Complete framework guide (14.8 KB)
+- **[QUICK-START.md](./playwright-base-project/QUICK-START.md)** - Copy-paste automation template
+- **[AUTOMATION-TRIGGER-PROMPT.md](./playwright-base-project/AUTOMATION-TRIGGER-PROMPT.md)** - Detailed AI guide
+
+### Example Output Structure
+After automating a test case, generates:
+```
+page-objects/[SUT]/
+├── LoginPage.ts              # Login interactions
+├── DashboardPage.ts          # Dashboard elements
+└── [Feature]Page.ts          # Feature-specific pages
+
+test-data/
+├── [sut]-credentials.json    # Login credentials
+└── [sut]-testdata.json       # Test data
+
+tests/
+└── TC-[ID]-[description].spec.ts  # Executable test case
+```
+
+### Value Proposition
+✅ **Speed** - Minutes, not hours, to create executable tests  
+✅ **Quality** - Real selectors from live application  
+✅ **Coverage** - Validates Test Design with automation  
+✅ **Evidence** - Test execution reports for deliverables  
+
+**See:** [playwright-base-project/](./playwright-base-project/) for complete documentation.
 
 ---
 
@@ -213,6 +298,46 @@ Test Lead: Sava Barbarov
 
 ---
 
+## ⚡ K6 Performance Testing Integration
+
+### Purpose in Competition
+K6 provides **rapid performance baseline establishment** for the unknown SUT, supporting Test Plan risk analysis and Test Design performance test cases.
+
+### Competition Workflow
+1. **Endpoint Discovery** (via Playwright MCP) - Capture network requests during SUT exploration
+2. **Template Selection** - Choose appropriate K6 test type (API/spike/stress/scenario)
+3. **Quick Customization** - Update BASE_URL and discovered endpoints (5 minutes)
+4. **Execution** - Run load tests to establish performance baselines (2-5 minutes)
+5. **Report Generation** - Auto-generated `summary.html` with professional metrics and graphs
+
+### K6 Test Templates Ready for Competition
+
+| Template | Competition Use Case | Execution Time |
+|----------|---------------------|----------------|
+| `basic-load-test.js` | Quick API health check | 30 seconds |
+| `api-rest-test.js` | Multi-endpoint performance baseline | 2 minutes |
+| `spike-test.js` | Resilience testing for Test Plan risks | 40 seconds |
+| `stress-test.js` | Find breaking points for capacity planning | 4.5 minutes |
+| `scenario-based-test.js` | Realistic user behavior simulation | 2 minutes |
+
+### Performance Reports Output
+- **HTML Reports** - Professional `summary.html` with graphs, metrics, and pass/fail thresholds
+- **Key Metrics** - Response times (p95, p99), error rates, throughput, concurrent users
+- **Thresholds** - Configurable pass/fail criteria for Test Plan inclusion
+- **Evidence** - Competition-ready performance test documentation
+
+### Playwright MCP + K6 Integration
+```bash
+# Competition Day Quick Flow:
+1. Playwright MCP → Discover endpoints (5 min)
+2. Update K6 template with discovered URLs (2 min)
+3. Run: k6 run --vus 10 --duration 2m api-rest-test.js (2 min)
+4. Include summary.html in supporting artifacts (instant)
+# Total: ~10 minutes for complete performance test evidence
+```
+
+---
+
 ## 📚 Knowledge Base Resources
 
 ### Generation Prompts
@@ -258,10 +383,10 @@ graph TD
 4. **Test Design Document** - Comprehensive test cases (HTML)
 
 ### Supporting Artifacts
-- OWASP ZAP security test reports
-- K6 performance test reports
-- Lighthouse accessibility reports
-- Playwright automation scripts (GitHub repository)
+- **OWASP ZAP** security test reports
+- **K6** performance test reports (`summary.html` - auto-generated HTML reports with metrics, graphs, and thresholds)
+- **Lighthouse** accessibility reports
+- **Playwright** automation scripts (GitHub repository)
 
 ---
 
