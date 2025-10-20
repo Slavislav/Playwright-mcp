@@ -1,0 +1,102 @@
+{
+  "emailSettings": {
+    "validEmails": [
+      "slavastinov@gmail.com",
+      "test@example.com",
+      "user@domain.com",
+      "customer@shop.com"
+    ],
+    "invalidEmails": [
+      "invalid-email",
+      "@domain.com",
+      "user@",
+      "user..name@domain.com"
+    ],
+    "currentEmail": "slavastinov@gmail.com",
+    "helperText": "Leave this blank to send email replies to jack@loox.io"
+  },
+  "complianceSettings": {
+    "unsubscribeOptions": [
+      "Unsubscribe customers from Loox and Shopify marketing emails",
+      "Keep customers subscribed to Shopify marketing emails"
+    ],
+    "sendEmailsToOptions": [
+      "Customers who gave marketing consent and all U.S. customers",
+      "Only customers who gave marketing consent",
+      "All customers"
+    ],
+    "transactionalEmailsLabel": "Send transactional emails to customers who did not give marketing consent"
+  },
+  "orderSearch": {
+    "validEmails": [
+      "aaa@abv.bg",
+      "customer@test.com"
+    ],
+    "invalidEmails": [
+      "invalid-format",
+      "missing@domain"
+    ],
+    "expectedOrder": {
+      "email": "aaa@abv.bg",
+      "product": "The Archived Snowboard",
+      "statusPattern": "Sent:"
+    }
+  },
+  "orderFilters": {
+    "statusOptions": [
+      "All orders",
+      "Sent",
+      "Scheduled/Pending fulfillment",
+      "Review received",
+      "Blocked from Loox emails",
+      "Cancelled"
+    ],
+    "timeRangeOptions": [
+      "All time",
+      "Custom"
+    ],
+    "defaultStatus": "All orders",
+    "defaultTimeRange": "All time"
+  },
+  "branding": {
+    "validFileTypes": [
+      "JPG",
+      "PNG",
+      "WEBP",
+      "JPEG",
+      "GIF"
+    ],
+    "invalidFileTypes": [
+      "txt",
+      "pdf",
+      "doc",
+      "exe"
+    ],
+    "maxFileSize": "15 MB",
+    "validColors": [
+      "#EBBF20",
+      "#000000",
+      "#FFFFFF",
+      "#FF0000",
+      "#00FF00",
+      "#0000FF"
+    ],
+    "invalidColors": [
+      "red",
+      "#GGGGGG",
+      "#12345",
+      "#1234567"
+    ],
+    "cornerStyles": [
+      "Sharp",
+      "Slightly rounded",
+      "Rounded",
+      "Extra rounded"
+    ],
+    "currentCornerStyle": "Rounded",
+    "defaultFont": "Default (Poppins)"
+  }
+}
+
+
+

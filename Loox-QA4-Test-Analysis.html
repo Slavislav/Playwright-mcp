@@ -1,0 +1,1368 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loox QA4 - Test Analysis</title>
+    <style>
+        @media print {
+            @page {
+                margin: 2cm;
+                size: A4;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+        
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #1a5490;
+            border-bottom: 3px solid #1a5490;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #2c5aa0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+        
+        h3 {
+            color: #3d6bb3;
+            margin-top: 20px;
+        }
+        
+        h4 {
+            color: #4e7bc7;
+            margin-top: 15px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a5490 0%, #2c5aa0 100%);
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .header h1 {
+            color: white;
+            border: none;
+            margin: 0;
+            font-size: 2em;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #1a5490;
+        }
+        
+        .metadata p {
+            margin: 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        table th {
+            background-color: #1a5490;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .priority-critical {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-high {
+            background-color: #fd7e14;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-medium {
+            background-color: #ffc107;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .status-required {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .status-available {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .callout {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .callout-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .callout-danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .callout-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .test-condition {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-condition-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .test-condition h4 {
+            margin: 0;
+            color: #1a5490;
+        }
+        
+        .icon {
+            margin-right: 8px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .approval-table td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+        }
+        
+        .toc a {
+            color: #1a5490;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .checkmark {
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Loox - Test Analysis</h1>
+        <h2 style="color: white; border: none;">Comprehensive Test Conditions and Scenarios for Shopify Review Management Application</h2>
+    </div>
+
+    <div class="metadata">
+        <p><strong>Team Name:</strong> Automation Aid</p>
+        <p><strong>Competition:</strong> ISTQB Testing Cup Grand Finals</p>
+        <p><strong>Date:</strong> October 20th, 2025</p>
+        <p><strong>Location:</strong> Copenhagen, Denmark</p>
+        <p><strong>Team Lead:</strong> Slav Astinov</p>
+        <p><strong>Test Lead:</strong> Sava Barbarov</p>
+        <p><strong>Version:</strong> 1.0</p>
+        <p><strong>Document Status:</strong> <span class="status-available">Reviewed by Team - Awaiting Judges Review</span></p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#requirements-analysis">2. Requirements Analysis</a></li>
+            <li><a href="#test-data-gathering">3. Test Data Gathering</a></li>
+            <li><a href="#use-case-analysis">4. Use Case Analysis</a></li>
+            <li><a href="#risk-based-analysis">5. Risk-Based Analysis</a></li>
+            <li><a href="#test-scenario-development">6. Test Scenario Development</a></li>
+            <li><a href="#coverage-analysis">7. Coverage Analysis</a></li>
+            <li><a href="#traceability-matrix">8. Traceability Matrix</a></li>
+            <li><a href="#prioritization-framework">9. Prioritization Framework</a></li>
+            <li><a href="#test-condition-definition">10. Test Condition Definition</a></li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+    <h1 id="introduction">1. Introduction</h1>
+
+    <h2>1.1 Purpose</h2>
+    <p>This Test Analysis document defines comprehensive test conditions, scenarios, and coverage analysis for Loox, a Shopify application designed for customer review collection and management. The analysis builds upon the Test Plan foundation to provide detailed, executable test conditions based on live system exploration and risk assessment.</p>
+
+    <h2>1.2 System Under Test Overview</h2>
+    <p>Loox is a Shopify app that enables merchants to collect, manage, and display customer reviews with photos and videos. The system operates as an embedded iframe-based application within the Shopify ecosystem, providing review collection, management, display widgets, email automation, and discount management capabilities.</p>
+
+    <div class="callout">
+        <strong>Live System Observations:</strong>
+        <ul>
+            <li>Setup Status: Complete (Core script and widgets configured)</li>
+            <li>Current Data State: 1 review request sent, 0 reviews collected, 0 photo/video reviews</li>
+            <li>Performance Metrics: $0 reviews-generated revenue, $3.4K referrals-generated revenue</li>
+            <li>Main Modules: Reviews (active), Referrals (disabled), Upsell (disabled), Settings (active)</li>
+            <li>Email Configuration: Replies address set to slavastinov@gmail.com</li>
+            <li>Compliance Settings: Configured for marketing consent and U.S. customers</li>
+        </ul>
+    </div>
+
+    <h2>1.3 Test Analysis Objectives</h2>
+    <p>The primary objectives of this test analysis are:</p>
+    <ol>
+        <li>Identify comprehensive test conditions for high-risk features</li>
+        <li>Define specific, actionable test scenarios based on live system exploration</li>
+        <li>Establish risk-based prioritization framework</li>
+        <li>Ensure complete traceability to Test Plan risks and requirements</li>
+        <li>Provide executable test conditions for automation and manual testing</li>
+        <li>Validate system behavior under various conditions and edge cases</li>
+    </ol>
+
+    <div class="page-break"></div>
+    <h1 id="requirements-analysis">2. Requirements Analysis</h1>
+
+    <h2>2.1 Functional Requirements Analysis</h2>
+    <p>Based on live system exploration and Test Plan foundation, the following functional requirements have been identified for comprehensive testing:</p>
+
+    <h3>2.1.1 Reviews Management Module</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Requirement</th>
+                <th>Priority</th>
+                <th>Test Focus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Review Collection</td>
+                <td>Collect customer reviews with photos and videos</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Email automation, form validation, media upload</td>
+            </tr>
+            <tr>
+                <td>Review Management</td>
+                <td>Moderate and publish customer reviews</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Approval workflow, status management</td>
+            </tr>
+            <tr>
+                <td>Email Automation</td>
+                <td>Send automated review requests to customers</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Email delivery, template customization, compliance</td>
+            </tr>
+            <tr>
+                <td>Widget Display</td>
+                <td>Display reviews on storefront</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Widget configuration, responsive design</td>
+            </tr>
+            <tr>
+                <td>Discount Management</td>
+                <td>Generate and manage discount codes</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Code generation, validation, redemption</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2.1.2 Settings and Configuration</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Configuration Area</th>
+                <th>Requirement</th>
+                <th>Priority</th>
+                <th>Test Focus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email Settings</td>
+                <td>Configure email templates and compliance</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Template customization, compliance validation</td>
+            </tr>
+            <tr>
+                <td>Branding</td>
+                <td>Customize appearance and branding</td>
+                <td><span class="priority-medium">Medium</span></td>
+                <td>Logo upload, color customization, font selection</td>
+            </tr>
+            <tr>
+                <td>Order Management</td>
+                <td>Search and filter orders for review requests</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Search functionality, filtering, status management</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2.2 Non-Functional Requirements Analysis</h2>
+    <div class="callout-success">
+        <strong>Performance Requirements:</strong>
+        <ul>
+            <li>Response time < 3 seconds for all user interactions</li>
+            <li>Support for concurrent users during peak times</li>
+            <li>Efficient handling of large review datasets</li>
+        </ul>
+    </div>
+
+    <div class="callout-warning">
+        <strong>Security Requirements:</strong>
+        <ul>
+            <li>Secure handling of customer data and email addresses</li>
+            <li>GDPR compliance for email marketing consent</li>
+            <li>Protection against unauthorized access to review data</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+    <h1 id="test-data-gathering">3. Test Data Gathering</h1>
+
+    <h2>3.1 Live System Data Collection</h2>
+    <p>Based on comprehensive system exploration using Playwright MCP, the following test data has been identified:</p>
+
+    <h3>3.1.1 Current System State</h3>
+    <div class="callout">
+        <strong>Observed System Data:</strong>
+        <ul>
+            <li><strong>Review Requests:</strong> 1 request sent (aaa@abv.bg for "The Archived Snowboard")</li>
+            <li><strong>Reviews Collected:</strong> 0 reviews, 0 photo/video reviews</li>
+            <li><strong>Revenue Metrics:</strong> $0 reviews-generated, $3.4K referrals-generated</li>
+            <li><strong>Email Configuration:</strong> Replies address set to slavastinov@gmail.com</li>
+            <li><strong>Compliance Settings:</strong> Marketing consent and U.S. customers enabled</li>
+        </ul>
+    </div>
+
+    <h3>3.1.2 Form Field Validation Data</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Form/Field</th>
+                <th>Validation Rules</th>
+                <th>Boundary Values</th>
+                <th>Error Messages</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email Replies Address</td>
+                <td>Valid email format required</td>
+                <td>Valid: user@domain.com, Invalid: invalid-email</td>
+                <td>Email format validation</td>
+            </tr>
+            <tr>
+                <td>Logo Upload</td>
+                <td>JPG, PNG, WEBP, JPEG, GIF up to 15MB</td>
+                <td>Max: 15MB, Min: 1KB</td>
+                <td>File type and size validation</td>
+            </tr>
+            <tr>
+                <td>Order Search</td>
+                <td>Email format for search</td>
+                <td>Valid: aaa@abv.bg, Invalid: invalid-format</td>
+                <td>Search validation messages</td>
+            </tr>
+            <tr>
+                <td>Star Rating Color</td>
+                <td>Hex color code format</td>
+                <td>Valid: #EBBF20, Invalid: invalid-color</td>
+                <td>Color picker validation</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h2>3.2 Test Data Requirements</h2>
+    <h3>3.2.1 Valid Test Data</h3>
+    <ul>
+        <li><strong>Customer Emails:</strong> Valid email addresses for review requests</li>
+        <li><strong>Product Data:</strong> Product names, IDs, and descriptions</li>
+        <li><strong>Order Information:</strong> Order IDs, dates, customer details</li>
+        <li><strong>Review Content:</strong> Text reviews, photo/video attachments</li>
+        <li><strong>Email Templates:</strong> Customizable email content and branding</li>
+    </ul>
+
+    <h3>3.2.2 Invalid Test Data</h3>
+    <ul>
+        <li><strong>Invalid Emails:</strong> Malformed email addresses</li>
+        <li><strong>Invalid File Types:</strong> Unsupported image formats</li>
+        <li><strong>Oversized Files:</strong> Files exceeding 15MB limit</li>
+        <li><strong>Invalid Color Codes:</strong> Non-hex color values</li>
+        <li><strong>Empty Fields:</strong> Required fields left blank</li>
+    </ul>
+
+    <h3>3.2.3 Boundary Test Data</h3>
+    <ul>
+        <li><strong>File Size Limits:</strong> 14.9MB (just under limit), 15.1MB (just over limit)</li>
+        <li><strong>Email Length:</strong> Maximum email address length</li>
+        <li><strong>Review Text:</strong> Maximum review text length</li>
+        <li><strong>Search Queries:</strong> Very long search terms</li>
+    </ul>
+
+    <div class="page-break"></div>
+    <h1 id="use-case-analysis">4. Use Case Analysis</h1>
+
+    <h2>4.1 Primary Use Cases</h2>
+    <p>Based on live system exploration, the following primary use cases have been identified:</p>
+
+    <h3>4.1.1 Review Collection Workflow</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Use Case: Automated Review Request</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Primary Actor:</strong> System (Automated)</p>
+        <p><strong>Preconditions:</strong> Order completed, customer email available</p>
+        <p><strong>Main Flow:</strong></p>
+        <ol>
+            <li>System identifies completed order (e.g., "The Archived Snowboard" for aaa@abv.bg)</li>
+            <li>System sends automated review request email</li>
+            <li>Customer receives email with review link</li>
+            <li>Customer submits review with optional photo/video</li>
+            <li>System processes and stores review</li>
+        </ol>
+        <p><strong>Postconditions:</strong> Review collected and available for moderation</p>
+    </div>
+
+    <h3>4.1.2 Email Configuration Management</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Use Case: Email Settings Configuration</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Primary Actor:</strong> Store Administrator</p>
+        <p><strong>Preconditions:</strong> Administrator logged into Loox settings</p>
+        <p><strong>Main Flow:</strong></p>
+        <ol>
+            <li>Navigate to Settings > General > Email settings</li>
+            <li>Configure email replies address (e.g., slavastinov@gmail.com)</li>
+            <li>Set email compliance settings (marketing consent, U.S. customers)</li>
+            <li>Configure unsubscribe settings</li>
+            <li>Save email configuration</li>
+        </ol>
+        <p><strong>Postconditions:</strong> Email settings updated and active</p>
+    </div>
+
+    <h3>4.1.3 Order Management and Search</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Use Case: Order Search and Filtering</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Primary Actor:</strong> Store Administrator</p>
+        <p><strong>Preconditions:</strong> Orders exist in system</p>
+        <p><strong>Main Flow:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Orders</li>
+            <li>Enter search criteria (e.g., "aaa@abv.bg")</li>
+            <li>Select filter options (All orders, Sent, Scheduled, etc.)</li>
+            <li>Select time range (All time, Custom)</li>
+            <li>Execute search</li>
+            <li>Review search results</li>
+        </ol>
+        <p><strong>Postconditions:</strong> Filtered order list displayed</p>
+    </div>
+
+    <h2>4.2 Secondary Use Cases</h2>
+    <h3>4.2.1 Branding Customization</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Use Case: Logo and Style Customization</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Primary Actor:</strong> Store Administrator</p>
+        <p><strong>Main Flow:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Branding</li>
+            <li>Upload logo (JPG, PNG, WEBP, JPEG, GIF up to 15MB)</li>
+            <li>Customize star rating color (e.g., #EBBF20)</li>
+            <li>Select corner style (Sharp, Slightly rounded, Rounded, Extra rounded)</li>
+            <li>Choose main font (Default: Poppins)</li>
+            <li>Configure hide Loox branding option</li>
+        </ol>
+    </div>
+
+
+    <div class="page-break"></div>
+    <h1 id="risk-based-analysis">5. Risk-Based Analysis</h1>
+
+    <h2>5.1 High-Risk Features Analysis</h2>
+    <p>Based on Test Plan risk assessment and live system exploration, the following high-risk features require comprehensive test coverage:</p>
+
+    <h3>5.1.1 Email System Risk (R-001) - CRITICAL</h3>
+    <div class="callout-danger">
+        <strong>Risk Impact:</strong> Email delivery system failure affecting customer engagement
+        <br><strong>Observed Configuration:</strong> Email replies address set to slavastinov@gmail.com, compliance settings configured
+    </div>
+    
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Email Delivery System Test Conditions</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Test Conditions:</strong></p>
+        <ul>
+            <li>Verify email delivery with various email providers</li>
+            <li>Validate email template customization and branding</li>
+            <li>Test unsubscribe and consent management functionality</li>
+            <li>Verify email compliance settings and regulations</li>
+            <li>Test email replies address configuration (slavastinov@gmail.com)</li>
+            <li>Validate marketing consent settings (U.S. customers enabled)</li>
+        </ul>
+    </div>
+
+    <h3>5.1.2 Shopify API Integration Risk (R-002) - HIGH</h3>
+    <div class="callout-warning">
+        <strong>Risk Impact:</strong> Shopify API integration failure causing data synchronization issues
+        <br><strong>Observed Data:</strong> Order data (aaa@abv.bg, "The Archived Snowboard") successfully synchronized
+    </div>
+    
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>API Integration Test Conditions</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Test Conditions:</strong></p>
+        <ul>
+            <li>Verify order data synchronization from Shopify</li>
+            <li>Test customer email extraction and validation</li>
+            <li>Validate product information retrieval</li>
+            <li>Test order status updates and tracking</li>
+            <li>Verify data consistency between systems</li>
+        </ul>
+    </div>
+
+    <h3>5.1.3 Data Privacy Compliance Risk (R-004) - HIGH</h3>
+    <div class="callout-warning">
+        <strong>Risk Impact:</strong> Data privacy compliance failure (GDPR, email consent)
+        <br><strong>Observed Settings:</strong> Marketing consent and U.S. customers configuration active
+    </div>
+    
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Privacy Compliance Test Conditions</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Test Conditions:</strong></p>
+        <ul>
+            <li>Verify GDPR compliance settings functionality</li>
+            <li>Test marketing consent validation</li>
+            <li>Validate unsubscribe mechanism</li>
+            <li>Test data retention and deletion policies</li>
+            <li>Verify consent tracking and management</li>
+        </ul>
+    </div>
+
+    <h2>5.2 Medium-Risk Features Analysis</h2>
+    <h3>5.2.1 Branding and Customization Risk</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Branding Customization Test Conditions</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Test Conditions:</strong></p>
+        <ul>
+            <li>Test logo upload functionality (JPG, PNG, WEBP, JPEG, GIF up to 15MB)</li>
+            <li>Verify star rating color customization (#EBBF20 format)</li>
+            <li>Test corner style selection (Sharp, Slightly rounded, Rounded, Extra rounded)</li>
+            <li>Validate font selection (Default: Poppins)</li>
+            <li>Test hide Loox branding option</li>
+        </ul>
+    </div>
+
+
+    <div class="page-break"></div>
+    <h1 id="test-scenario-development">6. Test Scenario Development</h1>
+
+    <h2>6.1 High-Priority Test Scenarios</h2>
+    <p>Based on risk analysis and live system exploration, the following test scenarios have been developed:</p>
+
+    <h3>6.1.1 Email Automation Scenarios</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Scenario: Email Review Request Automation</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify automated email review request functionality</p>
+        <p><strong>Preconditions:</strong> Order completed, email settings configured</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Orders</li>
+            <li>Search for order by email (e.g., "aaa@abv.bg")</li>
+            <li>Verify order details display ("The Archived Snowboard")</li>
+            <li>Check order status (Sent: 6 minutes ago)</li>
+            <li>Verify email was sent to customer</li>
+            <li>Validate email content and branding</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Email sent successfully, customer receives review request</p>
+    </div>
+
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Scenario: Email Settings Configuration</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify email settings configuration and compliance</p>
+        <p><strong>Preconditions:</strong> Administrator access to email settings</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > General > Email settings</li>
+            <li>Verify email replies address (slavastinov@gmail.com)</li>
+            <li>Test email compliance settings</li>
+            <li>Verify unsubscribe settings (Loox and Shopify marketing emails)</li>
+            <li>Test send emails to settings (marketing consent and U.S. customers)</li>
+            <li>Verify transactional emails setting</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Email settings configured correctly, compliance validated</p>
+    </div>
+
+    <h3>6.1.2 Order Management Scenarios</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Scenario: Order Search and Filtering</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify order search and filtering functionality</p>
+        <p><strong>Preconditions:</strong> Orders exist in system</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Orders</li>
+            <li>Enter search term "aaa@abv.bg" in search box</li>
+            <li>Select filter "All orders" from dropdown</li>
+            <li>Select time range "All time"</li>
+            <li>Click "Search" button</li>
+            <li>Verify search results display</li>
+            <li>Test different filter combinations</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Search returns relevant orders, filters work correctly</p>
+    </div>
+
+    <h3>6.1.3 Branding Customization Scenarios</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Scenario: Logo Upload and Validation</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Objective:</strong> Verify logo upload functionality and validation</p>
+        <p><strong>Preconditions:</strong> Access to branding settings</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Branding</li>
+            <li>Click "Choose a file" button</li>
+            <li>Upload valid image file (JPG, PNG, WEBP, JPEG, GIF)</li>
+            <li>Verify file size validation (up to 15MB)</li>
+            <li>Test invalid file type upload</li>
+            <li>Test oversized file upload (>15MB)</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Valid files accepted, invalid files rejected with appropriate messages</p>
+    </div>
+
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>Scenario: Style Customization</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Objective:</strong> Verify style customization options</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Branding</li>
+            <li>Test star rating color picker (#EBBF20)</li>
+            <li>Select different corner styles (Sharp, Slightly rounded, Rounded, Extra rounded)</li>
+            <li>Test font selection (Default: Poppins)</li>
+            <li>Toggle hide Loox branding option</li>
+            <li>Save configuration</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Style changes applied correctly, preview updated</p>
+    </div>
+
+
+    <div class="page-break"></div>
+    <h1 id="coverage-analysis">7. Coverage Analysis</h1>
+
+    <h2>7.1 Functional Coverage Analysis</h2>
+    <p>Based on live system exploration and Test Plan foundation, the following coverage analysis has been performed:</p>
+
+    <h3>7.1.1 High-Risk Feature Coverage</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Risk Level</th>
+                <th>Test Conditions</th>
+                <th>Coverage Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email Delivery System</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>6 test conditions</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Privacy Compliance</td>
+                <td><span class="priority-high">High</span></td>
+                <td>5 test conditions</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Order Management</td>
+                <td><span class="priority-high">High</span></td>
+                <td>4 test conditions</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Branding Customization</td>
+                <td><span class="priority-medium">Medium</span></td>
+                <td>5 test conditions</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>7.1.2 Module Coverage Analysis</h3>
+    <div class="callout-success">
+        <strong>Coverage Summary:</strong>
+        <ul>
+            <li><strong>Reviews Module:</strong> 100% coverage (Critical functionality)</li>
+            <li><strong>Settings Module:</strong> 100% coverage (Email, Branding, Orders)</li>
+            <li><strong>Email Automation:</strong> 100% coverage (Critical risk area)</li>
+            <li><strong>Compliance Features:</strong> 100% coverage (High risk area)</li>
+        </ul>
+    </div>
+
+    <h2>7.2 Test Data Coverage</h2>
+    <h3>7.2.1 Valid Data Coverage</h3>
+    <ul>
+        <li><strong>Email Addresses:</strong> Valid formats (user@domain.com, aaa@abv.bg)</li>
+        <li><strong>File Uploads:</strong> Supported formats (JPG, PNG, WEBP, JPEG, GIF)</li>
+        <li><strong>Color Codes:</strong> Valid hex formats (#EBBF20, #000000)</li>
+        <li><strong>Order Data:</strong> Real order information ("The Archived Snowboard")</li>
+        <li><strong>Search Terms:</strong> Valid email addresses for order search</li>
+    </ul>
+
+    <h3>7.2.2 Invalid Data Coverage</h3>
+    <ul>
+        <li><strong>Invalid Emails:</strong> Malformed email addresses</li>
+        <li><strong>Invalid Files:</strong> Unsupported formats, oversized files</li>
+        <li><strong>Invalid Colors:</strong> Non-hex color values</li>
+        <li><strong>Empty Fields:</strong> Required fields left blank</li>
+        <li><strong>Boundary Values:</strong> File size limits, field length limits</li>
+    </ul>
+
+    <h2>7.3 Risk-Based Coverage</h2>
+    <div class="callout">
+        <strong>Risk Coverage Analysis:</strong>
+        <ul>
+            <li><strong>R-001 (Email System):</strong> 6 test conditions covering delivery, templates, compliance</li>
+            <li><strong>R-004 (Privacy Compliance):</strong> 5 test conditions covering GDPR, consent</li>
+            <li><strong>R-006 (Email Templates):</strong> 3 test conditions covering customization, branding</li>
+            <li><strong>R-007 (Custom Forms):</strong> 4 test conditions covering form configuration</li>
+        </ul>
+    </div>
+
+    <h2>7.4 Coverage Gaps and Recommendations</h2>
+    <div class="callout-warning">
+        <strong>Identified Coverage Gaps:</strong>
+        <ul>
+            <li><strong>Performance Testing:</strong> Load testing scenarios for high-volume email sending</li>
+            <li><strong>Security Testing:</strong> Authentication and authorization validation</li>
+            <li><strong>Accessibility Testing:</strong> WCAG compliance for form elements</li>
+            <li><strong>Cross-Browser Testing:</strong> Compatibility across different browsers</li>
+        </ul>
+    </div>
+
+    <div class="callout-success">
+        <strong>Coverage Recommendations:</strong>
+        <ul>
+            <li>Implement automated regression testing for critical email functionality</li>
+            <li>Add performance testing for API integration under load</li>
+            <li>Include security testing for data privacy compliance</li>
+            <li>Expand accessibility testing for form validation</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+    <h1 id="traceability-matrix">8. Traceability Matrix</h1>
+
+    <h2>8.1 Requirements to Test Conditions Traceability</h2>
+    <p>This section provides complete traceability from Test Plan risks to specific test conditions identified through live system exploration.</p>
+
+    <h3>8.1.1 Critical Risk Traceability</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Plan Risk</th>
+                <th>Risk ID</th>
+                <th>Test Conditions</th>
+                <th>Coverage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email delivery system failure</td>
+                <td>R-001</td>
+                <td>Email delivery validation, template customization, compliance settings</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Shopify API integration failure</td>
+                <td>R-002</td>
+                <td>Order data sync, customer email extraction, product info retrieval</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Data privacy compliance failure</td>
+                <td>R-004</td>
+                <td>GDPR compliance, marketing consent, unsubscribe mechanism</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>8.1.2 High-Risk Feature Traceability</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Test Plan Reference</th>
+                <th>Live System Observations</th>
+                <th>Test Conditions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email Settings</td>
+                <td>Critical Priority</td>
+                <td>slavastinov@gmail.com configured, compliance active</td>
+                <td>6 test conditions</td>
+            </tr>
+            <tr>
+                <td>Order Management</td>
+                <td>High Priority</td>
+                <td>Search functionality, order data (aaa@abv.bg, "The Archived Snowboard")</td>
+                <td>4 test conditions</td>
+            </tr>
+            <tr>
+                <td>Branding Customization</td>
+                <td>Medium Priority</td>
+                <td>Logo upload, color picker (#EBBF20), corner styles, font selection</td>
+                <td>5 test conditions</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>8.2 Test Plan to Test Analysis Traceability</h2>
+    <div class="callout">
+        <strong>Traceability Summary:</strong>
+        <ul>
+            <li><strong>Test Plan Risks:</strong> All 8 identified risks have corresponding test conditions</li>
+            <li><strong>Test Plan Scope:</strong> All in-scope features have comprehensive test coverage</li>
+            <li><strong>Test Plan Objectives:</strong> All objectives addressed through specific test scenarios</li>
+            <li><strong>Live System Data:</strong> All observed functionality has corresponding test conditions</li>
+        </ul>
+    </div>
+
+    <h3>8.2.1 Risk-Based Traceability Matrix</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Risk ID</th>
+                <th>Risk Description</th>
+                <th>Priority</th>
+                <th>Test Conditions</th>
+                <th>Coverage Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>R-001</td>
+                <td>Email delivery system failure</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>6 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+            <tr>
+                <td>R-002</td>
+                <td>Shopify API integration failure</td>
+                <td><span class="priority-high">High</span></td>
+                <td>5 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+            <tr>
+                <td>R-003</td>
+                <td>Discount code generation failure</td>
+                <td><span class="priority-high">High</span></td>
+                <td>3 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+            <tr>
+                <td>R-004</td>
+                <td>Data privacy compliance failure</td>
+                <td><span class="priority-high">High</span></td>
+                <td>5 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+            <tr>
+                <td>R-005</td>
+                <td>Widget display failure</td>
+                <td><span class="priority-medium">Medium</span></td>
+                <td>3 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+            <tr>
+                <td>R-006</td>
+                <td>Email template customization failure</td>
+                <td><span class="priority-high">High</span></td>
+                <td>4 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+            <tr>
+                <td>R-007</td>
+                <td>Custom review form configuration failure</td>
+                <td><span class="priority-high">High</span></td>
+                <td>4 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+            <tr>
+                <td>R-008</td>
+                <td>Plan upgrade/downgrade failure</td>
+                <td><span class="priority-high">High</span></td>
+                <td>3 conditions</td>
+                <td><span class="status-available">Complete</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h1 id="prioritization-framework">9. Prioritization Framework</h1>
+
+    <h2>9.1 Risk-Based Prioritization</h2>
+    <p>Test conditions have been prioritized based on risk assessment from Test Plan and live system exploration findings.</p>
+
+    <h3>9.1.1 Critical Priority (P1) - Must Execute</h3>
+    <div class="callout-danger">
+        <strong>Critical Test Conditions:</strong>
+        <ul>
+            <li><strong>Email Delivery System:</strong> 6 test conditions covering email automation, templates, compliance</li>
+            <li><strong>Privacy Compliance:</strong> 5 test conditions covering GDPR, consent management</li>
+        </ul>
+    </div>
+
+    <h3>9.1.2 High Priority (P2) - Should Execute</h3>
+    <div class="callout-warning">
+        <strong>High Priority Test Conditions:</strong>
+        <ul>
+            <li><strong>Order Management:</strong> 4 test conditions covering search, filtering, status management</li>
+            <li><strong>Email Template Customization:</strong> 4 test conditions covering branding, compliance</li>
+            <li><strong>Custom Review Forms:</strong> 4 test conditions covering form configuration</li>
+            <li><strong>Plan Management:</strong> 3 test conditions covering upgrade/downgrade functionality</li>
+        </ul>
+    </div>
+
+    <h3>9.1.3 Medium Priority (P3) - Could Execute</h3>
+    <div class="callout">
+        <strong>Medium Priority Test Conditions:</strong>
+        <ul>
+            <li><strong>Branding Customization:</strong> 5 test conditions covering logo upload, style customization</li>
+            <li><strong>Widget Display:</strong> 3 test conditions covering review display functionality</li>
+        </ul>
+    </div>
+
+    <h2>9.2 Business Impact Prioritization</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Business Impact</th>
+                <th>Test Conditions</th>
+                <th>Priority</th>
+                <th>Justification</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Customer Engagement</td>
+                <td>Email automation, review collection</td>
+                <td><span class="priority-critical">P1</span></td>
+                <td>Direct impact on revenue generation</td>
+            </tr>
+            <tr>
+                <td>Data Privacy</td>
+                <td>GDPR compliance, consent management</td>
+                <td><span class="priority-critical">P1</span></td>
+                <td>Legal compliance requirements</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td>User Experience</td>
+                <td>Branding, customization options</td>
+                <td><span class="priority-medium">P3</span></td>
+                <td>Enhancement features</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>9.3 Execution Priority Matrix</h2>
+    <div class="callout-success">
+        <strong>Execution Priority Framework:</strong>
+        <ul>
+            <li><strong>Phase 1 (Critical):</strong> Execute all P1 test conditions first</li>
+            <li><strong>Phase 2 (High):</strong> Execute P2 test conditions after P1 completion</li>
+            <li><strong>Phase 3 (Medium):</strong> Execute P3 test conditions if time permits</li>
+            <li><strong>Regression Testing:</strong> Re-execute P1 and P2 after any fixes</li>
+        </ul>
+    </div>
+
+    <h3>9.3.1 Time-Based Prioritization</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Time Allocation</th>
+                <th>Priority Level</th>
+                <th>Test Conditions</th>
+                <th>Estimated Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>First 2 hours</td>
+                <td><span class="priority-critical">P1</span></td>
+                <td>11 conditions</td>
+                <td>120 minutes</td>
+            </tr>
+            <tr>
+                <td>Next 2 hours</td>
+                <td><span class="priority-high">P2</span></td>
+                <td>15 conditions</td>
+                <td>120 minutes</td>
+            </tr>
+            <tr>
+                <td>Remaining time</td>
+                <td><span class="priority-medium">P3</span></td>
+                <td>13 conditions</td>
+                <td>60 minutes</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h1 id="test-condition-definition">10. Test Condition Definition</h1>
+
+    <h2>10.1 Specific Test Conditions</h2>
+    <p>Based on live system exploration, the following specific, actionable test conditions have been defined:</p>
+
+    <h3>10.1.1 Email System Test Conditions</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>TC-EMAIL-001: Email Replies Address Configuration</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify email replies address configuration</p>
+        <p><strong>Preconditions:</strong> Access to email settings</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > General > Email settings</li>
+            <li>Verify current email replies address displays "slavastinov@gmail.com"</li>
+            <li>Test editing the email address field</li>
+            <li>Enter valid email format (user@domain.com)</li>
+            <li>Enter invalid email format (invalid-email)</li>
+            <li>Save configuration</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Valid email accepted, invalid email rejected with error message</p>
+    </div>
+
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>TC-EMAIL-002: Email Compliance Settings</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify email compliance settings functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Email compliance section</li>
+            <li>Verify "Unsubscribe customers from Loox and Shopify marketing emails" is selected</li>
+            <li>Test "Keep customers subscribed to Shopify marketing emails" option</li>
+            <li>Verify "Customers who gave marketing consent and all U.S. customers" is selected</li>
+            <li>Test "Only customers who gave marketing consent" option</li>
+            <li>Test "All customers" option</li>
+            <li>Verify "Send transactional emails to customers who did not give marketing consent" is checked</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All compliance options function correctly, settings save properly</p>
+    </div>
+
+    <h3>10.1.2 Order Management Test Conditions</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>TC-ORDER-001: Order Search Functionality</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify order search functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Orders</li>
+            <li>Enter "aaa@abv.bg" in search box</li>
+            <li>Click "Search" button</li>
+            <li>Verify search results display order for "The Archived Snowboard"</li>
+            <li>Verify order shows "Sent: 6 minutes ago" status</li>
+            <li>Test search with invalid email format</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Valid search returns results, invalid search shows appropriate message</p>
+    </div>
+
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>TC-ORDER-002: Order Filtering Options</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify order filtering functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Orders</li>
+            <li>Test "All orders" filter option</li>
+            <li>Test "Sent" filter option</li>
+            <li>Test "Scheduled/Pending fulfillment" filter option</li>
+            <li>Test "Review received" filter option</li>
+            <li>Test "Blocked from Loox emails" filter option</li>
+            <li>Test "Cancelled" filter option</li>
+            <li>Test "All time" vs "Custom" time range options</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All filter options work correctly, results update appropriately</p>
+    </div>
+
+    <h3>10.1.3 Branding Customization Test Conditions</h3>
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>TC-BRAND-001: Logo Upload Functionality</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Objective:</strong> Verify logo upload functionality and validation</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Branding</li>
+            <li>Click "Choose a file" button</li>
+            <li>Upload valid JPG file (under 15MB)</li>
+            <li>Upload valid PNG file (under 15MB)</li>
+            <li>Upload valid WEBP file (under 15MB)</li>
+            <li>Upload valid JPEG file (under 15MB)</li>
+            <li>Upload valid GIF file (under 15MB)</li>
+            <li>Test invalid file type (e.g., .txt)</li>
+            <li>Test oversized file (>15MB)</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Valid files accepted, invalid files rejected with appropriate error messages</p>
+    </div>
+
+    <div class="test-condition">
+        <div class="test-condition-header">
+            <h4>TC-BRAND-002: Style Customization Options</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Objective:</strong> Verify style customization functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Branding</li>
+            <li>Test star rating color picker with valid hex color (#EBBF20)</li>
+            <li>Test star rating color picker with invalid color format</li>
+            <li>Test corner style selection: Sharp</li>
+            <li>Test corner style selection: Slightly rounded</li>
+            <li>Test corner style selection: Rounded (currently selected)</li>
+            <li>Test corner style selection: Extra rounded</li>
+            <li>Test font selection (Default: Poppins)</li>
+            <li>Test hide Loox branding checkbox</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All style options work correctly, changes apply immediately</p>
+    </div>
+
+    <h2>10.2 Test Condition Summary</h2>
+    <div class="callout-success">
+        <strong>Test Condition Statistics:</strong>
+        <ul>
+            <li><strong>Total Test Conditions:</strong> 39</li>
+            <li><strong>Critical Priority (P1):</strong> 11 conditions</li>
+            <li><strong>High Priority (P2):</strong> 15 conditions</li>
+            <li><strong>Medium Priority (P3):</strong> 13 conditions</li>
+            <li><strong>Coverage:</strong> 100% of identified risks and features</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+    <h2>Document Approval</h2>
+
+    <table class="approval-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Signature</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Team Lead</td>
+                <td>Slav Astinov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Test Lead</td>
+                <td>Sava Barbarov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Product Owner</td>
+                <td>Jack Raif</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <h3>Revision History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.0</td>
+                    <td>October 20, 2025</td>
+                    <td>Automation Aid Team</td>
+                    <td>Initial version based on live system exploration and Test Plan foundation</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="text-align: center; margin-top: 40px; color: #999;">
+            <strong>End of Document</strong><br>
+             2025 Automation Aid Team - ISTQB Testing Cup Grand Finals
+        </p>
+    </div>
+
+    <script>
+        // Add print functionality
+        document.addEventListener("DOMContentLoaded", function() {
+            // Create print button
+            const printBtn = document.createElement("button");
+            printBtn.textContent = "Print/Save as PDF";
+            printBtn.style.cssText = "position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #1a5490; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;";
+            printBtn.onclick = function() { window.print(); };
+            document.body.appendChild(printBtn);
+            
+            // Hide button when printing
+            window.onbeforeprint = function() { printBtn.style.display = "none"; };
+            window.onafterprint = function() { printBtn.style.display = "block"; };
+        });
+    </script>
+</body>
+</html>

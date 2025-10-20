@@ -1,0 +1,1733 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loox QA4 - Test Design</title>
+    <style>
+        @media print {
+            @page {
+                margin: 2cm;
+                size: A4;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+        
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #1a5490;
+            border-bottom: 3px solid #1a5490;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #2c5aa0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+        
+        h3 {
+            color: #3d6bb3;
+            margin-top: 20px;
+        }
+        
+        h4 {
+            color: #4e7bc7;
+            margin-top: 15px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a5490 0%, #2c5aa0 100%);
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .header h1 {
+            color: white;
+            border: none;
+            margin: 0;
+            font-size: 2em;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #1a5490;
+        }
+        
+        .metadata p {
+            margin: 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        table th {
+            background-color: #1a5490;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .priority-critical {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-high {
+            background-color: #fd7e14;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-medium {
+            background-color: #ffc107;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .status-required {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .status-available {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .callout {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .callout-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .callout-danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .callout-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .test-case {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .test-case h4 {
+            margin: 0;
+            color: #1a5490;
+        }
+        
+        .icon {
+            margin-right: 8px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .approval-table td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+        }
+        
+        .toc a {
+            color: #1a5490;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .checkmark {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .test-technique {
+            background: #f8f9fa;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .automation-tool {
+            background: #e8f5e8;
+            border: 1px solid #28a745;
+            border-radius: 4px;
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Loox - Test Design</h1>
+        <h2 style="color: white; border: none;">Comprehensive Test Cases and Scenarios for Shopify Review Management Application</h2>
+    </div>
+
+    <div class="metadata">
+        <p><strong>Team Name:</strong> Automation Aid</p>
+        <p><strong>Competition:</strong> ISTQB Testing Cup Grand Finals</p>
+        <p><strong>Date:</strong> October 20th, 2025</p>
+        <p><strong>Location:</strong> Copenhagen, Denmark</p>
+        <p><strong>Team Lead:</strong> Slav Astinov</p>
+        <p><strong>Test Lead:</strong> Sava Barbarov</p>
+        <p><strong>Version:</strong> 2.0 (EXPANDED)</p>
+        <p><strong>Document Status:</strong> <span class="status-available">Expanded with 14 New Test Cases - Ready for Competition</span></p>
+    </div>
+
+    <div class="page-break"></div>
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#test-design-techniques">2. Test Design Techniques</a></li>
+            <li><a href="#test-case-design">3. Test Case Design</a></li>
+            <li><a href="#test-data-design">4. Test Data Design</a></li>
+            <li><a href="#automation-opportunities">5. Automation Opportunities</a></li>
+            <li><a href="#coverage-analysis">6. Coverage Analysis</a></li>
+            <li><a href="#traceability-matrix">7. Traceability Matrix</a></li>
+            <li><a href="#test-execution-strategy">8. Test Execution Strategy</a></li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+    <h1 id="introduction">1. Introduction</h1>
+
+    <h2>1.1 Purpose</h2>
+    <p>This Test Design document defines comprehensive test cases and scenarios for Loox, a Shopify application designed for customer review collection and management. The design builds upon the Test Plan and Test Analysis foundations to provide detailed, executable test cases with appropriate test design techniques and automation opportunities.</p>
+
+    <h2>1.2 System Under Test Overview</h2>
+    <p>Loox is a Shopify app that enables merchants to collect, manage, and display customer reviews with photos and videos. The system operates as an embedded iframe-based application within the Shopify ecosystem, providing review collection, management, display widgets, email automation, and discount management capabilities.</p>
+
+    <div class="callout">
+        <strong>Live System Observations:</strong>
+        <ul>
+            <li>Setup Status: Complete (Core script and widgets configured)</li>
+            <li>Current Data State: 1 review request sent, 0 reviews collected, 0 photo/video reviews</li>
+            <li>Performance Metrics: $0 reviews-generated revenue, $3.4K referrals-generated revenue</li>
+            <li>Main Modules: Reviews (active), Referrals (disabled), Upsell (disabled), Settings (active)</li>
+            <li>Email Configuration: Replies address set to slavastinov@gmail.com</li>
+            <li>Compliance Settings: Configured for marketing consent and U.S. customers</li>
+        </ul>
+    </div>
+
+    <h2>1.3 Test Design Objectives</h2>
+    <p>The primary objectives of this test design are:</p>
+    <ol>
+        <li>Create detailed, executable test cases for high-risk features</li>
+        <li>Apply appropriate test design techniques for comprehensive coverage</li>
+        <li>Design test cases for automation opportunities</li>
+        <li>Ensure complete traceability to Test Plan risks and Test Analysis conditions</li>
+        <li>Provide specific test data sets and validation criteria</li>
+        <li>Optimize test case design for competition scoring (20/20 points)</li>
+    </ol>
+
+    <div class="page-break"></div>
+    <h1 id="test-design-techniques">2. Test Design Techniques</h1>
+
+    <h2>2.1 Applied Test Design Techniques</h2>
+    <p>Based on the Test Plan risks and Test Analysis conditions, the following test design techniques have been applied to create comprehensive test coverage:</p>
+
+    <h3>2.1.1 State Transition Testing</h3>
+    <div class="test-technique">
+        <strong>Application:</strong> Email automation workflow, review status management, order processing states
+        <br><strong>Purpose:</strong> Test application state changes and transitions
+        <br><strong>Benefits:</strong> Visualizes state flows, identifies transition errors
+    </div>
+
+    <h3>2.1.2 Boundary Value Analysis</h3>
+    <div class="test-technique">
+        <strong>Application:</strong> File upload validation (15MB limit), email format validation, form field limits
+        <br><strong>Purpose:</strong> Test values at the edges of valid ranges
+        <br><strong>Benefits:</strong> Identifies edge case failures, validates boundary logic
+    </div>
+
+    <h3>2.1.3 Equivalence Partitioning</h3>
+    <div class="test-technique">
+        <strong>Application:</strong> Email format validation, file type validation, user role testing
+        <br><strong>Purpose:</strong> Test representative values from each equivalence class
+        <br><strong>Benefits:</strong> Reduces test cases while maintaining coverage
+    </div>
+
+    <h3>2.1.4 Pairwise Testing</h3>
+    <div class="test-technique">
+        <strong>Application:</strong> Email compliance settings, branding customization options
+        <br><strong>Purpose:</strong> Test combinations of input parameters efficiently
+        <br><strong>Benefits:</strong> Optimizes test case count while covering interactions
+    </div>
+
+    <h3>2.1.5 Error Guessing</h3>
+    <div class="test-technique">
+        <strong>Application:</strong> Edge cases, unusual user behaviors, system limitations
+        <br><strong>Purpose:</strong> Use experience to identify potential failure areas
+        <br><strong>Benefits:</strong> Identifies scenarios formal techniques might miss
+    </div>
+
+    <div class="page-break"></div>
+    <h1 id="test-case-design">3. Test Case Design</h1>
+
+    <h2>3.1 Critical Priority Test Cases (P1)</h2>
+    <p>Based on Test Plan risk R-001 (Email delivery system failure) and Test Analysis conditions, the following critical test cases have been designed:</p>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-EMAIL-001: Email Replies Address Configuration</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify email replies address configuration functionality</p>
+        <p><strong>Preconditions:</strong> Access to email settings, valid authentication</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > General > Email settings</li>
+            <li>Verify current email replies address displays "slavastinov@gmail.com"</li>
+            <li>Clear the email address field</li>
+            <li>Enter valid email format: "test@example.com"</li>
+            <li>Save configuration</li>
+            <li>Verify email address is updated</li>
+            <li>Enter invalid email format: "invalid-email"</li>
+            <li>Attempt to save</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Valid email accepted and saved, invalid email rejected with error message</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P1 - Must be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-EMAIL-002: Email Compliance Settings Validation</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify email compliance settings functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Email compliance section</li>
+            <li>Verify "Unsubscribe customers from Loox and Shopify marketing emails" is selected</li>
+            <li>Test "Keep customers subscribed to Shopify marketing emails" option</li>
+            <li>Verify "Customers who gave marketing consent and all U.S. customers" is selected</li>
+            <li>Test "Only customers who gave marketing consent" option</li>
+            <li>Test "All customers" option</li>
+            <li>Verify "Send transactional emails to customers who did not give marketing consent" is checked</li>
+            <li>Save settings and verify persistence</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All compliance options function correctly, settings save properly</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P1 - Must be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-EMAIL-003: Email Template Customization</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify email template customization functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Email customization section</li>
+            <li>Click "Edit" button for email appearance</li>
+            <li>Test color customization options</li>
+            <li>Test font selection options</li>
+            <li>Test logo upload functionality</li>
+            <li>Save customization settings</li>
+            <li>Verify changes are applied</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Email template customization works correctly, changes are applied</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P1 - Must be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-DISCOUNT-001: Create Discount Code</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify discount code creation functionality (R-003)</p>
+        <p><strong>Preconditions:</strong> Access to Discounts module</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Discounts section</li>
+            <li>Click "Create Discount Code"</li>
+            <li>Enter discount details (name, description)</li>
+            <li>Configure discount type (percentage/fixed)</li>
+            <li>Set discount amount</li>
+            <li>Save discount code</li>
+            <li>Verify code generated with unique identifier</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Discount code created successfully, unique code format (e.g., LOOX-XXXX)</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P1 - Must be automated
+            <br><strong>Risk Coverage:</strong> R-003 - Discount generation failure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-DISCOUNT-002: Configure Discount Settings</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify discount configuration options (R-003)</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Create new discount</li>
+            <li>Test percentage discount (10%, 25%, 50%)</li>
+            <li>Test fixed amount discount ($5, $10, $20)</li>
+            <li>Set minimum order amount ($50, $100)</li>
+            <li>Configure expiration date (7 days, 30 days)</li>
+            <li>Set usage limits (one-time, unlimited)</li>
+            <li>Save and verify all settings persist</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All discount types and conditions work correctly, settings saved</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P1 - Must be automated
+            <br><strong>Risk Coverage:</strong> R-003 - Discount generation failure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-DISCOUNT-003: Associate Discount with Review</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Objective:</strong> Verify discount-review link functionality (R-003)</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Create discount code</li>
+            <li>Navigate to review request settings</li>
+            <li>Link discount to review request email</li>
+            <li>Send test review request</li>
+            <li>Verify discount code appears in email</li>
+            <li>Test discount code redemption flow</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Discount code included in review emails, redemption works</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P1 - Must be automated
+            <br><strong>Risk Coverage:</strong> R-003 - Discount generation failure
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    <h2>3.2 High Priority Test Cases (P2)</h2>
+    <p>Based on Test Plan risks R-002, R-004, R-006, R-007, R-008 and Test Analysis conditions, the following high priority test cases have been designed:</p>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-ORDER-001: Order Search Functionality</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify order search functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Orders</li>
+            <li>Enter "aaa@abv.bg" in search box</li>
+            <li>Click "Search" button</li>
+            <li>Verify search results display order for "The Archived Snowboard"</li>
+            <li>Verify order shows "Sent: 33 minutes ago" status</li>
+            <li>Test search with invalid email format</li>
+            <li>Test empty search</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Valid search returns results, invalid search shows appropriate message</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P2 - Must be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-ORDER-002: Order Filtering Options</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify order filtering functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Orders</li>
+            <li>Test "All orders" filter option</li>
+            <li>Test "Sent" filter option</li>
+            <li>Test "Scheduled/Pending fulfillment" filter option</li>
+            <li>Test "Review received" filter option</li>
+            <li>Test "Blocked from Loox emails" filter option</li>
+            <li>Test "Cancelled" filter option</li>
+            <li>Test "All time" vs "Custom" time range options</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All filter options work correctly, results update appropriately</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P2 - Must be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-BRAND-001: Logo Upload Functionality</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify logo upload functionality and validation</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Branding</li>
+            <li>Click "Choose a file" button</li>
+            <li>Upload valid JPG file (under 15MB)</li>
+            <li>Upload valid PNG file (under 15MB)</li>
+            <li>Upload valid WEBP file (under 15MB)</li>
+            <li>Upload valid JPEG file (under 15MB)</li>
+            <li>Upload valid GIF file (under 15MB)</li>
+            <li>Test invalid file type (e.g., .txt)</li>
+            <li>Test oversized file (>15MB)</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Valid files accepted, invalid files rejected with appropriate error messages</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright - Automated functional testing
+            <br><strong>Priority:</strong> P2 - Must be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-FORM-001: Create Custom Review Form</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify custom form creation (R-007)</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Review Form & Custom Questions</li>
+            <li>Create new custom form</li>
+            <li>Configure form layout (single, two-column, grid)</li>
+            <li>Add form title and description</li>
+            <li>Save form</li>
+            <li>Verify form appears in forms list</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Custom form created with selected layout</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright
+            <br><strong>Priority:</strong> P2 - Must be automated
+            <br><strong>Risk Coverage:</strong> R-007 - Form configuration failure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-FORM-002: Add Custom Questions</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify custom question addition (R-007)</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Open form editor</li>
+            <li>Add text question type</li>
+            <li>Add multiple choice question</li>
+            <li>Add rating question</li>
+            <li>Test question reordering</li>
+            <li>Save questions</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All question types added, reordering works</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright
+            <br><strong>Priority:</strong> P2 - Must be automated
+            <br><strong>Risk Coverage:</strong> R-007 - Form configuration failure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-PLAN-001: View Current Plan Details</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify plan information display (R-008)</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > General > Your Plan</li>
+            <li>Verify plan name displays correctly</li>
+            <li>Check plan features list</li>
+            <li>Verify usage limits</li>
+            <li>Check billing information</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Plan details display accurately</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright
+            <br><strong>Priority:</strong> P2 - Should be automated
+            <br><strong>Risk Coverage:</strong> R-008 - Plan management failure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-PLAN-002: Upgrade Plan Functionality</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify plan upgrade process (R-008)</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>View available plans</li>
+            <li>Select upgrade to higher tier</li>
+            <li>Review pricing and features comparison</li>
+            <li>Confirm upgrade (test mode)</li>
+            <li>Verify new features accessible</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Upgrade completes, new features available</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Manual or Playwright
+            <br><strong>Priority:</strong> P2 - Should be automated
+            <br><strong>Risk Coverage:</strong> R-008 - Plan management failure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-REVIEW-001: View Product Reviews List</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify reviews list display</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Reviews > Manage Reviews</li>
+            <li>Verify reviews list displays</li>
+            <li>Test pagination</li>
+            <li>Test sorting (date, rating)</li>
+            <li>Verify review details shown</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Reviews list displays with all information</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright
+            <br><strong>Priority:</strong> P2 - Should be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-REVIEW-002: Filter Product Reviews</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify review filtering</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Test Published filter</li>
+            <li>Test Pending filter</li>
+            <li>Test Spam filter</li>
+            <li>Filter by rating (5, 4, 3, 2, 1 stars)</li>
+            <li>Filter by photo/video reviews</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All filters work, results match criteria</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright
+            <br><strong>Priority:</strong> P2 - Should be automated
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-EMAIL-EDITOR-001: Customize Review Request Email</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify email template customization (R-006)</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Email Editors</li>
+            <li>Select Review Request template</li>
+            <li>Edit subject line</li>
+            <li>Customize body text</li>
+            <li>Test dynamic variables</li>
+            <li>Preview email</li>
+            <li>Save changes</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Template customized, variables work</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright
+            <br><strong>Priority:</strong> P2 - Should be automated
+            <br><strong>Risk Coverage:</strong> R-006 - Email template failure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-MANUAL-REQUEST-001: Send Manual Review Request</h4>
+            <span class="priority-high">High</span>
+        </div>
+        <p><strong>Objective:</strong> Verify manual request functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Manual Request</li>
+            <li>Enter customer email</li>
+            <li>Select product</li>
+            <li>Preview email</li>
+            <li>Send request</li>
+            <li>Verify confirmation</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Manual request sent successfully</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Playwright
+            <br><strong>Priority:</strong> P2 - Should be automated
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    <h2>3.3 Medium Priority Test Cases (P3)</h2>
+    <p>Based on Test Plan risk R-005 and Test Analysis conditions, the following medium priority test cases have been designed:</p>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-BRAND-002: Style Customization Options</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Objective:</strong> Verify style customization functionality</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Navigate to Settings > Branding</li>
+            <li>Test star rating color picker with valid hex color (#EBBF20)</li>
+            <li>Test star rating color picker with invalid color format</li>
+            <li>Test corner style selection: Sharp</li>
+            <li>Test corner style selection: Slightly rounded</li>
+            <li>Test corner style selection: Rounded (currently selected)</li>
+            <li>Test corner style selection: Extra rounded</li>
+            <li>Test font selection (Default: Poppins)</li>
+            <li>Test hide Loox branding checkbox</li>
+        </ol>
+        <p><strong>Expected Results:</strong> All style options work correctly, changes apply immediately</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Manual testing or Playwright for regression
+            <br><strong>Priority:</strong> P3 - Optional automation
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-SECURITY-001: Security Vulnerability Assessment</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Objective:</strong> Perform security vulnerability assessment</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Configure OWASP ZAP for security scanning</li>
+            <li>Perform passive scanning of Loox application</li>
+            <li>Perform active scanning for vulnerabilities</li>
+            <li>Test for SQL injection vulnerabilities</li>
+            <li>Test for XSS vulnerabilities</li>
+            <li>Test for CSRF vulnerabilities</li>
+            <li>Generate security report</li>
+        </ol>
+        <p><strong>Expected Results:</strong> Security vulnerabilities identified and documented</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> OWASP ZAP - Automated security scanning
+            <br><strong>Priority:</strong> P3 - Security testing
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-case-header">
+            <h4>TC-ACCESSIBILITY-001: Accessibility Compliance Testing</h4>
+            <span class="priority-medium">Medium</span>
+        </div>
+        <p><strong>Objective:</strong> Verify WCAG compliance and accessibility</p>
+        <p><strong>Test Steps:</strong></p>
+        <ol>
+            <li>Configure Google Lighthouse for accessibility audit</li>
+            <li>Run accessibility audit on main pages</li>
+            <li>Test keyboard navigation</li>
+            <li>Test screen reader compatibility</li>
+            <li>Verify color contrast ratios</li>
+            <li>Test form accessibility</li>
+            <li>Generate accessibility report</li>
+        </ol>
+        <p><strong>Expected Results:</strong> WCAG compliance score > 90%, accessibility issues documented</p>
+        <div class="automation-tool">
+            <strong>Automation Tool:</strong> Google Lighthouse - Automated accessibility auditing
+            <br><strong>Priority:</strong> P3 - Accessibility testing
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    <h1 id="test-data-design">4. Test Data Design</h1>
+
+    <h2>4.1 Valid Test Data Sets</h2>
+    <p>Based on live system exploration, the following valid test data sets have been identified:</p>
+
+    <h3>4.1.1 Email Test Data</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Data Type</th>
+                <th>Valid Values</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email Addresses</td>
+                <td>slavastinov@gmail.com, test@example.com, user@domain.com</td>
+                <td>Email replies configuration, order search</td>
+            </tr>
+            <tr>
+                <td>Customer Emails</td>
+                <td>aaa@abv.bg, customer@shop.com, buyer@test.org</td>
+                <td>Order search, review requests</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>4.1.2 File Upload Test Data</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>File Type</th>
+                <th>Valid Extensions</th>
+                <th>Size Limits</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Image Files</td>
+                <td>JPG, PNG, WEBP, JPEG, GIF</td>
+                <td>Up to 15MB</td>
+                <td>Logo upload, review photos</td>
+            </tr>
+            <tr>
+                <td>Boundary Files</td>
+                <td>JPG, PNG</td>
+                <td>14.9MB (just under limit), 15.1MB (just over limit)</td>
+                <td>File size validation testing</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>4.1.3 Color and Style Test Data</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Data Type</th>
+                <th>Valid Values</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hex Colors</td>
+                <td>#EBBF20, #000000, #FFFFFF, #FF0000</td>
+                <td>Star rating color customization</td>
+            </tr>
+            <tr>
+                <td>Corner Styles</td>
+                <td>Sharp, Slightly rounded, Rounded, Extra rounded</td>
+                <td>Branding customization</td>
+            </tr>
+            <tr>
+                <td>Fonts</td>
+                <td>Default (Poppins), Arial, Helvetica</td>
+                <td>Typography customization</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4.2 Invalid Test Data Sets</h2>
+    <p>For negative testing scenarios, the following invalid test data sets have been designed:</p>
+
+    <h3>4.2.1 Invalid Email Formats</h3>
+    <ul>
+        <li>invalid-email (no @ symbol)</li>
+        <li>@domain.com (missing username)</li>
+        <li>user@ (missing domain)</li>
+        <li>user@domain (missing TLD)</li>
+        <li>user..name@domain.com (double dots)</li>
+    </ul>
+
+    <h3>4.2.2 Invalid File Types</h3>
+    <ul>
+        <li>.txt files (text files)</li>
+        <li>.pdf files (document files)</li>
+        <li>.doc files (Word documents)</li>
+        <li>.exe files (executable files)</li>
+    </ul>
+
+    <h3>4.2.3 Invalid Color Formats</h3>
+    <ul>
+        <li>red (color name instead of hex)</li>
+        <li>#GGGGGG (invalid hex characters)</li>
+        <li>#12345 (too short)</li>
+        <li>#1234567 (too long)</li>
+    </ul>
+
+    <div class="page-break"></div>
+    <h1 id="automation-opportunities">5. Automation Opportunities</h1>
+
+    <h2>5.1 High-Priority Automation (P1/P2 Test Cases)</h2>
+    <p>Based on competition toolstack and test case priorities, the following automation opportunities have been identified:</p>
+
+    <h3>5.1.1 Playwright Automation</h3>
+    <div class="callout-success">
+        <strong>Automated Test Cases (EXPANDED - 17 cases):</strong>
+        <ul>
+            <li><strong>P1 Critical (6 cases):</strong></li>
+            <ul>
+                <li>TC-EMAIL-001: Email Replies Address Configuration</li>
+                <li>TC-EMAIL-002: Email Compliance Settings Validation</li>
+                <li>TC-EMAIL-003: Email Template Customization</li>
+                <li>TC-DISCOUNT-001: Create Discount Code (NEW)</li>
+                <li>TC-DISCOUNT-002: Configure Discount Settings (NEW)</li>
+                <li>TC-DISCOUNT-003: Associate Discount with Review (NEW)</li>
+            </ul>
+            <li><strong>P2 High Priority (11 cases):</strong></li>
+            <ul>
+                <li>TC-ORDER-001: Order Search Functionality</li>
+                <li>TC-ORDER-002: Order Filtering Options</li>
+                <li>TC-BRAND-001: Logo Upload Functionality</li>
+                <li>TC-FORM-001: Create Custom Review Form (NEW)</li>
+                <li>TC-FORM-002: Add Custom Questions (NEW)</li>
+                <li>TC-PLAN-001: View Current Plan Details (NEW)</li>
+                <li>TC-PLAN-002: Upgrade Plan Functionality (NEW)</li>
+                <li>TC-REVIEW-001: View Product Reviews List (NEW)</li>
+                <li>TC-REVIEW-002: Filter Product Reviews (NEW)</li>
+                <li>TC-EMAIL-EDITOR-001: Customize Review Request Email (NEW)</li>
+                <li>TC-MANUAL-REQUEST-001: Send Manual Review Request (NEW)</li>
+            </ul>
+        </ul>
+    </div>
+
+    <h3>5.1.2 OWASP ZAP Security Testing</h3>
+    <div class="callout">
+        <strong>Security Test Cases:</strong>
+        <ul>
+            <li><strong>TC-SECURITY-001:</strong> Security Vulnerability Assessment (P3)</li>
+            <li><strong>Automated Scanning:</strong> Passive and active vulnerability scanning</li>
+            <li><strong>Deliverable:</strong> OWASP ZAP security report</li>
+        </ul>
+    </div>
+
+    <h3>5.1.3 Google Lighthouse Accessibility Testing</h3>
+    <div class="callout">
+        <strong>Accessibility Test Cases:</strong>
+        <ul>
+            <li><strong>TC-ACCESSIBILITY-001:</strong> Accessibility Compliance Testing (P3)</li>
+            <li><strong>Automated Auditing:</strong> WCAG compliance validation</li>
+            <li><strong>Deliverable:</strong> Lighthouse accessibility report</li>
+        </ul>
+    </div>
+
+    <h3>5.1.4 K6 Performance Testing</h3>
+    <div class="callout">
+        <strong>Performance Test Cases:</strong>
+        <ul>
+            <li><strong>TC-PERFORMANCE-001:</strong> Load Testing (P2)</li>
+            <li><strong>TC-PERFORMANCE-002:</strong> Stress Testing (P2)</li>
+            <li><strong>Automated Load Testing:</strong> Virtual user scenarios</li>
+            <li><strong>Deliverable:</strong> K6 performance test report</li>
+        </ul>
+    </div>
+
+    <h2>5.2 Automation Strategy</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Case Priority</th>
+                <th>Automation Tool</th>
+                <th>Execution Method</th>
+                <th>Deliverable</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>P1 (Critical)</td>
+                <td>Playwright</td>
+                <td>Automated</td>
+                <td>Playwright test scripts</td>
+            </tr>
+            <tr>
+                <td>P2 (High)</td>
+                <td>Playwright</td>
+                <td>Automated</td>
+                <td>Playwright test scripts</td>
+            </tr>
+            <tr>
+                <td>P2 (Security)</td>
+                <td>OWASP ZAP</td>
+                <td>Automated</td>
+                <td>Security vulnerability report</td>
+            </tr>
+            <tr>
+                <td>P2 (Performance)</td>
+                <td>K6 + Performance Analyzer</td>
+                <td>Automated</td>
+                <td>Performance test report</td>
+            </tr>
+            <tr>
+                <td>P3 (Accessibility)</td>
+                <td>Google Lighthouse</td>
+                <td>Automated</td>
+                <td>Accessibility audit report</td>
+            </tr>
+            <tr>
+                <td>P3 (Medium)</td>
+                <td>Manual/Playwright</td>
+                <td>Manual or Automated</td>
+                <td>Test execution report</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h1 id="coverage-analysis">6. Coverage Analysis</h1>
+
+    <h2>6.1 Test Coverage Matrix</h2>
+    <p>Based on Test Plan risks and Test Analysis conditions, the following coverage analysis has been performed:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Test Plan Risk</th>
+                <th>Risk ID</th>
+                <th>Test Cases</th>
+                <th>Coverage Status</th>
+                <th>Automation Tool</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email delivery system failure</td>
+                <td>R-001</td>
+                <td>TC-EMAIL-001, TC-EMAIL-002, TC-EMAIL-003</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Shopify API integration failure</td>
+                <td>R-002</td>
+                <td>TC-ORDER-001, TC-ORDER-002</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Data privacy compliance failure</td>
+                <td>R-004</td>
+                <td>TC-EMAIL-002</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Email template customization failure</td>
+                <td>R-006</td>
+                <td>TC-EMAIL-003</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Discount code generation failure</td>
+                <td>R-003</td>
+                <td>TC-DISCOUNT-001, TC-DISCOUNT-002, TC-DISCOUNT-003</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Widget display failure</td>
+                <td>R-005</td>
+                <td>TC-BRAND-001, TC-BRAND-002, TC-WIDGET-001, TC-WIDGET-002, TC-WIDGET-003</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright/Manual</td>
+            </tr>
+            <tr>
+                <td>Custom review form configuration failure</td>
+                <td>R-007</td>
+                <td>TC-FORM-001, TC-FORM-002</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Plan upgrade/downgrade failure</td>
+                <td>R-008</td>
+                <td>TC-PLAN-001, TC-PLAN-002</td>
+                <td><span class="status-available">100%</span></td>
+                <td>Playwright</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>6.2 Functional Coverage Analysis</h2>
+    <div class="callout-success">
+        <strong>Coverage Summary (EXPANDED):</strong>
+        <ul>
+            <li><strong>Email System:</strong> 100% coverage (5 test cases: TC-EMAIL-001, 002, 003, EMAIL-EDITOR-001, MANUAL-REQUEST-001)</li>
+            <li><strong>Order Management:</strong> 100% coverage (2 test cases)</li>
+            <li><strong>Branding Customization:</strong> 100% coverage (2 test cases)</li>
+            <li><strong>Discounts Module:</strong> 100% coverage (3 test cases) - NEW</li>
+            <li><strong>Review Forms:</strong> 100% coverage (2 test cases) - NEW</li>
+            <li><strong>Plan Management:</strong> 100% coverage (2 test cases) - NEW</li>
+            <li><strong>Review Management:</strong> 100% coverage (2 test cases) - NEW</li>
+            <li><strong>Widgets:</strong> 60% coverage (3 test cases) - NEW</li>
+            <li><strong>Security Testing:</strong> 100% coverage (1 test case)</li>
+            <li><strong>Accessibility Testing:</strong> 100% coverage (1 test case)</li>
+        </ul>
+    </div>
+
+    <h2>6.3 Test Design Technique Coverage</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Design Technique</th>
+                <th>Applied To</th>
+                <th>Test Cases</th>
+                <th>Coverage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Boundary Value Analysis</td>
+                <td>File upload validation, email format</td>
+                <td>TC-BRAND-001, TC-EMAIL-001</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Equivalence Partitioning</td>
+                <td>Email formats, file types</td>
+                <td>TC-EMAIL-001, TC-BRAND-001</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>State Transition Testing</td>
+                <td>Email workflow, order status</td>
+                <td>TC-EMAIL-002, TC-ORDER-001</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Pairwise Testing</td>
+                <td>Compliance settings, branding options</td>
+                <td>TC-EMAIL-002, TC-BRAND-002</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+            <tr>
+                <td>Error Guessing</td>
+                <td>Edge cases, security vulnerabilities</td>
+                <td>TC-SECURITY-001, TC-ACCESSIBILITY-001</td>
+                <td><span class="status-available">100%</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h1 id="traceability-matrix">7. Traceability Matrix</h1>
+
+    <h2>7.1 Test Plan to Test Design Traceability</h2>
+    <p>This section provides complete traceability from Test Plan risks to Test Design test cases:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Test Plan Risk</th>
+                <th>Test Analysis Condition</th>
+                <th>Test Design Case</th>
+                <th>Priority</th>
+                <th>Automation Tool</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>R-001: Email delivery system failure</td>
+                <td>TC-EMAIL-001: Email Replies Address Configuration</td>
+                <td>TC-EMAIL-001</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-001: Email delivery system failure</td>
+                <td>TC-EMAIL-002: Email Compliance Settings</td>
+                <td>TC-EMAIL-002</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-001: Email delivery system failure</td>
+                <td>TC-EMAIL-003: Email Template Customization</td>
+                <td>TC-EMAIL-003</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-002: Shopify API integration failure</td>
+                <td>TC-ORDER-001: Order Search Functionality</td>
+                <td>TC-ORDER-001</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-002: Shopify API integration failure</td>
+                <td>TC-ORDER-002: Order Filtering Options</td>
+                <td>TC-ORDER-002</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-004: Data privacy compliance failure</td>
+                <td>TC-EMAIL-002: Email Compliance Settings</td>
+                <td>TC-EMAIL-002</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-005: Widget display failure</td>
+                <td>TC-BRAND-001: Logo Upload Functionality</td>
+                <td>TC-BRAND-001</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-003: Discount code generation failure</td>
+                <td>TC-DISCOUNT-001: Create Discount Code</td>
+                <td>TC-DISCOUNT-001</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-003: Discount code generation failure</td>
+                <td>TC-DISCOUNT-002: Configure Discount Settings</td>
+                <td>TC-DISCOUNT-002</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-003: Discount code generation failure</td>
+                <td>TC-DISCOUNT-003: Associate Discount with Review</td>
+                <td>TC-DISCOUNT-003</td>
+                <td><span class="priority-critical">Critical</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-005: Widget display failure</td>
+                <td>TC-BRAND-002: Style Customization Options</td>
+                <td>TC-BRAND-002</td>
+                <td><span class="priority-medium">Medium</span></td>
+                <td>Manual/Playwright</td>
+            </tr>
+            <tr>
+                <td>R-005: Widget display failure</td>
+                <td>TC-WIDGET-001: Customize Product Reviews Widget</td>
+                <td>TC-WIDGET-001</td>
+                <td><span class="priority-medium">Medium</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-005: Widget display failure</td>
+                <td>TC-WIDGET-002: Add Star Rating Widget</td>
+                <td>TC-WIDGET-002</td>
+                <td><span class="priority-medium">Medium</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-005: Widget display failure</td>
+                <td>TC-WIDGET-003: Configure Pop-up Widget</td>
+                <td>TC-WIDGET-003</td>
+                <td><span class="priority-medium">Medium</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-006: Email template customization failure</td>
+                <td>TC-EMAIL-EDITOR-001: Customize Review Request Email</td>
+                <td>TC-EMAIL-EDITOR-001</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-007: Custom review form configuration failure</td>
+                <td>TC-FORM-001: Create Custom Form</td>
+                <td>TC-FORM-001</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-007: Custom review form configuration failure</td>
+                <td>TC-FORM-002: Add Custom Questions</td>
+                <td>TC-FORM-002</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-008: Plan upgrade/downgrade failure</td>
+                <td>TC-PLAN-001: View Plan Details</td>
+                <td>TC-PLAN-001</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>R-008: Plan upgrade/downgrade failure</td>
+                <td>TC-PLAN-002: Upgrade Plan</td>
+                <td>TC-PLAN-002</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Core Functionality</td>
+                <td>TC-REVIEW-001: View Reviews List</td>
+                <td>TC-REVIEW-001</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Core Functionality</td>
+                <td>TC-REVIEW-002: Filter Reviews</td>
+                <td>TC-REVIEW-002</td>
+                <td><span class="priority-high">High</span></td>
+                <td>Playwright</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>7.2 Complete Traceability Chain</h2>
+    <div class="callout">
+        <strong>Traceability Summary:</strong>
+        <ul>
+            <li><strong>Test Plan Risks:</strong> All 8 identified risks have corresponding test cases</li>
+            <li><strong>Test Analysis Conditions:</strong> All conditions converted to detailed test cases</li>
+            <li><strong>Test Design Cases:</strong> All test cases have clear objectives and steps</li>
+            <li><strong>Automation Mapping:</strong> All P1/P2 test cases assigned automation tools</li>
+            <li><strong>Coverage:</strong> 100% coverage of identified risks and conditions</li>
+        </ul>
+    </div>
+
+    <h2>7.3 Test Case Dependencies</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Case</th>
+                <th>Dependencies</th>
+                <th>Execution Order</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TC-EMAIL-001</td>
+                <td>Authentication, Email settings access</td>
+                <td>1</td>
+                <td>Foundation for other email tests</td>
+            </tr>
+            <tr>
+                <td>TC-EMAIL-002</td>
+                <td>TC-EMAIL-001</td>
+                <td>2</td>
+                <td>Requires email configuration</td>
+            </tr>
+            <tr>
+                <td>TC-EMAIL-003</td>
+                <td>TC-EMAIL-001</td>
+                <td>3</td>
+                <td>Requires email configuration</td>
+            </tr>
+            <tr>
+                <td>TC-ORDER-001</td>
+                <td>Authentication, Order data</td>
+                <td>4</td>
+                <td>Independent of email tests</td>
+            </tr>
+            <tr>
+                <td>TC-ORDER-002</td>
+                <td>TC-ORDER-001</td>
+                <td>5</td>
+                <td>Requires order search functionality</td>
+            </tr>
+            <tr>
+                <td>TC-BRAND-001</td>
+                <td>Authentication, File upload access</td>
+                <td>6</td>
+                <td>Independent test</td>
+            </tr>
+            <tr>
+                <td>TC-BRAND-002</td>
+                <td>TC-BRAND-001</td>
+                <td>7</td>
+                <td>Requires branding access</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h1 id="test-execution-strategy">8. Test Execution Strategy</h1>
+
+    <h2>8.1 Competition Timeline Execution</h2>
+    <p>Based on the ISTQB Testing Cup competition schedule, the following execution strategy has been designed:</p>
+
+    <h3>8.1.1 Morning Session (09:00 - 12:00)</h3>
+    <div class="callout">
+        <strong>Test Planning, Analysis, and Design (3 hours):</strong>
+        <ul>
+            <li><strong>09:00 - 09:45:</strong> Test Plan development and risk assessment</li>
+            <li><strong>09:45 - 10:30:</strong> Test Analysis and condition identification</li>
+            <li><strong>10:30 - 11:15:</strong> Test Design and test case creation</li>
+            <li><strong>11:15 - 12:00:</strong> Test Design completion and review</li>
+        </ul>
+    </div>
+
+    <h3>8.1.2 Afternoon Session (13:00 - 16:00)</h3>
+    <div class="callout-success">
+        <strong>Test Implementation, Execution, and Reporting (3 hours):</strong>
+        <ul>
+            <li><strong>13:00 - 14:00:</strong> Critical test case execution (P1)</li>
+            <li><strong>14:00 - 15:00:</strong> High priority test case execution (P2)</li>
+            <li><strong>15:00 - 15:30:</strong> Medium priority test case execution (P3)</li>
+            <li><strong>15:30 - 16:00:</strong> Test reporting and documentation</li>
+        </ul>
+    </div>
+
+    <h2>8.2 Test Execution Priority Matrix</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Phase</th>
+                <th>Priority</th>
+                <th>Test Cases</th>
+                <th>Duration</th>
+                <th>Tools</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Phase 1</td>
+                <td><span class="priority-critical">P1</span></td>
+                <td>TC-EMAIL-001, TC-EMAIL-002, TC-EMAIL-003, TC-DISCOUNT-001, TC-DISCOUNT-002, TC-DISCOUNT-003 (6 cases)</td>
+                <td>60 minutes</td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Phase 2</td>
+                <td><span class="priority-high">P2</span></td>
+                <td>TC-ORDER-001, TC-ORDER-002, TC-BRAND-001, TC-FORM-001, TC-FORM-002, TC-PLAN-001, TC-PLAN-002, TC-REVIEW-001, TC-REVIEW-002, TC-EMAIL-EDITOR-001, TC-MANUAL-REQUEST-001 (11 cases)</td>
+                <td>90 minutes</td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Phase 3</td>
+                <td><span class="priority-medium">P3</span></td>
+                <td>TC-BRAND-002, TC-WIDGET-001, TC-WIDGET-002, TC-WIDGET-003, TC-SECURITY-001, TC-ACCESSIBILITY-001 (6 cases)</td>
+                <td>30 minutes</td>
+                <td>Playwright/Manual/OWASP ZAP/Lighthouse</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>8.3 Success Criteria</h2>
+    <div class="callout-success">
+        <strong>Competition Scoring Targets:</strong>
+        <ul>
+            <li><strong>Test Analysis and Design: 20/20 points</strong>
+                <ul>
+                    <li>Focus on high-risk features: Comprehensive test case design</li>
+                    <li>Well-defined test conditions, cases, and charters: Executable test cases</li>
+                    <li>Prioritization and traceability: Complete mapping chain</li>
+                    <li>No penalty points for missing basic tests or over-designing</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <h2>8.4 Deliverables</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Deliverable</th>
+                <th>Format</th>
+                <th>Tool</th>
+                <th>Timeline</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test Design Document</td>
+                <td>HTML</td>
+                <td>Manual</td>
+                <td>Morning Session</td>
+            </tr>
+            <tr>
+                <td>Playwright Test Scripts</td>
+                <td>JavaScript</td>
+                <td>Playwright</td>
+                <td>Afternoon Session</td>
+            </tr>
+            <tr>
+                <td>Security Report</td>
+                <td>HTML/XML</td>
+                <td>OWASP ZAP</td>
+                <td>Afternoon Session</td>
+            </tr>
+            <tr>
+                <td>Accessibility Report</td>
+                <td>HTML/JSON</td>
+                <td>Google Lighthouse</td>
+                <td>Afternoon Session</td>
+            </tr>
+            <tr>
+                <td>Performance Report</td>
+                <td>HTML/JSON</td>
+                <td>K6 + Performance Analyzer</td>
+                <td>Afternoon Session</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h2>Document Approval</h2>
+
+    <table class="approval-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Signature</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Team Lead</td>
+                <td>Slav Astinov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Test Lead</td>
+                <td>Sava Barbarov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Product Owner</td>
+                <td>Jack Raif</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <h3>Revision History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.0</td>
+                    <td>October 20, 2025</td>
+                    <td>Automation Aid Team</td>
+                    <td>Initial version based on Test Plan and Test Analysis foundations</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="text-align: center; margin-top: 40px; color: #999;">
+            <strong>End of Document</strong><br>
+             2025 Automation Aid Team - ISTQB Testing Cup Grand Finals
+        </p>
+    </div>
+
+    <script>
+        // Add print functionality
+        document.addEventListener("DOMContentLoaded", function() {
+            // Create print button
+            const printBtn = document.createElement("button");
+            printBtn.textContent = "Print/Save as PDF";
+            printBtn.style.cssText = "position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #1a5490; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;";
+            printBtn.onclick = function() { window.print(); };
+            document.body.appendChild(printBtn);
+            
+            // Hide button when printing
+            window.onbeforeprint = function() { printBtn.style.display = "none"; };
+            window.onafterprint = function() { printBtn.style.display = "block"; };
+        });
+    </script>
+</body>
+</html>
+    <h2>Document Approval</h2>
+
+    <table class="approval-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Signature</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Team Lead</td>
+                <td>Slav Astinov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Test Lead</td>
+                <td>Sava Barbarov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Product Owner</td>
+                <td>Jack Raif</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <h3>Revision History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.0</td>
+                    <td>October 20, 2025</td>
+                    <td>Automation Aid Team</td>
+                    <td>Initial version based on Test Plan and Test Analysis foundations</td>
+                </tr>
+                <tr>
+                    <td>2.0</td>
+                    <td>October 20, 2025</td>
+                    <td>Automation Aid Team</td>
+                    <td><strong>EXPANDED:</strong> Added 14 new test cases covering Discounts (3), Review Forms (2), Plan Management (2), Review Management (2), Email Editors (1), Manual Requests (1), Widgets (3). Total: 20 test cases.</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="text-align: center; margin-top: 40px; color: #999;">
+            <strong>End of Document</strong><br>
+             2025 Automation Aid Team - ISTQB Testing Cup Grand Finals
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const printBtn = document.createElement("button");
+            printBtn.textContent = "Print/Save as PDF";
+            printBtn.style.cssText = "position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #1a5490; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;";
+            printBtn.onclick = function() { window.print(); };
+            document.body.appendChild(printBtn);
+            
+            window.onbeforeprint = function() { printBtn.style.display = "none"; };
+            window.onafterprint = function() { printBtn.style.display = "block"; };
+        });
+    </script>
+</body>
+</html>

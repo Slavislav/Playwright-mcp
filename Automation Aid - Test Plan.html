@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loox QA4 - Test Plan</title>
+    <style>
+        @media print {
+            @page {
+                margin: 2cm;
+                size: A4;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #1a5490;
+            border-bottom: 3px solid #1a5490;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #2c5aa0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+        
+        h3 {
+            color: #3d6bb3;
+            margin-top: 20px;
+        }
+        
+        h4 {
+            color: #4e7bc7;
+            margin-top: 15px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a5490 0%, #2c5aa0 100%);
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .header h1 {
+            color: white;
+            border: none;
+            margin: 0;
+            font-size: 2em;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #1a5490;
+        }
+        
+        .metadata p {
+            margin: 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        table th {
+            background-color: #1a5490;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .priority-critical {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-high {
+            background-color: #fd7e14;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .priority-medium {
+            background-color: #ffc107;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .status-required {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .status-available {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .callout {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .callout-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .callout-danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .callout-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .test-condition {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-condition-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .test-condition h4 {
+            margin: 0;
+            color: #1a5490;
+        }
+        
+        .icon {
+            margin-right: 8px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .approval-table td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+        }
+        
+        .toc a {
+            color: #1a5490;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .checkmark {
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Loox - Test Plan</h1>
+        <h2 style="color: white; border: none;">Comprehensive Testing Strategy for Shopify Review Management Application</h2>
+    </div>
+
+    <div class="metadata">
+        <p><strong>Team Name:</strong> Automation Aid</p>
+        <p><strong>Competition:</strong> ISTQB Testing Cup Grand Finals</p>
+        <p><strong>Date:</strong> October 20th, 2025</p>
+        <p><strong>Location:</strong> Copenhagen, Denmark</p>
+        <p><strong>Team Lead:</strong> Slav Astinov</p>
+        <p><strong>Test Lead:</strong> Sava Barbarov</p>
+        <p><strong>Version:</strong> 1.1</p>
+        <p><strong>Document Status:</strong> <span class="status-available">Updated - Test Analysis & Design Expanded to 23 Conditions & 20 Cases</span></p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#test-scope">2. Test Scope</a></li>
+            <li><a href="#test-approach">3. Test Approach</a></li>
+            <li><a href="#risk-assessment">4. Risk Assessment</a></li>
+            <li><a href="#test-schedule">5. Test Schedule</a></li>
+            <li><a href="#test-resources">6. Test Resources</a></li>
+            <li><a href="#test-deliverables">7. Test Deliverables</a></li>
+            <li><a href="#entry-exit-criteria">8. Entry/Exit Criteria</a></li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1 id="introduction">1. Introduction</h1>
+
+    <h2>1.1 Purpose</h2>
+    <p>This Test Plan defines the comprehensive testing strategy for Loox, a Shopify application designed for customer review collection and management. The plan outlines systematic testing approaches to ensure the application meets functional requirements, performance standards, and security compliance within the ISTQB Testing Cup competition framework.</p>
+
+    <h2>1.2 System Under Test Overview</h2>
+    <p>Loox is a Shopify app that enables merchants to collect, manage, and display customer reviews with photos and videos. The system operates as an embedded iframe-based application within the Shopify ecosystem, providing review collection, management, display widgets, email automation, and discount management capabilities.</p>
+
+    <div class="callout">
+        <strong>Key System Characteristics Observed:</strong>
+        <ul>
+            <li>Setup Status: Complete (Core script and widgets configured)</li>
+            <li>Current Data State: 0 review requests sent, 0 reviews collected, 0 photo/video reviews</li>
+            <li>Performance Metrics: $0 reviews-generated revenue, $3.4K referrals-generated revenue</li>
+            <li>Main Modules: Reviews (active), Referrals (disabled), Upsell (disabled), Settings (active)</li>
+        </ul>
+    </div>
+
+    <h2>1.3 Test Objectives</h2>
+    <p>The primary objectives of this testing effort are:</p>
+    <ol>
+        <li>Verify core review collection and management functionality</li>
+        <li>Validate email automation and customization features</li>
+        <li>Test discount management and code generation</li>
+        <li>Ensure proper Shopify integration and data synchronization</li>
+        <li>Validate security and compliance features</li>
+        <li>Verify performance and scalability requirements</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h1 id="test-scope">2. Test Scope</h1>
+
+    <h2>2.1 In-Scope Functionality</h2>
+    <p>Based on live system exploration, the following functionality is within testing scope:</p>
+
+    <h3>2.1.1 Reviews Management Module</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Description</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Manage Reviews / Store Reviews</td>
+                <td>Review collection, moderation, and publishing functionality</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>Reviews Widgets</td>
+                <td>Widget configuration and display management</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Email Editors</td>
+                <td>Email template customization and editing functionality</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>Manual Request</td>
+                <td>Send manual review requests to customers</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Review Form & Custom Questions</td>
+                <td>Custom review form creation and question management</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Discounts</td>
+                <td>Discount code generation and management</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Publishing Reviews</td>
+                <td>Review approval and publication workflow</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>Preview Link & QR Code</td>
+                <td>Review preview functionality and QR code generation</td>
+                <td><span class="priority-medium">Medium</span></td>
+            </tr>
+            <tr>
+                <td>Product Groups</td>
+                <td>Product categorization and grouping for reviews</td>
+                <td><span class="priority-medium">Medium</span></td>
+            </tr>
+            <tr>
+                <td>Reviews Settings</td>
+                <td>Review-specific configuration and preferences</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2.1.2 Settings Module</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Sub-module</th>
+                <th>Features</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Branding</td>
+                <td>Logo upload, style customization, color picker, corner style options</td>
+                <td><span class="priority-medium">Medium</span></td>
+            </tr>
+            <tr>
+                <td>Email Settings</td>
+                <td>Email customization, compliance settings, unsubscribe management</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>Add Loox To Your Theme</td>
+                <td>Theme integration and core script installation</td>
+                <td><span class="priority-critical">Critical</span></td>
+            </tr>
+            <tr>
+                <td>Manual Request</td>
+                <td>Manual review request configuration and management</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Orders</td>
+                <td>Order search, filtering, status management, analytics dashboard</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+            <tr>
+                <td>Localization</td>
+                <td>Language and regional settings configuration</td>
+                <td><span class="priority-medium">Medium</span></td>
+            </tr>
+            <tr>
+                <td>Preview Link & QR Code</td>
+                <td>Preview functionality and QR code generation settings</td>
+                <td><span class="priority-medium">Medium</span></td>
+            </tr>
+            <tr>
+                <td>Loox Plan - Upgrade & Downgrade</td>
+                <td>Plan management and subscription changes</td>
+                <td><span class="priority-high">High</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2.2 Out-of-Scope Functionality</h2>
+    <div class="callout-warning">
+        <strong>Explicitly Out of Scope:</strong>
+        <ul>
+            <li>Import reviews (as specified in product owner scope)</li>
+            <li>Integrations (as specified in product owner scope)</li>
+            <li>Referrals (as specified in product owner scope)</li>
+            <li>Upsell (as specified in product owner scope)</li>
+            <li>SEO functionality</li>
+            <li>External domains management</li>
+        </ul>
+    </div>
+
+    <h2>2.3 Test Environment</h2>
+    <p><strong>Access Credentials:</strong></p>
+    <ul>
+        <li>Username: slavastinov@gmail.com</li>
+        <li>Password: ybPZ4D!nD/R*^3v</li>
+        <li>Shopify Dashboard: https://admin.shopify.com/store/istqb5-qa4/</li>
+        <li>Loox App URL: https://admin.shopify.com/store/istqb5-qa4/apps/loox-qa4/merchant/owRpA393na/homepage</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h1 id="test-approach">3. Test Approach</h1>
+
+    <h2>3.1 Test Levels</h2>
+    <p>The testing approach encompasses multiple test levels to ensure comprehensive coverage:</p>
+
+    <h3>3.1.1 Functional Testing</h3>
+    <ul>
+        <li><strong>Integration Testing:</strong> Shopify API integration and data flow</li>
+        <li><strong>System Testing:</strong> End-to-end workflow validation</li>
+        <li><strong>User Acceptance Testing:</strong> Business process validation</li>
+    </ul>
+    
+    <div class="callout-warning">
+        <strong>Unit Testing Note:</strong> Unit testing is not applicable for this Shopify app as it operates as a black-box iframe-based application. The app's internal components are not accessible for unit testing, and testing focuses on integration and system-level functionality.
+    </div>
+
+    <h3>3.1.2 Non-Functional Testing</h3>
+    <ul>
+        <li><strong>Performance Testing:</strong> Load testing using K6 + Performance Analyzer</li>
+        <li><strong>Security Testing:</strong> Vulnerability assessment using OWASP ZAP</li>
+        <li><strong>Accessibility Testing:</strong> WCAG compliance using Google Lighthouse</li>
+        <li><strong>Usability Testing:</strong> User experience and interface validation</li>
+    </ul>
+
+    <h2>3.2 Testing Techniques</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Technique</th>
+                <th>Application</th>
+                <th>Tool</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Exploratory Testing</td>
+                <td>Initial system understanding and risk identification</td>
+                <td>Playwright MCP</td>
+            </tr>
+            <tr>
+                <td>Boundary Value Analysis</td>
+                <td>Form validation and data input testing</td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Equivalence Partitioning</td>
+                <td>Email settings and configuration testing</td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>State Transition Testing</td>
+                <td>Review workflow and status management</td>
+                <td>Playwright</td>
+            </tr>
+            <tr>
+                <td>Security Testing</td>
+                <td>Authentication, authorization, and data protection</td>
+                <td>OWASP ZAP</td>
+            </tr>
+            <tr>
+                <td>Performance Testing</td>
+                <td>Load testing and scalability validation</td>
+                <td>K6 + Performance Analyzer</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3.3 Tool Integration Strategy</h2>
+    <div class="callout-success">
+        <strong>Competition Toolstack Implementation:</strong>
+        <ul>
+            <li><strong>Playwright MCP:</strong> Systematic SUT exploration and data gathering</li>
+            <li><strong>Playwright:</strong> Automated functional test execution for P1/P2 scenarios</li>
+            <li><strong>OWASP ZAP:</strong> Security vulnerability assessment and penetration testing</li>
+            <li><strong>Google Lighthouse:</strong> Accessibility audits and WCAG compliance validation</li>
+            <li><strong>K6 + Performance Analyzer:</strong> Load testing and performance benchmarking</li>
+            <li><strong>Cursor + Claude:</strong> AI-assisted test documentation and analysis</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1 id="risk-assessment">4. Risk Assessment</h1>
+
+    <h2>4.1 Risk Matrix</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Risk ID</th>
+                <th>Risk Description</th>
+                <th>Likelihood</th>
+                <th>Impact</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>R-001</td>
+                <td>Email delivery system failure affecting customer engagement</td>
+                <td>Medium</td>
+                <td>Critical</td>
+                <td><span class="priority-critical">P1</span></td>
+            </tr>
+            <tr>
+                <td>R-002</td>
+                <td>Shopify API integration failure causing data synchronization issues</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td><span class="priority-high">P2</span></td>
+            </tr>
+            <tr>
+                <td>R-003</td>
+                <td>Discount code generation failure impacting merchant revenue</td>
+                <td>Low</td>
+                <td>High</td>
+                <td><span class="priority-high">P2</span></td>
+            </tr>
+            <tr>
+                <td>R-004</td>
+                <td>Data privacy compliance failure (GDPR, email consent)</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td><span class="priority-high">P2</span></td>
+            </tr>
+            <tr>
+                <td>R-005</td>
+                <td>Widget display failure affecting customer-facing review display</td>
+                <td>Low</td>
+                <td>Medium</td>
+                <td><span class="priority-medium">P3</span></td>
+            </tr>
+            <tr>
+                <td>R-006</td>
+                <td>Email template customization failure affecting brand consistency</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td><span class="priority-high">P2</span></td>
+            </tr>
+            <tr>
+                <td>R-007</td>
+                <td>Custom review form configuration failure affecting data collection</td>
+                <td>Low</td>
+                <td>High</td>
+                <td><span class="priority-high">P2</span></td>
+            </tr>
+            <tr>
+                <td>R-008</td>
+                <td>Plan upgrade/downgrade failure affecting subscription management</td>
+                <td>Low</td>
+                <td>High</td>
+                <td><span class="priority-high">P2</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4.2 Risk Mitigation Strategies</h2>
+    <div class="test-condition no-break">
+        <div class="test-condition-header">
+            <h4><span class="icon">⚙️</span>R-001: Email System Risk</h4>
+            <span class="priority-critical">Critical</span>
+        </div>
+        <p><strong>Mitigation Strategy:</strong></p>
+        <ol>
+            <li>Test email delivery with various email providers</li>
+            <li>Validate email template customization and branding</li>
+            <li>Verify unsubscribe and consent management functionality</li>
+            <li>Test email compliance settings and regulations</li>
+        </ol>
+        <div class="callout-success">
+            <strong>Observed Configuration:</strong> Email replies address set to slavastinov@gmail.com, compliance settings configured
+        </div>
+    </div>
+
+
+    <h2>4.3 Assumptions</h2>
+    <h3>Functional Assumptions</h3>
+    <ol>
+        <li><strong>Shopify Integration:</strong> Shopify API endpoints are stable and accessible</li>
+        <li><strong>Email Delivery:</strong> SMTP/API services are operational and reliable</li>
+        <li><strong>Data Privacy:</strong> Customer consent data is properly managed and stored</li>
+        <li><strong>Performance:</strong> System can handle expected load during testing</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h1 id="test-schedule">5. Test Schedule</h1>
+
+    <h2>5.1 Competition Timeline</h2>
+    <div class="callout">
+        <strong>ISTQB Testing Cup Competition Schedule:</strong>
+        <ul>
+            <li><strong>Morning Session (09:00 - 12:00):</strong> Test planning, analysis, and design</li>
+            <li><strong>Afternoon Session (13:00 - 16:00):</strong> Test implementation, execution, and reporting</li>
+            <li><strong>Total Available Time:</strong> 6 hours (3 hours morning + 3 hours afternoon)</li>
+        </ul>
+    </div>
+
+    <h2>5.2 Test Execution Schedule</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Phase</th>
+                <th>Duration</th>
+                <th>Activities</th>
+                <th>Deliverables</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test Planning</td>
+                <td>45 minutes</td>
+                <td>Risk assessment, scope definition, resource allocation</td>
+                <td>Test Plan document</td>
+            </tr>
+            <tr>
+                <td>Test Analysis</td>
+                <td>45 minutes</td>
+                <td>Test condition identification, prioritization</td>
+                <td>Test Analysis document</td>
+            </tr>
+            <tr>
+                <td>Test Design</td>
+                <td>45 minutes</td>
+                <td>Test case design, automation script development</td>
+                <td>Test Design document</td>
+            </tr>
+            <tr>
+                <td>Test Execution</td>
+                <td>2 hours</td>
+                <td>Functional, security, performance testing</td>
+                <td>Test execution reports</td>
+            </tr>
+            <tr>
+                <td>Reporting</td>
+                <td>45 minutes</td>
+                <td>Results analysis, defect reporting, final documentation</td>
+                <td>Final test reports</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>5.3 Critical Path Activities</h2>
+    <ol>
+        <li><strong>Core Functionality Testing (90 minutes):</strong> Review collection, email automation, settings management</li>
+        <li><strong>Integration Testing (30 minutes):</strong> Shopify API integration and data synchronization</li>
+        <li><strong>Security Testing (30 minutes):</strong> Authentication, authorization, and data protection</li>
+        <li><strong>Performance Testing (30 minutes):</strong> Load testing and scalability validation</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h1 id="test-resources">6. Test Resources</h1>
+
+    <h2>6.1 Team Structure</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Responsibilities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Team Lead</td>
+                <td>Slav Astinov</td>
+                <td>Overall project coordination, stakeholder communication</td>
+            </tr>
+            <tr>
+                <td>Test Lead</td>
+                <td>Sava Barbarov</td>
+                <td>Test strategy execution, quality assurance</td>
+            </tr>
+            <tr>
+                <td>Product Owner</td>
+                <td>Jack Raif</td>
+                <td>Requirements validation, acceptance criteria definition</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>6.2 Tools and Environment</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tool</th>
+                <th>Purpose</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Playwright MCP</td>
+                <td>SUT exploration and data gathering</td>
+                <td><span class="status-available">Available</span></td>
+            </tr>
+            <tr>
+                <td>Playwright</td>
+                <td>Automated functional testing</td>
+                <td><span class="status-available">Available</span></td>
+            </tr>
+            <tr>
+                <td>OWASP ZAP</td>
+                <td>Security vulnerability assessment</td>
+                <td><span class="status-available">Available</span></td>
+            </tr>
+            <tr>
+                <td>Google Lighthouse</td>
+                <td>Accessibility and performance auditing</td>
+                <td><span class="status-available">Available</span></td>
+            </tr>
+            <tr>
+                <td>K6 + Performance Analyzer</td>
+                <td>Load testing and performance benchmarking</td>
+                <td><span class="status-available">Available</span></td>
+            </tr>
+            <tr>
+                <td>Cursor + Claude</td>
+                <td>AI-assisted documentation and analysis</td>
+                <td><span class="status-available">Available</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>6.3 Test Environment Requirements</h2>
+    <ul>
+        <li><strong>Browser Support:</strong> Chrome, Firefox, Safari, Edge (latest versions)</li>
+        <li><strong>Device Testing:</strong> Desktop, tablet, mobile responsive design</li>
+        <li><strong>Network Conditions:</strong> Various connection speeds and latency scenarios</li>
+        <li><strong>Data Requirements:</strong> Test customer data, order information, email addresses</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h1 id="test-deliverables">7. Test Deliverables</h1>
+
+    <h2>7.1 Documentation Deliverables</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Purpose</th>
+                <th>Format</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test Plan</td>
+                <td>Comprehensive testing strategy and approach</td>
+                <td>HTML</td>
+            </tr>
+            <tr>
+                <td>Test Analysis</td>
+                <td>23 detailed test conditions covering all 8 risks with prioritization framework</td>
+                <td>HTML</td>
+            </tr>
+            <tr>
+                <td>Test Design</td>
+                <td>20 detailed test cases with automation strategy and traceability matrix</td>
+                <td>HTML</td>
+            </tr>
+            <tr>
+                <td>Test Execution Report</td>
+                <td>Results summary and defect analysis</td>
+                <td>HTML</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>7.2 Technical Deliverables</h2>
+    <ul>
+        <li><strong>Playwright Test Scripts:</strong> 17 automated test scripts (6 P1 Critical + 11 P2 High Priority) published to GitHub repository</li>
+        <li><strong>OWASP ZAP Security Report:</strong> Security vulnerability assessment report</li>
+        <li><strong>K6 Performance Report:</strong> Load testing results and performance metrics</li>
+        <li><strong>Lighthouse Accessibility Report:</strong> WCAG compliance and accessibility scores</li>
+    </ul>
+
+    <h2>7.3 Quality Metrics</h2>
+    <div class="callout-success">
+        <strong>Success Criteria:</strong>
+        <ul>
+            <li><strong>Test Coverage:</strong> Minimum 80% functional coverage of in-scope features (ACHIEVED: 100% of identified risks)</li>
+            <li><strong>Test Cases Designed:</strong> 23 test conditions, 20 detailed test cases covering all 8 Test Plan risks</li>
+            <li><strong>Defect Detection:</strong> All P1 and P2 risks validated through testing</li>
+            <li><strong>Performance:</strong> Response time < 3 seconds per K6 metrics</li>
+            <li><strong>Security:</strong> No critical vulnerabilities identified by OWASP ZAP</li>
+            <li><strong>Accessibility:</strong> WCAG 2.1 AA compliance score > 90%</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1 id="entry-exit-criteria">8. Entry/Exit Criteria</h1>
+
+    <h2>8.1 Entry Criteria</h2>
+    <div class="callout">
+        <strong>Test Entry Conditions:</strong>
+        <ul>
+            <li>✅ SUT access credentials provided and validated</li>
+            <li>✅ Test environment accessible and stable</li>
+            <li>✅ All required testing tools available and configured</li>
+            <li>✅ Test data prepared and validated</li>
+            <li>✅ Team resources allocated and ready</li>
+        </ul>
+    </div>
+
+    <h2>8.2 Exit Criteria</h2>
+    <div class="callout-success">
+        <strong>Test Exit Conditions:</strong>
+        <ul>
+            <li>✅ All P1 and P2 test cases executed and passed</li>
+            <li>✅ Critical risks identified and mitigated</li>
+            <li>✅ Performance requirements met (response time < 3s)</li>
+            <li>✅ Security vulnerabilities addressed</li>
+            <li>✅ All test deliverables completed and approved</li>
+            <li>✅ Defect reports documented and prioritized</li>
+        </ul>
+    </div>
+
+    <h2>8.3 Success Metrics</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Target</th>
+                <th>Measurement</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test Coverage</td>
+                <td>80%</td>
+                <td>Functional coverage of in-scope features</td>
+            </tr>
+            <tr>
+                <td>Defect Detection Rate</td>
+                <td>100%</td>
+                <td>All P1/P2 risks validated</td>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>< 3 seconds</td>
+                <td>Average response time per K6 metrics</td>
+            </tr>
+            <tr>
+                <td>Security Score</td>
+                <td>No Critical</td>
+                <td>OWASP ZAP vulnerability assessment</td>
+            </tr>
+            <tr>
+                <td>Accessibility Score</td>
+                <td>> 90%</td>
+                <td>Lighthouse accessibility audit</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>Document Approval</h2>
+
+    <table class="approval-table">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Signature</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Team Lead</td>
+                <td>Slav Astinov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Test Lead</td>
+                <td>Sava Barbarov</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+            <tr>
+                <td>Product Owner</td>
+                <td>Jack Raif</td>
+                <td>_________________</td>
+                <td>_________</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <h3>Revision History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.0</td>
+                    <td>October 20, 2025</td>
+                    <td>Automation Aid Team</td>
+                    <td>Initial version based on live system exploration</td>
+                </tr>
+                <tr>
+                    <td>1.1</td>
+                    <td>October 20, 2025</td>
+                    <td>Automation Aid Team</td>
+                    <td>Updated Quality Metrics to reflect expanded Test Analysis (23 conditions) and Test Design (20 test cases) achieving 100% risk coverage</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="text-align: center; margin-top: 40px; color: #999;">
+            <strong>End of Document</strong><br>
+            © 2025 Automation Aid Team - ISTQB Testing Cup Grand Finals
+        </p>
+    </div>
+
+    <script>
+        // Add print functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create print button
+            const printBtn = document.createElement('button');
+            printBtn.textContent = '🖨️ Print/Save as PDF';
+            printBtn.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #1a5490; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;';
+            printBtn.onclick = function() { window.print(); };
+            document.body.appendChild(printBtn);
+            
+            // Hide button when printing
+            window.onbeforeprint = function() { printBtn.style.display = 'none'; };
+            window.onafterprint = function() { printBtn.style.display = 'block'; };
+        });
+    </script>
+</body>
+</html>
